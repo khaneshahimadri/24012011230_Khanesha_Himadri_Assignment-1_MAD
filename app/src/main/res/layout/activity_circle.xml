@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#050914">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <!-- ================= HEADER ================= -->
+
+        <TextView
+            android:id="@+id/tvBack"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="‹"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCircleTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="SAFETY CIRCLE"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvBack"
+            app:layout_constraintTop_toTopOf="@id/tvBack" />
+
+        <TextView
+            android:id="@+id/tvCircleSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Emergency Contacts"
+            android:textColor="#8B94A7"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvBack"
+            app:layout_constraintTop_toBottomOf="@id/tvCircleTitle" />
+
+
+        <!-- ================= STATUS ================= -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/circleStatusCard"
+            android:layout_width="0dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="30dp"
+            app:cardBackgroundColor="#101827"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvBack">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="22dp">
+
+                <TextView
+                    android:id="@+id/tvCircleStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="● CIRCLE ACTIVE"
+                    android:textColor="#00E6A8"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvCircleInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Your trusted contacts are ready for emergencies."
+                    android:textColor="#AAB3C5"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvCircleStatus" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- ================= CONTACTS TITLE ================= -->
+
+        <TextView
+            android:id="@+id/tvContactsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="TRUSTED CONTACTS"
+            android:textColor="#8B94A7"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/circleStatusCard" />
+
+
+        <!-- ================= CONTACT 1 ================= -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardContact1"
+            android:layout_width="0dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="14dp"
+            app:cardBackgroundColor="#101827"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvContactsTitle">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="14dp">
+
+                <!-- NUMBER -->
+
+                <TextView
+                    android:id="@+id/tvContact1Icon"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="#1C293B"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- NAME -->
+
+                <TextView
+                    android:id="@+id/tvContact1Name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="Emergency Contact"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvContact1Icon"
+                    app:layout_constraintTop_toTopOf="@id/tvContact1Icon" />
+
+                <!-- PHONE -->
+
+                <TextView
+                    android:id="@+id/tvContact1Status"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="2dp"
+                    android:text="Ready to receive alerts"
+                    android:textColor="#7F899D"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvContact1Icon"
+                    app:layout_constraintTop_toBottomOf="@id/tvContact1Name" />
+
+                <!-- CALL -->
+
+                <Button
+                    android:id="@+id/btnCall1"
+                    android:layout_width="90dp"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="7dp"
+                    android:backgroundTint="#123526"
+                    android:text="CALL"
+                    android:textColor="#35F28B"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/tvContact1Name"
+                    app:layout_constraintTop_toBottomOf="@id/tvContact1Status" />
+
+                <!-- SMS -->
+
+                <Button
+                    android:id="@+id/btnSms1"
+                    android:layout_width="90dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="#1D1640"
+                    android:text="SMS"
+                    android:textColor="#A86BFF"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/btnCall1"
+                    app:layout_constraintTop_toTopOf="@id/btnCall1" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- ================= CONTACT 2 ================= -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardContact2"
+            android:layout_width="0dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#101827"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardContact1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="14dp">
+
+                <!-- NUMBER -->
+
+                <TextView
+                    android:id="@+id/tvContact2Icon"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="#1C293B"
+                    android:gravity="center"
+                    android:text="2"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- NAME -->
+
+                <TextView
+                    android:id="@+id/tvContact2Name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="Family Contact"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvContact2Icon"
+                    app:layout_constraintTop_toTopOf="@id/tvContact2Icon" />
+
+                <!-- PHONE -->
+
+                <TextView
+                    android:id="@+id/tvContact2Status"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="2dp"
+                    android:text="Ready to receive alerts"
+                    android:textColor="#7F899D"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvContact2Icon"
+                    app:layout_constraintTop_toBottomOf="@id/tvContact2Name" />
+
+                <!-- CALL -->
+
+                <Button
+                    android:id="@+id/btnCall2"
+                    android:layout_width="90dp"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="7dp"
+                    android:backgroundTint="#123526"
+                    android:text="CALL"
+                    android:textColor="#35F28B"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/tvContact2Name"
+                    app:layout_constraintTop_toBottomOf="@id/tvContact2Status" />
+
+                <!-- SMS -->
+
+                <Button
+                    android:id="@+id/btnSms2"
+                    android:layout_width="90dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="#1D1640"
+                    android:text="SMS"
+                    android:textColor="#A86BFF"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/btnCall2"
+                    app:layout_constraintTop_toTopOf="@id/btnCall2" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- ================= ADD CONTACT ================= -->
+
+        <Button
+            android:id="@+id/btnAddContact"
+            android:layout_width="0dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#7C3AED"
+            android:text="+  ADD EMERGENCY CONTACT"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardContact2" />
+
+
+        <!-- ================= INFORMATION ================= -->
+
+        <TextView
+            android:id="@+id/tvCircleInformation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="Your trusted contacts can be notified when SOS is activated."
+            android:textColor="#7F899D"
+            android:textSize="13sp"
+            android:layout_marginBottom="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnAddContact" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
