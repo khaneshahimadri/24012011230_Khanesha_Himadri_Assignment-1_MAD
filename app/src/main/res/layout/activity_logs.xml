@@ -1,245 +1,318 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#050A12">
+    android:background="#050914"
+    android:fillViewport="true">
 
-    <!-- HEADER -->
-
-    <TextView
-        android:id="@+id/tvBack"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="25dp"
-        android:gravity="center"
-        android:text="‹"
-        android:textColor="#FFFFFF"
-        android:textSize="32sp"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvLogsTitle"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="SOS LOGS"
-        android:textColor="#FFFFFF"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/tvBack"
-        app:layout_constraintTop_toTopOf="@id/tvBack" />
+        android:padding="22dp">
 
-    <TextView
-        android:id="@+id/tvLogsSubtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Emergency History"
-        android:textColor="#8B94A7"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/tvLogsTitle"
-        app:layout_constraintTop_toBottomOf="@id/tvLogsTitle" />
 
-    <!-- STATUS -->
+        <!-- BACK -->
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardLogStatus"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="30dp"
-        app:cardBackgroundColor="#101827"
-        app:cardCornerRadius="18dp"
-        app:cardElevation="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvLogsSubtitle">
+        <TextView
+            android:id="@+id/tvBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:text="‹"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="20dp">
 
-            <TextView
-                android:id="@+id/tvLogStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="● SYSTEM LOGGING ACTIVE"
-                android:textColor="#35F28B"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <!-- TITLE -->
 
-            <TextView
-                android:id="@+id/tvLogCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:text="0 emergency events recorded"
-                android:textColor="#8B94A7"
-                android:textSize="13sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvLogStatus" />
+        <TextView
+            android:id="@+id/tvLogsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="ACTIVITY"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/tvBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvBack" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/tvLogsSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Emergency Event History"
+            android:textColor="#7F899D"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/tvBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLogsTitle" />
 
-    <!-- TITLE -->
 
-    <TextView
-        android:id="@+id/tvHistoryTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
-        android:text="SOS HISTORY"
-        android:textColor="#8B94A7"
-        android:textSize="13sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardLogStatus" />
+        <!-- SUMMARY CARD -->
 
-    <!-- LOG 1 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardSummary"
+            android:layout_width="0dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="32dp"
+            app:cardBackgroundColor="#101827"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvBack">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardLog1"
-        android:layout_width="0dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="14dp"
-        app:cardBackgroundColor="#101827"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvHistoryTitle">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="18dp">
 
-            <TextView
-                android:id="@+id/tvLog1Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SOS Activated"
-                android:textColor="#FF5268"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/tvSystemStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="● EVENT RECORDING ACTIVE"
+                    android:textColor="#35F28B"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvLog1Date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="No events yet"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvLog1Title" />
 
-            <TextView
-                android:id="@+id/tvLog1Details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Location: --   •   SMS: --"
-                android:textColor="#7F899D"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvLog1Date" />
+                <TextView
+                    android:id="@+id/tvLogCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="0 emergency events"
+                    android:textColor="#FFFFFF"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvSystemStatus" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/tvSummaryInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Latest SOS activity stored locally"
+                    android:textColor="#7F899D"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvLogCount" />
 
-    <!-- LOG 2 -->
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardLog2"
-        android:layout_width="0dp"
-        android:layout_height="110dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="12dp"
-        app:cardBackgroundColor="#101827"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardLog1">
+        </androidx.cardview.widget.CardView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="18dp">
 
-            <TextView
-                android:id="@+id/tvLog2Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SOS Activated"
-                android:textColor="#FF5268"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <!-- HISTORY TITLE -->
 
-            <TextView
-                android:id="@+id/tvLog2Date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="No events yet"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvLog2Title" />
+        <TextView
+            android:id="@+id/tvHistoryTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="RECENT EMERGENCIES"
+            android:textColor="#8B94A7"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardSummary" />
 
-            <TextView
-                android:id="@+id/tvLog2Details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Location: --   •   SMS: --"
-                android:textColor="#7F899D"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvLog2Date" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- LOG 1 -->
 
-    </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardLog1"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="14dp"
+            app:cardBackgroundColor="#101827"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvHistoryTitle">
 
-    <!-- CLEAR LOGS -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="18dp">
 
-    <Button
-        android:id="@+id/btnClearLogs"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="22dp"
-        android:backgroundTint="#7C3AED"
-        android:text="CLEAR LOGS"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardLog2" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tvLog1Icon"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:gravity="center"
+                    android:background="#35101A"
+                    android:text="!"
+                    android:textColor="#FF5268"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/tvLog1Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="SOS ACTIVATED"
+                    android:textColor="#FF5268"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/tvLog1Icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvLog1Icon" />
+
+
+                <TextView
+                    android:id="@+id/tvLog1Date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="4dp"
+                    android:text="No emergency recorded"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toEndOf="@id/tvLog1Icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvLog1Title" />
+
+
+                <TextView
+                    android:id="@+id/tvLog1Details"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:lineSpacingExtra="4dp"
+                    android:text="Location: --&#10;Emergency Alert: --"
+                    android:textColor="#8B94A7"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvLog1Icon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- LOG 2 -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardLog2"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#101827"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardLog1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="18dp">
+
+
+                <TextView
+                    android:id="@+id/tvLog2Icon"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:gravity="center"
+                    android:background="#35101A"
+                    android:text="!"
+                    android:textColor="#FF5268"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/tvLog2Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="SOS ACTIVATED"
+                    android:textColor="#FF5268"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/tvLog2Icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvLog2Icon" />
+
+
+                <TextView
+                    android:id="@+id/tvLog2Date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="4dp"
+                    android:text="No emergency recorded"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toEndOf="@id/tvLog2Icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvLog2Title" />
+
+
+                <TextView
+                    android:id="@+id/tvLog2Details"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:lineSpacingExtra="4dp"
+                    android:text="Location: --&#10;Emergency Alert: --"
+                    android:textColor="#8B94A7"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvLog2Icon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- CLEAR BUTTON -->
+
+        <Button
+            android:id="@+id/btnClearLogs"
+            android:layout_width="0dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="30dp"
+            android:text="CLEAR EMERGENCY HISTORY"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:backgroundTint="#7C3AED"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardLog2"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

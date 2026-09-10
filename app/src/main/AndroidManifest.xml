@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
     <!-- VIBRATION -->
-    <uses-permission
-        android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- GPS / LOCATION -->
     <uses-permission
         android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-permission
         android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -19,6 +20,9 @@
     <!-- SMS -->
     <uses-permission
         android:name="android.permission.SEND_SMS" />
+
+    <uses-permission
+        android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:allowBackup="true"
@@ -35,11 +39,13 @@
             android:name=".MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <!-- GPS SCREEN -->
@@ -53,10 +59,24 @@
             android:name=".CircleActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
+        <!-- LOGS SCREEN -->
         <activity
             android:name=".LogsActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
+        <!-- INCOMING LOCATE SMS RECEIVER -->
+        <receiver
+            android:name=".SmsReceiver"
+            android:exported="true">
+
+            <intent-filter android:priority="999">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+
+        </receiver>
+
     </application>
 
 </manifest>
