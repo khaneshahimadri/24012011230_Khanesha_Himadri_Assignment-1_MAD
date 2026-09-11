@@ -1,129 +1,118 @@
 package com.example.a24012011230_khaneshahimadri_assignment_1_mad
 
 import android.Manifest
-import android.app.Activity
-import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationManager
 import android.media.MediaPlayer
-import android.os.Build
+import android.os.BatteryManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.os.VibrationEffect
 import android.os.Vibrator
-import android.os.VibratorManager
 import android.telephony.SmsManager
 import android.view.MotionEvent
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
-
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-
 class MainActivity : AppCompatActivity() {
 
-
-    // =========================================================
+    // =====================================================
     // UI
-    // =========================================================
+    // =====================================================
 
-    private lateinit var btnSOS: Button
+    private lateinit var btnSOS: TextView
 
     private lateinit var tvStatus: TextView
     private lateinit var tvEmergency: TextView
     private lateinit var tvHold: TextView
 
     private lateinit var tvGps: TextView
+    private lateinit var tvGpsAccuracy: TextView
     private lateinit var tvSms: TextView
+    private lateinit var tvSignalValue: TextView
     private lateinit var tvBattery: TextView
-    private lateinit var tvLastLocation: TextView
 
     private lateinit var cardGPS: CardView
     private lateinit var cardCircle: CardView
+    private lateinit var cardTestBeacon: CardView
+    private lateinit var cardZeroInternet: CardView
+
+    private lateinit var tvContactAvatar: TextView
+    private lateinit var tvContactName: TextView
+    private lateinit var tvContactNumber: TextView
 
     private lateinit var navHome: TextView
+    private lateinit var navGps: TextView
+    private lateinit var navSos: TextView
     private lateinit var navCircle: TextView
     private lateinit var navLogs: TextView
+    private lateinit var navScreens: TextView
 
-
-    // =========================================================
+    // =====================================================
     // GPS
-    // =========================================================
+    // =====================================================
 
     private lateinit var fusedLocationClient:
             FusedLocationProviderClient
 
-    private lateinit var locationRequest:
-            LocationRequest
-
     private lateinit var locationCallback:
             LocationCallback
 
-    private var lastLatitude = 0.0
-    private var lastLongitude = 0.0
+    private var currentLatitude: Double? = null
+    private var currentLongitude: Double? = null
 
-
-    // =========================================================
+    // =====================================================
     // SOS
-    // =========================================================
+    // =====================================================
 
     private var mediaPlayer: MediaPlayer? = null
-
-    private var sosActive = false
-
-    private var holdingSOS = false
+    private var vibrator: Vibrator? = null
 
     private val handler =
         Handler(Looper.getMainLooper())
 
+    private var buttonPressed = false
+    private var sosActive = false
+
+    companion object {
+        private const val PERMISSION_REQUEST = 100
+    }
+
+    // =====================================================
+    // SOS 3 SECOND TIMER
+    // =====================================================
 
     private val sosRunnable =
         Runnable {
 
-            if (holdingSOS && !sosActive) {
+            if (
+                buttonPressed &&
+                !sosActive
+            ) {
 
                 startSOS()
             }
         }
 
-
-    // =========================================================
-    // SMS STATUS VARIABLES
-    // =========================================================
-
-    private var totalSmsToSend = 0
-
-    private var smsResultsReceived = 0
-
-    private var smsSentSuccessfully = 0
-
-    private var smsFailed = 0
-
-
-    // =========================================================
+    // =====================================================
     // BATTERY RECEIVER
-    // =========================================================
+    // =====================================================
 
     private val batteryReceiver =
         object : BroadcastReceiver() {
@@ -135,23 +124,23 @@ class MainActivity : AppCompatActivity() {
 
                 val level =
                     intent?.getIntExtra(
-                        "level",
+                        BatteryManager.EXTRA_LEVEL,
                         -1
                     ) ?: -1
 
-
                 val scale =
                     intent?.getIntExtra(
-                        "scale",
-                        100
-                    ) ?: 100
+                        BatteryManager.EXTRA_SCALE,
+                        -1
+                    ) ?: -1
 
-
-                if (level >= 0 && scale > 0) {
+                if (
+                    level >= 0 &&
+                    scale > 0
+                ) {
 
                     val batteryPercentage =
-                        (level * 100) / scale
-
+                        level * 100 / scale
 
                     tvBattery.text =
                         "$batteryPercentage%"
@@ -159,92 +148,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
-    // =========================================================
-    // SMS SENT RECEIVER
-    // =========================================================
-
-    private val smsSentReceiver =
-        object : BroadcastReceiver() {
-
-            override fun onReceive(
-                context: Context?,
-                intent: Intent?
-            ) {
-
-                smsResultsReceived++
-
-
-                // Android confirms that SMS was sent
-
-                if (resultCode == Activity.RESULT_OK) {
-
-                    smsSentSuccessfully++
-
-                } else {
-
-                    smsFailed++
-                }
-
-
-                // Check when all SMS attempts are finished
-
-                if (smsResultsReceived >= totalSmsToSend) {
-
-                    if (
-                        smsSentSuccessfully == totalSmsToSend
-                    ) {
-
-                        updateSmsLog(
-                            "Sent Successfully"
-                        )
-
-
-                        Toast.makeText(
-                            this@MainActivity,
-                            "Emergency SMS sent successfully",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-
-                    } else if (
-                        smsSentSuccessfully > 0 &&
-                        smsFailed > 0
-                    ) {
-
-                        updateSmsLog(
-                            "Partially Sent"
-                        )
-
-
-                        Toast.makeText(
-                            this@MainActivity,
-                            "Some emergency SMS messages failed",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-
-                    } else {
-
-                        updateSmsLog(
-                            "Failed"
-                        )
-
-
-                        Toast.makeText(
-                            this@MainActivity,
-                            "Emergency SMS failed",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            }
-        }
-
-
-    // =========================================================
+    // =====================================================
     // ON CREATE
-    // =========================================================
+    // =====================================================
 
     override fun onCreate(
         savedInstanceState: Bundle?
@@ -256,128 +162,240 @@ class MainActivity : AppCompatActivity() {
             R.layout.activity_main
         )
 
-
-        // =====================================================
-        // FIND VIEWS
-        // =====================================================
+        // =================================================
+        // CONNECT XML
+        // =================================================
 
         btnSOS =
-            findViewById(R.id.btnSOS)
+            findViewById(
+                R.id.btnSOS
+            )
 
         tvStatus =
-            findViewById(R.id.tvStatus)
+            findViewById(
+                R.id.tvStatus
+            )
 
         tvEmergency =
-            findViewById(R.id.tvEmergency)
+            findViewById(
+                R.id.tvEmergency
+            )
 
         tvHold =
-            findViewById(R.id.tvHold)
+            findViewById(
+                R.id.tvHold
+            )
 
         tvGps =
-            findViewById(R.id.tvGps)
+            findViewById(
+                R.id.tvGps
+            )
+
+        tvGpsAccuracy =
+            findViewById(
+                R.id.tvGpsAccuracy
+            )
 
         tvSms =
-            findViewById(R.id.tvSms)
+            findViewById(
+                R.id.tvSms
+            )
+
+        tvSignalValue =
+            findViewById(
+                R.id.tvSignalValue
+            )
 
         tvBattery =
-            findViewById(R.id.tvBattery)
-
-        tvLastLocation =
-            findViewById(R.id.tvLastLocation)
+            findViewById(
+                R.id.tvBattery
+            )
 
         cardGPS =
-            findViewById(R.id.cardGPS)
+            findViewById(
+                R.id.cardGPS
+            )
 
         cardCircle =
-            findViewById(R.id.cardCircle)
+            findViewById(
+                R.id.cardCircle
+            )
+
+        cardTestBeacon =
+            findViewById(
+                R.id.cardTestBeacon
+            )
+
+        cardZeroInternet =
+            findViewById(
+                R.id.cardZeroInternet
+            )
+
+        tvContactAvatar =
+            findViewById(
+                R.id.tvContactAvatar
+            )
+
+        tvContactName =
+            findViewById(
+                R.id.tvContactName
+            )
+
+        tvContactNumber =
+            findViewById(
+                R.id.tvContactNumber
+            )
 
         navHome =
-            findViewById(R.id.navHome)
+            findViewById(
+                R.id.navHome
+            )
+
+        navGps =
+            findViewById(
+                R.id.navGps
+            )
+
+        navSos =
+            findViewById(
+                R.id.navSos
+            )
 
         navCircle =
-            findViewById(R.id.navCircle)
+            findViewById(
+                R.id.navCircle
+            )
 
         navLogs =
-            findViewById(R.id.navLogs)
+            findViewById(
+                R.id.navLogs
+            )
 
+        navScreens =
+            findViewById(
+                R.id.navScreens
+            )
 
-        // =====================================================
-        // GPS CLIENT
-        // =====================================================
+        // =================================================
+        // GPS SETUP
+        // =================================================
 
         fusedLocationClient =
             LocationServices
-                .getFusedLocationProviderClient(this)
-
-
-        locationRequest =
-            LocationRequest.Builder(
-                Priority.PRIORITY_HIGH_ACCURACY,
-                3000L
-            )
-                .setMinUpdateIntervalMillis(
-                    2000L
+                .getFusedLocationProviderClient(
+                    this
                 )
-                .build()
 
+        createLocationCallback()
 
-        locationCallback =
-            object : LocationCallback() {
+        // =================================================
+        // BATTERY
+        // =================================================
 
-                override fun onLocationResult(
-                    locationResult: LocationResult
-                ) {
-
-                    val location =
-                        locationResult.lastLocation
-
-
-                    if (location != null) {
-
-                        updateLocation(
-                            location
-                        )
-                    }
-                }
-            }
-
-
-        // =====================================================
-        // REGISTER SMS STATUS RECEIVER
-        // =====================================================
-
-        val smsFilter =
+        registerReceiver(
+            batteryReceiver,
             IntentFilter(
-                SMS_SENT_ACTION
+                Intent.ACTION_BATTERY_CHANGED
             )
-
-
-        ContextCompat.registerReceiver(
-            this,
-            smsSentReceiver,
-            smsFilter,
-            ContextCompat.RECEIVER_NOT_EXPORTED
         )
 
+        // =================================================
+        // STATUS
+        // =================================================
 
-        // =====================================================
-        // START FEATURES
-        // =====================================================
+        checkSmsStatus()
+        checkCellularStatus()
+        loadTrustedContact()
 
-        startBatteryMonitoring()
+        // =================================================
+        // SOS BUTTON
+        // =================================================
 
-        checkGPS()
+        btnSOS.setOnTouchListener { _, event ->
 
-        checkSMS()
+            when (event.action) {
 
-        requestSmsPermissions()
+                MotionEvent.ACTION_DOWN -> {
 
-        setupSOSButton()
+                    // If SOS already active,
+                    // one new tap stops it immediately
+
+                    if (sosActive) {
+
+                        stopSOS()
+
+                        return@setOnTouchListener true
+                    }
+
+                    // Start holding
+
+                    buttonPressed = true
+
+                    tvHold.text =
+                        "HOLD FOR 3 SECONDS..."
+
+                    handler.removeCallbacks(
+                        sosRunnable
+                    )
+
+                    handler.postDelayed(
+                        sosRunnable,
+                        3000
+                    )
+
+                    true
+                }
 
 
-        // =====================================================
+                MotionEvent.ACTION_UP -> {
+
+                    // If SOS has NOT started,
+                    // cancel the hold
+
+                    if (!sosActive) {
+
+                        buttonPressed = false
+
+                        handler.removeCallbacks(
+                            sosRunnable
+                        )
+
+                        tvHold.text =
+                            "3s REMAINING"
+                    }
+
+                    // If SOS is already active,
+                    // releasing finger does nothing
+
+                    true
+                }
+
+
+                MotionEvent.ACTION_CANCEL -> {
+
+                    if (!sosActive) {
+
+                        buttonPressed = false
+
+                        handler.removeCallbacks(
+                            sosRunnable
+                        )
+
+                        tvHold.text =
+                            "3s REMAINING"
+                    }
+
+                    true
+                }
+
+
+                else -> true
+            }
+        }
+
+        // =================================================
         // GPS CARD
-        // =====================================================
+        // =================================================
 
         cardGPS.setOnClickListener {
 
@@ -387,15 +405,12 @@ class MainActivity : AppCompatActivity() {
                     GpsActivity::class.java
                 )
 
-            startActivity(
-                intent
-            )
+            startActivity(intent)
         }
 
-
-        // =====================================================
+        // =================================================
         // CIRCLE CARD
-        // =====================================================
+        // =================================================
 
         cardCircle.setOnClickListener {
 
@@ -405,25 +420,58 @@ class MainActivity : AppCompatActivity() {
                     CircleActivity::class.java
                 )
 
-            startActivity(
-                intent
-            )
+            startActivity(intent)
         }
 
+        // =================================================
+        // TEST BEACON
+        // =================================================
 
-        // =====================================================
-        // BOTTOM NAVIGATION
-        // =====================================================
+        cardTestBeacon.setOnClickListener {
+
+            Toast.makeText(
+                this,
+                "BEACON ready for LOCATE SMS",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        // =================================================
+        // ZERO INTERNET
+        // =================================================
+
+        cardZeroInternet.setOnClickListener {
+
+            Toast.makeText(
+                this,
+                "GPS and SMS can work without mobile internet",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        // =================================================
+        // NAVIGATION
+        // =================================================
 
         navHome.setOnClickListener {
 
-            navHome.alpha = 1.0f
-
-            navCircle.alpha = 0.6f
-
-            navLogs.alpha = 0.6f
+            Toast.makeText(
+                this,
+                "Beacon Home",
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
+        navGps.setOnClickListener {
+
+            val intent =
+                Intent(
+                    this,
+                    GpsActivity::class.java
+                )
+
+            startActivity(intent)
+        }
 
         navCircle.setOnClickListener {
 
@@ -433,11 +481,8 @@ class MainActivity : AppCompatActivity() {
                     CircleActivity::class.java
                 )
 
-            startActivity(
-                intent
-            )
+            startActivity(intent)
         }
-
 
         navLogs.setOnClickListener {
 
@@ -447,128 +492,322 @@ class MainActivity : AppCompatActivity() {
                     LogsActivity::class.java
                 )
 
-            startActivity(
-                intent
-            )
+            startActivity(intent)
         }
 
+        navSos.setOnClickListener {
 
-        navHome.alpha = 1.0f
+            Toast.makeText(
+                this,
+                "Hold SOS for 3 seconds",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
 
-        navCircle.alpha = 0.6f
+        navScreens.setOnClickListener {
 
-        navLogs.alpha = 0.6f
+            Toast.makeText(
+                this,
+                "BEACON Emergency System",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        // =================================================
+        // PERMISSIONS
+        // =================================================
+
+        requestRequiredPermissions()
     }
 
+    // =====================================================
+    // START SOS
+    // =====================================================
 
-    // =========================================================
-    // BATTERY
-    // =========================================================
+    private fun startSOS() {
 
-    private fun startBatteryMonitoring() {
+        if (sosActive) {
+            return
+        }
 
-        val filter =
-            IntentFilter(
-                Intent.ACTION_BATTERY_CHANGED
-            )
+        sosActive = true
 
+        // IMPORTANT
+        // We no longer need the holding state after activation
+        buttonPressed = false
 
-        ContextCompat.registerReceiver(
-            this,
-            batteryReceiver,
-            filter,
-            ContextCompat.RECEIVER_NOT_EXPORTED
+        handler.removeCallbacks(
+            sosRunnable
         )
-    }
 
+        // =================================================
+        // UPDATE UI
+        // =================================================
 
-    // =========================================================
-    // CHECK GPS
-    // =========================================================
+        tvStatus.text =
+            "● SOS ACTIVE"
 
-    private fun checkGPS() {
+        tvEmergency.text =
+            "⚠ SOS DISPATCH ACTIVE"
 
-        val locationManager =
-            getSystemService(
-                Context.LOCATION_SERVICE
-            ) as LocationManager
+        tvHold.text =
+            "TAP SOS TO STOP"
 
+        btnSOS.text =
+            "SOS ACTIVE\nTAP TO STOP"
 
-        val gpsEnabled =
-            try {
+        // =================================================
+        // CLEAR OLD PLAYER
+        // =================================================
 
-                locationManager.isProviderEnabled(
-                    LocationManager.GPS_PROVIDER
-                )
+        try {
 
-            } catch (e: Exception) {
+            if (
+                mediaPlayer != null &&
+                mediaPlayer!!.isPlaying
+            ) {
 
-                false
+                mediaPlayer!!.stop()
             }
 
-
-        if (gpsEnabled) {
-
-            tvGps.text =
-                "READY"
-
-            startLocationUpdates()
-
-        } else {
-
-            tvGps.text =
-                "OFF"
-
-            tvLastLocation.text =
-                "Last location • GPS OFF"
+        } catch (_: Exception) {
         }
-    }
 
+        try {
 
-    // =========================================================
-    // START LIVE LOCATION
-    // =========================================================
+            mediaPlayer?.release()
 
-    private fun startLocationUpdates() {
+        } catch (_: Exception) {
+        }
 
-        val finePermission =
-            ActivityCompat.checkSelfPermission(
+        mediaPlayer = null
+
+        // =================================================
+        // START SIREN
+        // =================================================
+
+        mediaPlayer =
+            MediaPlayer.create(
                 this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-
-
-        val coarsePermission =
-            ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-
-
-        if (
-            !finePermission &&
-            !coarsePermission
-        ) {
-
-            ActivityCompat.requestPermissions(
-                this,
-
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ),
-
-                LOCATION_REQUEST
+                R.raw.siren
             )
 
+        if (mediaPlayer == null) {
+
+            Toast.makeText(
+                this,
+                "Siren file not found",
+                Toast.LENGTH_SHORT
+            ).show()
 
             return
         }
 
+        mediaPlayer?.isLooping =
+            true
 
-        tvGps.text =
-            "SEARCHING..."
+        mediaPlayer?.start()
 
+        // =================================================
+        // START VIBRATION
+        // =================================================
+
+        vibrator =
+            getSystemService(
+                VIBRATOR_SERVICE
+            ) as Vibrator
+
+        val vibrationPattern =
+            longArrayOf(
+                0,
+                500,
+                300,
+                500,
+                300
+            )
+
+        @Suppress("DEPRECATION")
+        vibrator?.vibrate(
+            vibrationPattern,
+            0
+        )
+
+        // =================================================
+        // SEND SMS
+        // =================================================
+
+        sendEmergencySms()
+
+        // =================================================
+        // SAVE LOG
+        // =================================================
+
+        saveSOSLog()
+
+        Toast.makeText(
+            this,
+            "SOS activated",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    // =====================================================
+    // STOP SOS
+    // =====================================================
+
+    private fun stopSOS() {
+
+        handler.removeCallbacks(
+            sosRunnable
+        )
+
+        buttonPressed = false
+        sosActive = false
+
+        // =================================================
+        // STOP SIREN
+        // =================================================
+
+        try {
+
+            if (
+                mediaPlayer != null &&
+                mediaPlayer!!.isPlaying
+            ) {
+
+                mediaPlayer!!.stop()
+            }
+
+        } catch (_: Exception) {
+        }
+
+        try {
+
+            mediaPlayer?.release()
+
+        } catch (_: Exception) {
+        }
+
+        mediaPlayer = null
+
+        // =================================================
+        // STOP VIBRATION
+        // =================================================
+
+        try {
+
+            vibrator?.cancel()
+
+        } catch (_: Exception) {
+        }
+
+        // =================================================
+        // RESET UI
+        // =================================================
+
+        tvStatus.text =
+            "● ONLINE"
+
+        tvEmergency.text =
+            "⚠ EMERGENCY SOS DISPATCH"
+
+        tvHold.text =
+            "3s REMAINING"
+
+        btnSOS.text =
+            "SOS\nHOLD 3 SEC"
+
+        Toast.makeText(
+            this,
+            "SOS stopped",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    // =====================================================
+    // GPS CALLBACK
+    // =====================================================
+
+    private fun createLocationCallback() {
+
+        locationCallback =
+            object : LocationCallback() {
+
+                override fun onLocationResult(
+                    result: LocationResult
+                ) {
+
+                    val location =
+                        result.lastLocation
+                            ?: return
+
+                    currentLatitude =
+                        location.latitude
+
+                    currentLongitude =
+                        location.longitude
+
+                    tvGps.text =
+                        "GPS Live"
+
+                    tvGpsAccuracy.text =
+                        "± ${
+                            String.format(
+                                Locale.US,
+                                "%.1f",
+                                location.accuracy
+                            )
+                        } m"
+
+                    // Save location for LOCATE SMS receiver
+
+                    getSharedPreferences(
+                        "BeaconLocation",
+                        MODE_PRIVATE
+                    )
+                        .edit()
+                        .putString(
+                            "latitude",
+                            location.latitude.toString()
+                        )
+                        .putString(
+                            "longitude",
+                            location.longitude.toString()
+                        )
+                        .putLong(
+                            "timestamp",
+                            System.currentTimeMillis()
+                        )
+                        .apply()
+                }
+            }
+    }
+
+    // =====================================================
+    // START GPS UPDATES
+    // =====================================================
+
+    private fun startLocationUpdates() {
+
+        if (
+            ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+
+            return
+        }
+
+        val locationRequest =
+            LocationRequest.Builder(
+                Priority.PRIORITY_HIGH_ACCURACY,
+                3000L
+            )
+                .setMinUpdateIntervalMillis(
+                    1500L
+                )
+                .build()
 
         fusedLocationClient
             .requestLocationUpdates(
@@ -576,329 +815,59 @@ class MainActivity : AppCompatActivity() {
                 locationCallback,
                 Looper.getMainLooper()
             )
-            .addOnSuccessListener {
-
-                tvGps.text =
-                    "READY"
-            }
-            .addOnFailureListener {
-
-                tvGps.text =
-                    "ERROR"
-
-                tvLastLocation.text =
-                    "Last location • Unavailable"
-            }
     }
 
+    // =====================================================
+    // SMS STATUS
+    // =====================================================
 
-    // =========================================================
-    // UPDATE LOCATION
-    // =========================================================
-
-    private fun updateLocation(
-        location: Location
-    ) {
-
-        lastLatitude =
-            location.latitude
-
-        lastLongitude =
-            location.longitude
-
-
-        tvGps.text =
-            "READY"
-
-
-        val currentTime =
-            SimpleDateFormat(
-                "HH:mm:ss",
-                Locale.getDefault()
-            ).format(
-                Date()
-            )
-
-
-        tvLastLocation.text =
-            "Last location • $currentTime"
-
-
-        // Save latest GPS location
-
-        getSharedPreferences(
-            "BeaconLocation",
-            MODE_PRIVATE
-        )
-            .edit()
-            .putString(
-                "latitude",
-                lastLatitude.toString()
-            )
-            .putString(
-                "longitude",
-                lastLongitude.toString()
-            )
-            .putLong(
-                "timestamp",
-                System.currentTimeMillis()
-            )
-            .apply()
-    }
-
-
-    // =========================================================
-    // STOP LOCATION
-    // =========================================================
-
-    private fun stopLocationUpdates() {
-
-        if (
-            ::fusedLocationClient.isInitialized
-        ) {
-
-            fusedLocationClient
-                .removeLocationUpdates(
-                    locationCallback
-                )
-        }
-    }
-
-
-    // =========================================================
-    // CHECK SMS
-    // =========================================================
-
-    private fun checkSMS() {
+    private fun checkSmsStatus() {
 
         val hasTelephony =
             packageManager.hasSystemFeature(
                 PackageManager.FEATURE_TELEPHONY
             )
 
-
         if (hasTelephony) {
 
             tvSms.text =
-                "READY"
+                "SMS Ready"
 
         } else {
 
             tvSms.text =
-                "N/A"
+                "SMS N/A"
         }
     }
 
+    // =====================================================
+    // CELLULAR STATUS
+    // =====================================================
 
-    // =========================================================
-    // REQUEST SMS PERMISSIONS
-    // =========================================================
+    private fun checkCellularStatus() {
 
-    private fun requestSmsPermissions() {
-
-        val permissionsNeeded =
-            mutableListOf<String>()
-
-
-        if (
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.SEND_SMS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-
-            permissionsNeeded.add(
-                Manifest.permission.SEND_SMS
+        val hasTelephony =
+            packageManager.hasSystemFeature(
+                PackageManager.FEATURE_TELEPHONY
             )
-        }
 
+        if (hasTelephony) {
 
-        if (
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.RECEIVE_SMS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
+            tvSignalValue.text =
+                "Signal"
 
-            permissionsNeeded.add(
-                Manifest.permission.RECEIVE_SMS
-            )
-        }
+        } else {
 
-
-        if (
-            permissionsNeeded.isNotEmpty()
-        ) {
-
-            ActivityCompat.requestPermissions(
-                this,
-                permissionsNeeded.toTypedArray(),
-                SMS_PERMISSION_REQUEST
-            )
+            tvSignalValue.text =
+                "No Signal"
         }
     }
 
-
-    // =========================================================
-    // SOS BUTTON
-    // =========================================================
-
-    private fun setupSOSButton() {
-
-        btnSOS.setOnTouchListener { _, event ->
-
-            when (
-                event.action
-            ) {
-
-                MotionEvent.ACTION_DOWN -> {
-
-                    if (
-                        sosActive
-                    ) {
-
-                        stopSOS()
-
-                    } else {
-
-                        holdingSOS = true
-
-
-                        tvHold.text =
-                            "KEEP HOLDING..."
-
-
-                        handler.removeCallbacks(
-                            sosRunnable
-                        )
-
-
-                        handler.postDelayed(
-                            sosRunnable,
-                            3000L
-                        )
-                    }
-
-
-                    true
-                }
-
-
-                MotionEvent.ACTION_UP -> {
-
-                    if (
-                        !sosActive
-                    ) {
-
-                        holdingSOS = false
-
-
-                        handler.removeCallbacks(
-                            sosRunnable
-                        )
-
-
-                        tvHold.text =
-                            "HOLD 3 SEC"
-                    }
-
-
-                    true
-                }
-
-
-                MotionEvent.ACTION_CANCEL -> {
-
-                    holdingSOS = false
-
-
-                    handler.removeCallbacks(
-                        sosRunnable
-                    )
-
-
-                    if (
-                        !sosActive
-                    ) {
-
-                        tvHold.text =
-                            "HOLD 3 SEC"
-                    }
-
-
-                    true
-                }
-
-
-                else -> false
-            }
-        }
-    }
-
-
-    // =========================================================
-    // START SOS
-    // =========================================================
-
-    private fun startSOS() {
-
-        sosActive = true
-
-        holdingSOS = false
-
-
-        tvStatus.text =
-            "● SOS ACTIVE"
-
-        tvEmergency.text =
-            "EMERGENCY ACTIVE"
-
-        tvHold.text =
-            "SIREN ON • TAP TO STOP"
-
-        btnSOS.text =
-            "SOS\nACTIVE"
-
-
-        // Siren
-
-        startSiren()
-
-
-        // Vibration
-
-        startVibration()
-
-
-        // Send SMS and get starting status
-
-        val smsStatus =
-            sendEmergencySms()
-
-
-        // Save SOS log
-
-        saveSosLog(
-            smsStatus
-        )
-
-
-        if (
-            lastLatitude != 0.0 &&
-            lastLongitude != 0.0
-        ) {
-
-            tvLastLocation.text =
-                "Last location • Just now"
-        }
-    }
-
-
-    // =========================================================
-    // SEND EMERGENCY SMS
-    // =========================================================
-
-    private fun sendEmergencySms(): String {
+    // =====================================================
+    // LOAD TRUSTED CONTACT
+    // =====================================================
+
+    private fun loadTrustedContact() {
 
         val preferences =
             getSharedPreferences(
@@ -906,44 +875,83 @@ class MainActivity : AppCompatActivity() {
                 MODE_PRIVATE
             )
 
+        val name =
+            preferences.getString(
+                "contact1_name",
+                ""
+            ) ?: ""
 
-        val contact1 =
+        val number =
             preferences.getString(
                 "contact1_number",
                 ""
             ) ?: ""
 
+        if (number.isNotEmpty()) {
 
-        val contact2 =
-            preferences.getString(
-                "contact2_number",
-                ""
-            ) ?: ""
+            tvContactName.text =
+                if (name.isNotEmpty()) {
+                    name
+                } else {
+                    "Trusted Contact"
+                }
 
+            tvContactNumber.text =
+                number
 
-        // -----------------------------------------------------
-        // NO CONTACT
-        // -----------------------------------------------------
+            tvContactAvatar.text =
+                getInitials(name)
 
-        if (
-            contact1.isBlank() &&
-            contact2.isBlank()
-        ) {
+        } else {
 
-            Toast.makeText(
-                this,
-                "No emergency contact selected",
-                Toast.LENGTH_LONG
-            ).show()
+            tvContactName.text =
+                "No Trusted Contact"
 
+            tvContactNumber.text =
+                "Tap Circle to add contact"
 
-            return "No trusted contact"
+            tvContactAvatar.text =
+                "TC"
+        }
+    }
+
+    // =====================================================
+    // GET INITIALS
+    // =====================================================
+
+    private fun getInitials(
+        name: String
+    ): String {
+
+        if (name.isBlank()) {
+            return "TC"
         }
 
+        val words =
+            name.trim()
+                .split(" ")
 
-        // -----------------------------------------------------
-        // SMS PERMISSION
-        // -----------------------------------------------------
+        var initials =
+            words[0]
+                .take(1)
+                .uppercase()
+
+        if (words.size > 1) {
+
+            initials +=
+                words[1]
+                    .take(1)
+                    .uppercase()
+        }
+
+        return initials
+    }
+
+    // =====================================================
+    // SEND EMERGENCY SMS
+    // =====================================================
+
+    private fun sendEmergencySms() {
 
         if (
             ContextCompat.checkSelfPermission(
@@ -952,214 +960,122 @@ class MainActivity : AppCompatActivity() {
             ) != PackageManager.PERMISSION_GRANTED
         ) {
 
-            ActivityCompat.requestPermissions(
-                this,
-
-                arrayOf(
-                    Manifest.permission.SEND_SMS
-                ),
-
-                SMS_PERMISSION_REQUEST
-            )
-
-
-            return "Permission Required"
-        }
-
-
-        // -----------------------------------------------------
-        // LOCATION LINK
-        // -----------------------------------------------------
-
-        val locationText =
-            if (
-                lastLatitude != 0.0 &&
-                lastLongitude != 0.0
-            ) {
-
-                "https://maps.google.com/?q=$lastLatitude,$lastLongitude"
-
-            } else {
-
-                "Location currently unavailable"
-            }
-
-
-        // -----------------------------------------------------
-        // MESSAGE
-        // -----------------------------------------------------
-
-        val message =
-            "BEACON EMERGENCY ALERT\n" +
-                    "I may need help. Please check my location.\n" +
-                    "Location: $locationText"
-
-
-        // Reset SMS counters
-
-        totalSmsToSend = 0
-
-        smsResultsReceived = 0
-
-        smsSentSuccessfully = 0
-
-        smsFailed = 0
-
-
-        if (
-            contact1.isNotBlank()
-        ) {
-
-            totalSmsToSend++
-        }
-
-
-        if (
-            contact2.isNotBlank()
-        ) {
-
-            totalSmsToSend++
-        }
-
-
-        try {
-
-            val smsManager =
-                if (
-                    Build.VERSION.SDK_INT >=
-                    Build.VERSION_CODES.S
-                ) {
-
-                    getSystemService(
-                        SmsManager::class.java
-                    )
-
-                } else {
-
-                    @Suppress("DEPRECATION")
-
-                    SmsManager.getDefault()
-                }
-
-
-            // -------------------------------------------------
-            // SEND CONTACT 1
-            // -------------------------------------------------
-
-            if (
-                contact1.isNotBlank()
-            ) {
-
-                sendSmsWithStatus(
-                    smsManager,
-                    contact1,
-                    message,
-                    1001
-                )
-            }
-
-
-            // -------------------------------------------------
-            // SEND CONTACT 2
-            // -------------------------------------------------
-
-            if (
-                contact2.isNotBlank()
-            ) {
-
-                sendSmsWithStatus(
-                    smsManager,
-                    contact2,
-                    message,
-                    1002
-                )
-            }
-
-
             Toast.makeText(
                 this,
-                "Sending emergency SMS...",
+                "SMS permission not granted",
                 Toast.LENGTH_SHORT
             ).show()
 
+            return
+        }
 
-            return "Sending..."
+        val preferences =
+            getSharedPreferences(
+                "BeaconContacts",
+                MODE_PRIVATE
+            )
 
+        val number1 =
+            preferences.getString(
+                "contact1_number",
+                ""
+            ) ?: ""
 
-        } catch (
-            e: Exception
+        val number2 =
+            preferences.getString(
+                "contact2_number",
+                ""
+            ) ?: ""
+
+        if (
+            number1.isEmpty() &&
+            number2.isEmpty()
         ) {
+
+            Toast.makeText(
+                this,
+                "No trusted contact added",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            return
+        }
+
+        var message =
+            "BEACON EMERGENCY ALERT!\n" +
+                    "I may need help."
+
+        if (
+            currentLatitude != null &&
+            currentLongitude != null
+        ) {
+
+            message +=
+                "\nLocation:\n" +
+                        "https://maps.google.com/?q=" +
+                        "$currentLatitude,$currentLongitude"
+
+        } else {
+
+            message +=
+                "\nLocation unavailable."
+        }
+
+        try {
+
+            @Suppress("DEPRECATION")
+            val smsManager =
+                SmsManager.getDefault()
+
+            if (number1.isNotEmpty()) {
+
+                smsManager.sendTextMessage(
+                    number1,
+                    null,
+                    message,
+                    null,
+                    null
+                )
+            }
+
+            if (number2.isNotEmpty()) {
+
+                smsManager.sendTextMessage(
+                    number2,
+                    null,
+                    message,
+                    null,
+                    null
+                )
+            }
+
+            Toast.makeText(
+                this,
+                "Emergency SMS sent",
+                Toast.LENGTH_SHORT
+            ).show()
+
+        } catch (e: Exception) {
 
             Toast.makeText(
                 this,
                 "Unable to send emergency SMS",
-                Toast.LENGTH_LONG
+                Toast.LENGTH_SHORT
             ).show()
-
-
-            return "Failed"
         }
     }
 
-
-    // =========================================================
-    // SEND ONE SMS WITH STATUS
-    // =========================================================
-
-    private fun sendSmsWithStatus(
-        smsManager: SmsManager,
-        phoneNumber: String,
-        message: String,
-        requestCode: Int
-    ) {
-
-        val sentIntent =
-            Intent(
-                SMS_SENT_ACTION
-            )
-
-
-        sentIntent.setPackage(
-            packageName
-        )
-
-
-        val sentPendingIntent =
-            PendingIntent.getBroadcast(
-                this,
-                requestCode,
-                sentIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT or
-                        PendingIntent.FLAG_IMMUTABLE
-            )
-
-
-        smsManager.sendTextMessage(
-            phoneNumber,
-            null,
-            message,
-            sentPendingIntent,
-            null
-        )
-    }
-
-
-    // =========================================================
+    // =====================================================
     // SAVE SOS LOG
-    // =========================================================
+    // =====================================================
 
-    private fun saveSosLog(
-        smsStatus: String
-    ) {
+    private fun saveSOSLog() {
 
         val preferences =
             getSharedPreferences(
                 "BeaconLogs",
                 MODE_PRIVATE
             )
-
-
-        // Save old latest log as second log
 
         val oldDate =
             preferences.getString(
@@ -1167,13 +1083,11 @@ class MainActivity : AppCompatActivity() {
                 ""
             ) ?: ""
 
-
         val oldLocation =
             preferences.getString(
                 "log1_location",
                 ""
             ) ?: ""
-
 
         val oldSms =
             preferences.getString(
@@ -1181,12 +1095,7 @@ class MainActivity : AppCompatActivity() {
                 ""
             ) ?: ""
 
-
-        // -----------------------------------------------------
-        // CURRENT DATE AND TIME
-        // -----------------------------------------------------
-
-        val currentTime =
+        val date =
             SimpleDateFormat(
                 "dd MMM yyyy • hh:mm a",
                 Locale.getDefault()
@@ -1194,418 +1103,170 @@ class MainActivity : AppCompatActivity() {
                 Date()
             )
 
-
-        // -----------------------------------------------------
-        // LOCATION STATUS
-        // -----------------------------------------------------
-
         val locationStatus =
             if (
-                lastLatitude != 0.0 &&
-                lastLongitude != 0.0
+                currentLatitude != null &&
+                currentLongitude != null
             ) {
 
                 "Available"
 
             } else {
 
-                "Unavailable"
+                "Not Available"
             }
 
-
-        // -----------------------------------------------------
-        // COUNT EVENTS
-        // -----------------------------------------------------
-
-        var count =
+        val currentCount =
             preferences.getInt(
                 "log_count",
                 0
             )
 
+        val editor =
+            preferences.edit()
 
-        count++
+        if (oldDate.isNotEmpty()) {
 
-
-        // -----------------------------------------------------
-        // SAVE
-        // -----------------------------------------------------
-
-        preferences
-            .edit()
-
-            // Old Log 1 becomes Log 2
-
-            .putString(
+            editor.putString(
                 "log2_date",
                 oldDate
             )
 
-            .putString(
+            editor.putString(
                 "log2_location",
                 oldLocation
             )
 
-            .putString(
+            editor.putString(
                 "log2_sms",
                 oldSms
             )
-
-
-            // New event becomes Log 1
-
-            .putString(
-                "log1_date",
-                currentTime
-            )
-
-            .putString(
-                "log1_location",
-                locationStatus
-            )
-
-            .putString(
-                "log1_sms",
-                smsStatus
-            )
-
-            .putInt(
-                "log_count",
-                count
-            )
-
-            .apply()
-    }
-
-
-    // =========================================================
-    // UPDATE SMS STATUS IN LATEST LOG
-    // =========================================================
-
-    private fun updateSmsLog(
-        status: String
-    ) {
-
-        val preferences =
-            getSharedPreferences(
-                "BeaconLogs",
-                MODE_PRIVATE
-            )
-
-
-        preferences
-            .edit()
-            .putString(
-                "log1_sms",
-                status
-            )
-            .apply()
-    }
-
-
-    // =========================================================
-    // START SIREN
-    // =========================================================
-
-    private fun startSiren() {
-
-        try {
-
-            mediaPlayer?.release()
-
-
-            mediaPlayer =
-                MediaPlayer.create(
-                    this,
-                    R.raw.siren
-                )
-
-
-            if (
-                mediaPlayer != null
-            ) {
-
-                mediaPlayer?.isLooping =
-                    true
-
-                mediaPlayer?.start()
-
-            } else {
-
-                tvHold.text =
-                    "SIREN FILE NOT FOUND"
-            }
-
-
-        } catch (
-            e: Exception
-        ) {
-
-            tvHold.text =
-                "SIREN ERROR"
-        }
-    }
-
-
-    // =========================================================
-    // START VIBRATION
-    // =========================================================
-
-    private fun startVibration() {
-
-        val vibrator: Vibrator
-
-
-        if (
-            Build.VERSION.SDK_INT >= 31
-        ) {
-
-            val manager =
-                getSystemService(
-                    Context.VIBRATOR_MANAGER_SERVICE
-                ) as VibratorManager
-
-
-            vibrator =
-                manager.defaultVibrator
-
-        } else {
-
-            @Suppress("DEPRECATION")
-
-            vibrator =
-                getSystemService(
-                    Context.VIBRATOR_SERVICE
-                ) as Vibrator
         }
 
-
-        val pattern =
-            longArrayOf(
-                0,
-                500,
-                300,
-                500
-            )
-
-
-        if (
-            Build.VERSION.SDK_INT >= 26
-        ) {
-
-            vibrator.vibrate(
-                VibrationEffect.createWaveform(
-                    pattern,
-                    0
-                )
-            )
-
-        } else {
-
-            @Suppress("DEPRECATION")
-
-            vibrator.vibrate(
-                pattern,
-                0
-            )
-        }
-    }
-
-
-    // =========================================================
-    // STOP SOS
-    // =========================================================
-
-    private fun stopSOS() {
-
-        sosActive = false
-
-        holdingSOS = false
-
-
-        handler.removeCallbacks(
-            sosRunnable
+        editor.putString(
+            "log1_date",
+            date
         )
 
-
-        mediaPlayer?.let {
-
-            try {
-
-                if (
-                    it.isPlaying
-                ) {
-
-                    it.stop()
-                }
-
-            } catch (
-                e: Exception
-            ) {
-
-            }
-
-
-            it.release()
-        }
-
-
-        mediaPlayer = null
-
-
-        stopVibration()
-
-
-        tvStatus.text =
-            "● ONLINE"
-
-        tvEmergency.text =
-            "EMERGENCY"
-
-        tvHold.text =
-            "HOLD 3 SEC"
-
-        btnSOS.text =
-            "SOS"
-    }
-
-
-    // =========================================================
-    // STOP VIBRATION
-    // =========================================================
-
-    private fun stopVibration() {
-
-        val vibrator: Vibrator
-
-
-        if (
-            Build.VERSION.SDK_INT >= 31
-        ) {
-
-            val manager =
-                getSystemService(
-                    Context.VIBRATOR_MANAGER_SERVICE
-                ) as VibratorManager
-
-
-            vibrator =
-                manager.defaultVibrator
-
-        } else {
-
-            @Suppress("DEPRECATION")
-
-            vibrator =
-                getSystemService(
-                    Context.VIBRATOR_SERVICE
-                ) as Vibrator
-        }
-
-
-        vibrator.cancel()
-    }
-
-
-    // =========================================================
-    // PERMISSION RESULT
-    // =========================================================
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-
-        super.onRequestPermissionsResult(
-            requestCode,
-            permissions,
-            grantResults
+        editor.putString(
+            "log1_location",
+            locationStatus
         )
 
+        editor.putString(
+            "log1_sms",
+            "Triggered"
+        )
 
-        // LOCATION
+        editor.putInt(
+            "log_count",
+            currentCount + 1
+        )
+
+        editor.apply()
+    }
+
+    // =====================================================
+    // PERMISSIONS
+    // =====================================================
+
+    private fun requestRequiredPermissions() {
+
+        val permissions =
+            mutableListOf<String>()
 
         if (
-            requestCode == LOCATION_REQUEST
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
         ) {
 
-            val fineGranted =
-                ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED
+            permissions.add(
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
 
-
-            val coarseGranted =
-                ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED
-
-
-            if (
-                fineGranted ||
-                coarseGranted
-            ) {
-
-                checkGPS()
-
-            } else {
-
-                tvGps.text =
-                    "DENIED"
-
-                tvLastLocation.text =
-                    "Last location • Permission denied"
-            }
+            permissions.add(
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
         }
 
-
-        // SMS
-
         if (
-            requestCode == SMS_PERMISSION_REQUEST
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.SEND_SMS
+            ) != PackageManager.PERMISSION_GRANTED
         ) {
 
-            checkSMS()
+            permissions.add(
+                Manifest.permission.SEND_SMS
+            )
+        }
+
+        if (
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.RECEIVE_SMS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+
+            permissions.add(
+                Manifest.permission.RECEIVE_SMS
+            )
+        }
+
+        if (permissions.isNotEmpty()) {
+
+            ActivityCompat.requestPermissions(
+                this,
+                permissions.toTypedArray(),
+                PERMISSION_REQUEST
+            )
         }
     }
 
-
-    // =========================================================
-    // ON RESUME
-    // =========================================================
+    // =====================================================
+    // RESUME
+    // =====================================================
 
     override fun onResume() {
 
         super.onResume()
 
+        loadTrustedContact()
 
         if (
-            ::tvGps.isInitialized
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
         ) {
 
-            checkGPS()
+            startLocationUpdates()
         }
     }
 
-
-    // =========================================================
-    // ON PAUSE
-    // =========================================================
+    // =====================================================
+    // PAUSE
+    // =====================================================
 
     override fun onPause() {
 
         super.onPause()
 
-        stopLocationUpdates()
+        fusedLocationClient
+            .removeLocationUpdates(
+                locationCallback
+            )
+
+        // IMPORTANT:
+        // DO NOT stop SOS here.
+        // Siren should keep playing when finger is released.
     }
 
-
-    // =========================================================
-    // ON DESTROY
-    // =========================================================
+    // =====================================================
+    // DESTROY
+    // =====================================================
 
     override fun onDestroy() {
 
@@ -1613,19 +1274,34 @@ class MainActivity : AppCompatActivity() {
             sosRunnable
         )
 
+        try {
 
-        stopLocationUpdates()
+            if (
+                mediaPlayer != null &&
+                mediaPlayer!!.isPlaying
+            ) {
 
+                mediaPlayer!!.stop()
+            }
 
-        mediaPlayer?.release()
+        } catch (_: Exception) {
+        }
+
+        try {
+
+            mediaPlayer?.release()
+
+        } catch (_: Exception) {
+        }
 
         mediaPlayer = null
 
+        try {
 
-        stopVibration()
+            vibrator?.cancel()
 
-
-        // Remove battery receiver
+        } catch (_: Exception) {
+        }
 
         try {
 
@@ -1633,45 +1309,9 @@ class MainActivity : AppCompatActivity() {
                 batteryReceiver
             )
 
-        } catch (
-            e: Exception
-        ) {
-
+        } catch (_: Exception) {
         }
-
-
-        // Remove SMS status receiver
-
-        try {
-
-            unregisterReceiver(
-                smsSentReceiver
-            )
-
-        } catch (
-            e: Exception
-        ) {
-
-        }
-
 
         super.onDestroy()
-    }
-
-
-    // =========================================================
-    // CONSTANTS
-    // =========================================================
-
-    companion object {
-
-        private const val LOCATION_REQUEST =
-            101
-
-        private const val SMS_PERMISSION_REQUEST =
-            102
-
-        private const val SMS_SENT_ACTION =
-            "BEACON_SMS_SENT"
     }
 }

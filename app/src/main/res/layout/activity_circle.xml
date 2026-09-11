@@ -1,29 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#050914">
+    android:background="#050812"
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="24dp">
+        android:paddingStart="18dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="20dp">
 
-        <!-- ================= HEADER ================= -->
+        <!-- ====================================================== -->
+        <!-- HEADER -->
+        <!-- ====================================================== -->
 
         <TextView
             android:id="@+id/tvBack"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:clickable="true"
-            android:focusable="true"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:gravity="center"
-            android:text="‹"
-            android:textColor="#FFFFFF"
-            android:textSize="32sp"
+            android:text="←"
+            android:textColor="#9FB4D8"
+            android:textSize="27sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,197 +36,253 @@
             android:id="@+id/tvCircleTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="SAFETY CIRCLE"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Trusted Circle Whitelist"
             android:textColor="#FFFFFF"
-            android:textSize="26sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tvBack"
+            app:layout_constraintEnd_toStartOf="@id/btnAddContact"
             app:layout_constraintStart_toEndOf="@id/tvBack"
+            app:layout_constraintTop_toTopOf="@id/tvBack" />
+
+        <Button
+            android:id="@+id/btnAddContact"
+            android:layout_width="72dp"
+            android:layout_height="38dp"
+            android:backgroundTint="#176BFF"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="+ Add"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            app:cornerRadius="18dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvBack"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tvBack" />
 
         <TextView
             android:id="@+id/tvCircleSubtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Emergency Contacts"
-            android:textColor="#8B94A7"
-            android:textSize="14sp"
+            android:layout_marginStart="46dp"
+            android:layout_marginTop="4dp"
+            android:text="Only verified contacts can query your offline GPS"
+            android:textColor="#8C96AA"
+            android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvBack"
-            app:layout_constraintTop_toBottomOf="@id/tvCircleTitle" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvBack" />
 
-
-        <!-- ================= STATUS ================= -->
+        <!-- ====================================================== -->
+        <!-- WHITELIST INFO -->
+        <!-- ====================================================== -->
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/circleStatusCard"
+            android:id="@+id/cardWhitelistInfo"
             android:layout_width="0dp"
-            android:layout_height="110dp"
-            android:layout_marginTop="30dp"
-            app:cardBackgroundColor="#101827"
-            app:cardCornerRadius="16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            app:cardBackgroundColor="#0C1731"
+            app:cardCornerRadius="18dp"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvBack">
+            app:layout_constraintTop_toBottomOf="@id/tvCircleSubtitle">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="22dp">
+                android:layout_height="wrap_content"
+                android:minHeight="115dp"
+                android:padding="18dp">
 
                 <TextView
-                    android:id="@+id/tvCircleStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="● CIRCLE ACTIVE"
-                    android:textColor="#00E6A8"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    android:id="@+id/tvShieldIcon"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:gravity="center"
+                    android:text="🛡"
+                    android:textSize="24sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvCircleInfo"
+                    android:id="@+id/tvWhitelistTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Your trusted contacts are ready for emergencies."
-                    android:textColor="#AAB3C5"
-                    android:textSize="14sp"
+                    android:layout_marginStart="12dp"
+                    android:text="Strict Whitelist Enforcement"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvCircleStatus" />
+                    app:layout_constraintStart_toEndOf="@id/tvShieldIcon"
+                    app:layout_constraintTop_toTopOf="@id/tvShieldIcon" />
+
+                <TextView
+                    android:id="@+id/tvWhitelistInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="6dp"
+                    android:lineSpacingExtra="3dp"
+                    android:text="Unknown numbers are ignored automatically. Only contacts saved here can receive your location."
+                    android:textColor="#B0B8C7"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvShieldIcon"
+                    app:layout_constraintTop_toBottomOf="@id/tvWhitelistTitle" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
-
-        <!-- ================= CONTACTS TITLE ================= -->
-
-        <TextView
-            android:id="@+id/tvContactsTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="TRUSTED CONTACTS"
-            android:textColor="#8B94A7"
-            android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/circleStatusCard" />
-
-
-        <!-- ================= CONTACT 1 ================= -->
+        <!-- ====================================================== -->
+        <!-- CONTACT 1 -->
+        <!-- ====================================================== -->
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardContact1"
             android:layout_width="0dp"
-            android:layout_height="110dp"
-            android:layout_marginTop="14dp"
-            app:cardBackgroundColor="#101827"
-            app:cardCornerRadius="14dp"
+            android:layout_height="118dp"
+            android:layout_marginTop="18dp"
+            app:cardBackgroundColor="#0B1424"
+            app:cardCornerRadius="20dp"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvContactsTitle">
+            app:layout_constraintTop_toBottomOf="@id/cardWhitelistInfo">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="14dp">
-
-                <!-- NUMBER -->
+                android:paddingStart="14dp"
+                android:paddingTop="14dp"
+                android:paddingEnd="14dp"
+                android:paddingBottom="14dp">
 
                 <TextView
                     android:id="@+id/tvContact1Icon"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    android:background="#1C293B"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_contact_orange"
                     android:gravity="center"
-                    android:text="1"
+                    android:text="C1"
                     android:textColor="#FFFFFF"
-                    android:textSize="17sp"
+                    android:textSize="13sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <!-- NAME -->
 
                 <TextView
                     android:id="@+id/tvContact1Name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="Emergency Contact"
+                    android:layout_marginEnd="6dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="No contact selected"
                     android:textColor="#FFFFFF"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tvPrimaryBadge"
                     app:layout_constraintStart_toEndOf="@id/tvContact1Icon"
                     app:layout_constraintTop_toTopOf="@id/tvContact1Icon" />
 
-                <!-- PHONE -->
+                <TextView
+                    android:id="@+id/tvPrimaryBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:background="@drawable/bg_primary_badge"
+                    android:gravity="center"
+                    android:paddingStart="7dp"
+                    android:paddingEnd="7dp"
+                    android:text="★ PRIMARY"
+                    android:textColor="#FFC62B"
+                    android:textSize="7sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/btnDeleteContact1"
+                    app:layout_constraintTop_toTopOf="@id/tvContact1Name" />
+
+                <Button
+                    android:id="@+id/btnDeleteContact1"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:backgroundTint="#142238"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:text="×"
+                    android:textColor="#A9B7CC"
+                    android:textSize="18sp"
+                    app:cornerRadius="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvContact1Status"
+                    android:id="@+id/tvContact1Number"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:layout_marginTop="2dp"
-                    android:text="Ready to receive alerts"
-                    android:textColor="#7F899D"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="7dp"
+                    android:text="☎  Tap to select contact"
+                    android:textColor="#A8B6CA"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/btnDeleteContact1"
                     app:layout_constraintStart_toEndOf="@id/tvContact1Icon"
                     app:layout_constraintTop_toBottomOf="@id/tvContact1Name" />
 
-                <!-- CALL -->
+                <TextView
+                    android:id="@+id/tvContact1Info"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Family / Primary Responder • Whitelisted"
+                    android:textColor="#687994"
+                    android:textSize="9sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvContact1Icon"
+                    app:layout_constraintTop_toBottomOf="@id/tvContact1Number" />
+
+                <TextView
+                    android:id="@+id/tvContact1Status"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:visibility="gone"
+                    tools:ignore="MissingConstraints" />
 
                 <Button
-                    android:id="@+id/btnCall1"
-                    android:layout_width="90dp"
-                    android:layout_height="38dp"
-                    android:layout_marginTop="7dp"
-                    android:backgroundTint="#123526"
-                    android:text="CALL"
-                    android:textColor="#35F28B"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/tvContact1Name"
-                    app:layout_constraintTop_toBottomOf="@id/tvContact1Status" />
-
-                <!-- SMS -->
-
-                <Button
-                    android:id="@+id/btnSms1"
-                    android:layout_width="90dp"
-                    android:layout_height="38dp"
-                    android:layout_marginStart="8dp"
-                    android:backgroundTint="#1D1640"
-                    android:text="SMS"
-                    android:textColor="#A86BFF"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@id/btnCall1"
-                    app:layout_constraintTop_toTopOf="@id/btnCall1" />
+                    android:id="@+id/btnSelectContact1"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:visibility="gone"
+                    tools:ignore="MissingConstraints" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
-
-        <!-- ================= CONTACT 2 ================= -->
+        <!-- ====================================================== -->
+        <!-- CONTACT 2 -->
+        <!-- ====================================================== -->
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardContact2"
             android:layout_width="0dp"
-            android:layout_height="110dp"
+            android:layout_height="118dp"
             android:layout_marginTop="12dp"
-            app:cardBackgroundColor="#101827"
-            app:cardCornerRadius="14dp"
+            app:cardBackgroundColor="#0B1424"
+            app:cardCornerRadius="20dp"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -230,122 +291,292 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="14dp">
-
-                <!-- NUMBER -->
+                android:paddingStart="14dp"
+                android:paddingTop="14dp"
+                android:paddingEnd="14dp"
+                android:paddingBottom="14dp">
 
                 <TextView
                     android:id="@+id/tvContact2Icon"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    android:background="#1C293B"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_contact_blue"
                     android:gravity="center"
-                    android:text="2"
+                    android:text="C2"
                     android:textColor="#FFFFFF"
-                    android:textSize="17sp"
+                    android:textSize="13sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <!-- NAME -->
 
                 <TextView
                     android:id="@+id/tvContact2Name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="Family Contact"
+                    android:layout_marginEnd="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="No contact selected"
                     android:textColor="#FFFFFF"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btnFavoriteContact2"
                     app:layout_constraintStart_toEndOf="@id/tvContact2Icon"
                     app:layout_constraintTop_toTopOf="@id/tvContact2Icon" />
 
-                <!-- PHONE -->
+                <Button
+                    android:id="@+id/btnFavoriteContact2"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:backgroundTint="#142238"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:text="☆"
+                    android:textColor="#9FB2CA"
+                    android:textSize="18sp"
+                    app:cornerRadius="12dp"
+                    app:layout_constraintEnd_toStartOf="@id/btnDeleteContact2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btnDeleteContact2"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="5dp"
+                    android:backgroundTint="#142238"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:text="×"
+                    android:textColor="#A9B7CC"
+                    android:textSize="18sp"
+                    app:cornerRadius="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvContact2Status"
+                    android:id="@+id/tvContact2Number"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:layout_marginTop="2dp"
-                    android:text="Ready to receive alerts"
-                    android:textColor="#7F899D"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="7dp"
+                    android:text="☎  Tap to select contact"
+                    android:textColor="#A8B6CA"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/btnFavoriteContact2"
                     app:layout_constraintStart_toEndOf="@id/tvContact2Icon"
                     app:layout_constraintTop_toBottomOf="@id/tvContact2Name" />
 
-                <!-- CALL -->
+                <TextView
+                    android:id="@+id/tvContact2Info"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Emergency Contact • Whitelisted"
+                    android:textColor="#687994"
+                    android:textSize="9sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvContact2Icon"
+                    app:layout_constraintTop_toBottomOf="@id/tvContact2Number" />
+
+                <TextView
+                    android:id="@+id/tvContact2Status"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:visibility="gone"
+                    tools:ignore="MissingConstraints" />
 
                 <Button
-                    android:id="@+id/btnCall2"
-                    android:layout_width="90dp"
-                    android:layout_height="38dp"
-                    android:layout_marginTop="7dp"
-                    android:backgroundTint="#123526"
-                    android:text="CALL"
-                    android:textColor="#35F28B"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/tvContact2Name"
-                    app:layout_constraintTop_toBottomOf="@id/tvContact2Status" />
-
-                <!-- SMS -->
-
-                <Button
-                    android:id="@+id/btnSms2"
-                    android:layout_width="90dp"
-                    android:layout_height="38dp"
-                    android:layout_marginStart="8dp"
-                    android:backgroundTint="#1D1640"
-                    android:text="SMS"
-                    android:textColor="#A86BFF"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@id/btnCall2"
-                    app:layout_constraintTop_toTopOf="@id/btnCall2" />
+                    android:id="@+id/btnSelectContact2"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:visibility="gone"
+                    tools:ignore="MissingConstraints" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
+        <!-- ====================================================== -->
+        <!-- ADD TRUSTED CONTACT -->
+        <!-- ====================================================== -->
 
-        <!-- ================= ADD CONTACT ================= -->
-
-        <Button
-            android:id="@+id/btnAddContact"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardAddTrusted"
             android:layout_width="0dp"
-            android:layout_height="58dp"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="#7C3AED"
-            android:text="+  ADD EMERGENCY CONTACT"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp"
-            android:textStyle="bold"
+            android:layout_height="110dp"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="#08111F"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardContact2" />
+            app:layout_constraintTop_toBottomOf="@id/cardContact2">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="18dp">
 
-        <!-- ================= INFORMATION ================= -->
+                <TextView
+                    android:id="@+id/tvAddCircle"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="#4599FF"
+                    android:textSize="30sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvCircleInformation"
+                <TextView
+                    android:id="@+id/tvAddTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="Add Trusted Contact"
+                    android:textColor="#4B97FF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvAddCircle"
+                    app:layout_constraintTop_toTopOf="@id/tvAddCircle" />
+
+                <TextView
+                    android:id="@+id/tvAddSubtitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="7dp"
+                    android:text="Select from your phone contacts"
+                    android:textColor="#8B95AA"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvAddCircle"
+                    app:layout_constraintTop_toBottomOf="@id/tvAddTitle" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- ====================================================== -->
+        <!-- SEND LOCATE -->
+        <!-- ====================================================== -->
+
+        <Button
+            android:id="@+id/btnRequestLocation"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:gravity="center"
-            android:text="Your trusted contacts can be notified when SOS is activated."
-            android:textColor="#7F899D"
-            android:textSize="13sp"
-            android:layout_marginBottom="25dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="18dp"
+            android:backgroundTint="#6931C8"
+            android:minHeight="0dp"
+            android:text="SEND LOCATE"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:cornerRadius="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardAddTrusted" />
+
+        <!-- ====================================================== -->
+        <!-- BOTTOM NAVIGATION -->
+        <!-- ====================================================== -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardBottomNavigation"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#080E1B"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnAddContact" />
+            app:layout_constraintTop_toBottomOf="@id/btnRequestLocation">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/navHome"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="⌁&#10;Beacon"
+                    android:textColor="#8B95AA"
+                    android:textSize="9sp"
+                    app:layout_constraintEnd_toStartOf="@id/navGps"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/navGps"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="◎&#10;GPS"
+                    android:textColor="#8B95AA"
+                    android:textSize="9sp"
+                    app:layout_constraintEnd_toStartOf="@id/navSos"
+                    app:layout_constraintStart_toEndOf="@id/navHome" />
+
+                <TextView
+                    android:id="@+id/navSos"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="⚠&#10;SOS"
+                    android:textColor="#FF526C"
+                    android:textSize="9sp"
+                    app:layout_constraintEnd_toStartOf="@id/navCircle"
+                    app:layout_constraintStart_toEndOf="@id/navGps" />
+
+                <TextView
+                    android:id="@+id/navCircle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="♙&#10;Circle"
+                    android:textColor="#C36DFF"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/navLogs"
+                    app:layout_constraintStart_toEndOf="@id/navSos" />
+
+                <TextView
+                    android:id="@+id/navLogs"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="⌁&#10;Logs"
+                    android:textColor="#8B95AA"
+                    android:textSize="9sp"
+                    app:layout_constraintEnd_toStartOf="@id/navScreens"
+                    app:layout_constraintStart_toEndOf="@id/navCircle" />
+
+                <TextView
+                    android:id="@+id/navScreens"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="▦&#10;Screens"
+                    android:textColor="#8B95AA"
+                    android:textSize="9sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/navLogs" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

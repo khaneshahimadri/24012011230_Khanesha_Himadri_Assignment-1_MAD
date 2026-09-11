@@ -1,82 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    <!-- ========================= -->
+    <!-- PERMISSIONS -->
+    <!-- ========================= -->
 
-    <!-- VIBRATION -->
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
-    <!-- GPS / LOCATION -->
-    <uses-permission
-        android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-permission
-        android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <!-- CONTACTS -->
-    <uses-permission
-        android:name="android.permission.READ_CONTACTS" />
-
-    <!-- SMS -->
-    <uses-permission
-        android:name="android.permission.SEND_SMS" />
-
-    <uses-permission
-        android:name="android.permission.RECEIVE_SMS" />
-
+    <!-- ========================= -->
+    <!-- APPLICATION -->
+    <!-- ========================= -->
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="BEACON"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme._24012011230_KhaneshaHimadri_Assignment1_MAD">
 
-        <!-- MAIN SCREEN -->
+        <!-- ========================= -->
+        <!-- GPS ACTIVITY -->
+        <!-- ========================= -->
+
+        <activity
+            android:name=".GpsActivity"
+            android:exported="false" />
+
+        <!-- ========================= -->
+        <!-- CIRCLE ACTIVITY -->
+        <!-- ========================= -->
+
+        <activity
+            android:name=".CircleActivity"
+            android:exported="false" />
+
+        <!-- ========================= -->
+        <!-- LOGS ACTIVITY -->
+        <!-- ========================= -->
+
+        <activity
+            android:name=".LogsActivity"
+            android:exported="false" />
+
+        <!-- ========================= -->
+        <!-- MAIN ACTIVITY -->
+        <!-- ========================= -->
+
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize">
-
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
-        <!-- GPS SCREEN -->
-        <activity
-            android:name=".GpsActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+        <!-- ========================= -->
+        <!-- SMS RECEIVER -->
+        <!-- ========================= -->
 
-        <!-- SAFETY CIRCLE SCREEN -->
-        <activity
-            android:name=".CircleActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-
-        <!-- LOGS SCREEN -->
-        <activity
-            android:name=".LogsActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-
-        <!-- INCOMING LOCATE SMS RECEIVER -->
         <receiver
             android:name=".SmsReceiver"
             android:exported="true">
-
             <intent-filter android:priority="999">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
-
         </receiver>
 
+        <activity
+            android:name=".ScreensActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

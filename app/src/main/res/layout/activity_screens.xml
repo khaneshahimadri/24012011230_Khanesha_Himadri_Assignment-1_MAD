@@ -1,0 +1,1090 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#050A14"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="15dp"
+        android:paddingTop="18dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="20dp">
+
+        <!-- HEADER -->
+
+        <TextView
+            android:id="@+id/tvScreensIcon"
+            android:layout_width="28dp"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:text="▦"
+            android:textColor="#B961FF"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvScreensTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="All 12 BEACON Screens"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/btnClose"
+            app:layout_constraintStart_toEndOf="@id/tvScreensIcon"
+            app:layout_constraintTop_toTopOf="@id/tvScreensIcon" />
+
+        <TextView
+            android:id="@+id/tvScreensSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="3dp"
+            android:text="Select any screen to view its functional implementation"
+            android:textColor="#8793A8"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toStartOf="@id/btnClose"
+            app:layout_constraintStart_toEndOf="@id/tvScreensIcon"
+            app:layout_constraintTop_toBottomOf="@id/tvScreensTitle" />
+
+        <TextView
+            android:id="@+id/btnClose"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_close_button"
+            android:gravity="center"
+            android:text="×"
+            android:textColor="#AAB8CC"
+            android:textSize="27sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/headerDivider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="18dp"
+            android:background="#182237"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvScreensSubtitle" />
+
+        <!-- 1 HOME DASHBOARD -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardHomeDashboard"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="#091221"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerDivider">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/iconHome"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_screen_red"
+                    android:gravity="center"
+                    android:text="((•))"
+                    android:textColor="#FF5068"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleHome"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="1. Home Dashboard"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tagHome"
+                    app:layout_constraintStart_toEndOf="@id/iconHome"
+                    app:layout_constraintTop_toTopOf="@id/iconHome" />
+
+                <TextView
+                    android:id="@+id/subHome"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="6dp"
+                    android:text="System status, 3s Hold SOS, Beacon radar"
+                    android:textColor="#9AA7BB"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tagHome"
+                    app:layout_constraintStart_toEndOf="@id/iconHome"
+                    app:layout_constraintTop_toBottomOf="@id/titleHome" />
+
+                <TextView
+                    android:id="@+id/tagHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bg_screen_tag"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="Core"
+                    android:textColor="#A7B6CC"
+                    android:textSize="8sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- 2 EMERGENCY SOS -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardEmergencySOS"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#091221"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardHomeDashboard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/iconSOS"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_screen_red"
+                    android:gravity="center"
+                    android:text="!"
+                    android:textColor="#FF3350"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleSOS"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="2. Emergency SOS"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tagSOS"
+                    app:layout_constraintStart_toEndOf="@id/iconSOS"
+                    app:layout_constraintTop_toTopOf="@id/iconSOS" />
+
+                <TextView
+                    android:id="@+id/subSOS"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Active emergency mode, Siren &amp; auto-dispatch"
+                    android:textColor="#9AA7BB"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tagSOS"
+                    app:layout_constraintStart_toEndOf="@id/iconSOS"
+                    app:layout_constraintTop_toBottomOf="@id/titleSOS" />
+
+                <TextView
+                    android:id="@+id/tagSOS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bg_screen_tag"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="Emergency"
+                    android:textColor="#A7B6CC"
+                    android:textSize="8sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- 3 BEACON CONTROL -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardBeaconControl"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#091221"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardEmergencySOS">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/iconControl"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_screen_purple"
+                    android:gravity="center"
+                    android:text="☷"
+                    android:textColor="#CE72FF"
+                    android:textSize="21sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleControl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="3. Beacon Control"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tagControl"
+                    app:layout_constraintStart_toEndOf="@id/iconControl"
+                    app:layout_constraintTop_toTopOf="@id/iconControl" />
+
+                <TextView
+                    android:id="@+id/subControl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Keyword LOCATE, background listening daemon"
+                    android:textColor="#9AA7BB"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tagControl"
+                    app:layout_constraintStart_toEndOf="@id/iconControl"
+                    app:layout_constraintTop_toBottomOf="@id/titleControl" />
+
+                <TextView
+                    android:id="@+id/tagControl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bg_screen_tag"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="Settings"
+                    android:textColor="#A7B6CC"
+                    android:textSize="8sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- 4 TRUSTED CIRCLE -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardTrustedCircle"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#091221"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardBeaconControl">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/iconCircle"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_screen_blue"
+                    android:gravity="center"
+                    android:text="♙"
+                    android:textColor="#42A6FF"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleCircle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="4. Trusted Circle"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tagCircle"
+                    app:layout_constraintStart_toEndOf="@id/iconCircle"
+                    app:layout_constraintTop_toTopOf="@id/iconCircle" />
+
+                <TextView
+                    android:id="@+id/subCircle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Primary &amp; verified whitelist contacts"
+                    android:textColor="#9AA7BB"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tagCircle"
+                    app:layout_constraintStart_toEndOf="@id/iconCircle"
+                    app:layout_constraintTop_toBottomOf="@id/titleCircle" />
+
+                <TextView
+                    android:id="@+id/tagCircle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bg_screen_tag"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="Contacts"
+                    android:textColor="#A7B6CC"
+                    android:textSize="8sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- 5 OFFLINE -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardOfflineArchitecture"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#091221"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardTrustedCircle">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/iconOffline"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_screen_orange"
+                    android:gravity="center"
+                    android:text="⌁"
+                    android:textColor="#FFB600"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleOffline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="5. Offline Architecture"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tagOffline"
+                    app:layout_constraintStart_toEndOf="@id/iconOffline"
+                    app:layout_constraintTop_toTopOf="@id/iconOffline" />
+
+                <TextView
+                    android:id="@+id/subOffline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Zero data dependency, SMS vs Internet"
+                    android:textColor="#9AA7BB"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tagOffline"
+                    app:layout_constraintStart_toEndOf="@id/iconOffline"
+                    app:layout_constraintTop_toBottomOf="@id/titleOffline" />
+
+                <TextView
+                    android:id="@+id/tagOffline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bg_screen_tag"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="Architecture"
+                    android:textColor="#A7B6CC"
+                    android:textSize="8sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- 6 GPS -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardGpsTactical"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#091221"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardOfflineArchitecture">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/iconGps"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_screen_green"
+                    android:gravity="center"
+                    android:text="⌖"
+                    android:textColor="#00E7B6"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleGps"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="6. GPS Tactical Location"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tagGps"
+                    app:layout_constraintStart_toEndOf="@id/iconGps"
+                    app:layout_constraintTop_toTopOf="@id/iconGps" />
+
+                <TextView
+                    android:id="@+id/subGps"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Live GNSS coordinates, accuracy &amp; satellites"
+                    android:textColor="#9AA7BB"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tagGps"
+                    app:layout_constraintStart_toEndOf="@id/iconGps"
+                    app:layout_constraintTop_toBottomOf="@id/titleGps" />
+
+                <TextView
+                    android:id="@+id/tagGps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bg_screen_tag"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="Location"
+                    android:textColor="#A7B6CC"
+                    android:textSize="8sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- 7 SMS -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardSmsParser"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#091221"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardGpsTactical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/iconSmsParser"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_screen_cyan"
+                    android:gravity="center"
+                    android:text="↔"
+                    android:textColor="#00DFFF"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleSmsParser"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="7. SMS Request Parser"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tagSmsParser"
+                    app:layout_constraintStart_toEndOf="@id/iconSmsParser"
+                    app:layout_constraintTop_toTopOf="@id/iconSmsParser" />
+
+                <TextView
+                    android:id="@+id/subSmsParser"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Inbound LOCATE SMS verification pipeline"
+                    android:textColor="#9AA7BB"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tagSmsParser"
+                    app:layout_constraintStart_toEndOf="@id/iconSmsParser"
+                    app:layout_constraintTop_toBottomOf="@id/titleSmsParser" />
+
+                <TextView
+                    android:id="@+id/tagSmsParser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bg_screen_tag"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="Pipeline"
+                    android:textColor="#A7B6CC"
+                    android:textSize="8sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- 8 RESPONSE -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardLocationResponse"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#091221"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardSmsParser">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/iconLocationResponse"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_screen_indigo"
+                    android:gravity="center"
+                    android:text="➤"
+                    android:textColor="#8079FF"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleLocationResponse"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="8. Location Response"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tagLocationResponse"
+                    app:layout_constraintStart_toEndOf="@id/iconLocationResponse"
+                    app:layout_constraintTop_toTopOf="@id/iconLocationResponse" />
+
+                <TextView
+                    android:id="@+id/subLocationResponse"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Generated Google Maps link &amp; SMS dispatch"
+                    android:textColor="#9AA7BB"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tagLocationResponse"
+                    app:layout_constraintStart_toEndOf="@id/iconLocationResponse"
+                    app:layout_constraintTop_toBottomOf="@id/titleLocationResponse" />
+
+                <TextView
+                    android:id="@+id/tagLocationResponse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bg_screen_tag"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="Pipeline"
+                    android:textColor="#A7B6CC"
+                    android:textSize="8sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- 9 ACTIVITY -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardActivityLog"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#25103A"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardLocationResponse">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_screen_selected"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/iconActivity"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_screen_cyan"
+                    android:gravity="center"
+                    android:text="⌁"
+                    android:textColor="#00E2D5"
+                    android:textSize="26sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleActivity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="9. Beacon Activity Log"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tagActivity"
+                    app:layout_constraintStart_toEndOf="@id/iconActivity"
+                    app:layout_constraintTop_toTopOf="@id/iconActivity" />
+
+                <TextView
+                    android:id="@+id/subActivity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Audit log, successful fixes &amp; blocked probes"
+                    android:textColor="#B7A8CB"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tagActivity"
+                    app:layout_constraintStart_toEndOf="@id/iconActivity"
+                    app:layout_constraintTop_toBottomOf="@id/titleActivity" />
+
+                <TextView
+                    android:id="@+id/tagActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bg_screen_tag"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="Audit"
+                    android:textColor="#A7B6CC"
+                    android:textSize="8sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- 10 SECURITY -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardSecurity"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#091221"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardActivityLog">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/iconSecurity"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_screen_red"
+                    android:gravity="center"
+                    android:text="⌑"
+                    android:textColor="#FF5680"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleSecurity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="10. Security &amp; Privacy"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tagSecurity"
+                    app:layout_constraintStart_toEndOf="@id/iconSecurity"
+                    app:layout_constraintTop_toTopOf="@id/iconSecurity" />
+
+                <TextView
+                    android:id="@+id/subSecurity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Anti-spoofing whitelist &amp; stealth settings"
+                    android:textColor="#9AA7BB"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tagSecurity"
+                    app:layout_constraintStart_toEndOf="@id/iconSecurity"
+                    app:layout_constraintTop_toBottomOf="@id/titleSecurity" />
+
+                <TextView
+                    android:id="@+id/tagSecurity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bg_screen_tag"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="Security"
+                    android:textColor="#A7B6CC"
+                    android:textSize="8sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- 11 HEALTH -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardHealth"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#091221"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardSecurity">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/iconHealth"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_screen_green"
+                    android:gravity="center"
+                    android:text="♡"
+                    android:textColor="#00EAB6"
+                    android:textSize="23sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleHealth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="11. Beacon Health Diagnostics"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tagHealth"
+                    app:layout_constraintStart_toEndOf="@id/iconHealth"
+                    app:layout_constraintTop_toTopOf="@id/iconHealth" />
+
+                <TextView
+                    android:id="@+id/subHealth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Hardware sensors, SMSC &amp; battery health"
+                    android:textColor="#9AA7BB"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tagHealth"
+                    app:layout_constraintStart_toEndOf="@id/iconHealth"
+                    app:layout_constraintTop_toBottomOf="@id/titleHealth" />
+
+                <TextView
+                    android:id="@+id/tagHealth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bg_screen_tag"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="Diagnostics"
+                    android:textColor="#A7B6CC"
+                    android:textSize="8sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- 12 FLOW -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardCompleteFlow"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#091221"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardHealth">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/iconFlow"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_screen_purple"
+                    android:gravity="center"
+                    android:text="⌘"
+                    android:textColor="#C26EFF"
+                    android:textSize="23sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleFlow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="12. Complete Beacon Flow"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tagFlow"
+                    app:layout_constraintStart_toEndOf="@id/iconFlow"
+                    app:layout_constraintTop_toTopOf="@id/iconFlow" />
+
+                <TextView
+                    android:id="@+id/subFlow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Visual interactive end-to-end architecture"
+                    android:textColor="#9AA7BB"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tagFlow"
+                    app:layout_constraintStart_toEndOf="@id/iconFlow"
+                    app:layout_constraintTop_toBottomOf="@id/titleFlow" />
+
+                <TextView
+                    android:id="@+id/tagFlow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bg_screen_tag"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="Architecture"
+                    android:textColor="#A7B6CC"
+                    android:textSize="8sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- ================= BOTTOM NAV ================= -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardBottomNav"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="#080E1A"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardCompleteFlow">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/navHome"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="◉&#10;Beacon"
+                    android:textColor="#91A1B9"
+                    android:textSize="9sp"
+                    app:layout_constraintEnd_toStartOf="@id/navGps"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/navGps"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="⌖&#10;GPS"
+                    android:textColor="#91A1B9"
+                    android:textSize="9sp"
+                    app:layout_constraintEnd_toStartOf="@id/navSos"
+                    app:layout_constraintStart_toEndOf="@id/navHome" />
+
+                <TextView
+                    android:id="@+id/navSos"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="!&#10;SOS"
+                    android:textColor="#FF526A"
+                    android:textSize="9sp"
+                    app:layout_constraintEnd_toStartOf="@id/navCircle"
+                    app:layout_constraintStart_toEndOf="@id/navGps" />
+
+                <TextView
+                    android:id="@+id/navCircle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="♙&#10;Circle"
+                    android:textColor="#91A1B9"
+                    android:textSize="9sp"
+                    app:layout_constraintEnd_toStartOf="@id/navLogs"
+                    app:layout_constraintStart_toEndOf="@id/navSos" />
+
+                <TextView
+                    android:id="@+id/navLogs"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="⌁&#10;Logs"
+                    android:textColor="#91A1B9"
+                    android:textSize="9sp"
+                    app:layout_constraintEnd_toStartOf="@id/navScreens"
+                    app:layout_constraintStart_toEndOf="@id/navCircle" />
+
+                <TextView
+                    android:id="@+id/navScreens"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_screens_selected"
+                    android:gravity="center"
+                    android:text="▦&#10;Screens"
+                    android:textColor="#D478FF"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/navLogs" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
