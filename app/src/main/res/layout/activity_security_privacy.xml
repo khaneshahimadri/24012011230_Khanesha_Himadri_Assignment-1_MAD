@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#050A14"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="18dp"
+        android:paddingTop="28dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="20dp">
+
+        <!-- HEADER -->
+
+        <TextView
+            android:id="@+id/btnDashboard"
+            android:layout_width="100dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_security_dashboard"
+            android:gravity="center"
+            android:text="‹  Dashboard"
+            android:textColor="#D3DCE9"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:gravity="center_vertical"
+            android:text="♢  SECURITY &amp; PRIVACY"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btnDashboard" />
+
+
+        <!-- ZERO TRUST GUARD -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardGuard"
+            android:layout_width="0dp"
+            android:layout_height="105dp"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="#211232"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnDashboard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvGuardIcon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_security_guard_icon"
+                    android:gravity="center"
+                    android:text="▣"
+                    android:textColor="#D76CFF"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvGuardTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="ZERO-TRUST SMS GUARD"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvGuardIcon"
+                    app:layout_constraintTop_toTopOf="@id/tvGuardIcon" />
+
+                <TextView
+                    android:id="@+id/tvGuardInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Protects real-time location from unauthorized tracking or spoofed SMS probes."
+                    android:textColor="#AAB4C5"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvGuardIcon"
+                    app:layout_constraintTop_toBottomOf="@id/tvGuardTitle" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- TRUSTED SENDER -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardWhitelist"
+            android:layout_width="0dp"
+            android:layout_height="106dp"
+            android:layout_marginTop="18dp"
+            app:cardBackgroundColor="#0D1729"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardGuard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="18dp">
+
+                <TextView
+                    android:id="@+id/tvWhitelistTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Trusted Sender Whitelist Only"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/switchWhitelist"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvWhitelistInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Reject incoming SMS requests from numbers not in your Trusted Circle."
+                    android:textColor="#98A5B9"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/switchWhitelist"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvWhitelistTitle" />
+
+                <Switch
+                    android:id="@+id/switchWhitelist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:buttonTint="#00C99B"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- UNKNOWN DROPPING -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardUnknown"
+            android:layout_width="0dp"
+            android:layout_height="106dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#0D1729"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardWhitelist">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="18dp">
+
+                <TextView
+                    android:id="@+id/tvUnknownTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Silent Unknown Number Dropping"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/switchUnknown"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvUnknownInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Silently drop untrusted SMS without sending error receipts to prevent phone probing."
+                    android:textColor="#98A5B9"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/switchUnknown"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvUnknownTitle" />
+
+                <Switch
+                    android:id="@+id/switchUnknown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- STEALTH -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardStealth"
+            android:layout_width="0dp"
+            android:layout_height="128dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#0D1729"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardUnknown">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="18dp">
+
+                <TextView
+                    android:id="@+id/tvStealthTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="◉  Stealth Mode"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/switchStealth"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvStealthInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Suppress ringtones, vibrations, and screen wake when an authorized location SMS is handled."
+                    android:textColor="#98A5B9"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/switchStealth"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvStealthTitle" />
+
+                <Switch
+                    android:id="@+id/switchStealth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- COOLDOWN -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardCooldown"
+            android:layout_width="0dp"
+            android:layout_height="168dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#0D1729"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardStealth">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="18dp">
+
+                <TextView
+                    android:id="@+id/tvCooldownTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Anti-Spam Cooldown Rate"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvCooldownValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30 seconds"
+                    android:textColor="#CF6DFF"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvCooldownTitle" />
+
+                <TextView
+                    android:id="@+id/tvCooldownInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Limits repeated SMS location transmissions to reduce unnecessary requests and conserve battery."
+                    android:textColor="#98A5B9"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvCooldownTitle" />
+
+                <Button
+                    android:id="@+id/btn15"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="5dp"
+                    android:backgroundTint="#030817"
+                    android:text="15s"
+                    android:textAllCaps="false"
+                    android:textColor="#C7D0DD"
+                    android:textSize="10sp"
+                    app:cornerRadius="9dp"
+                    app:layout_constraintEnd_toStartOf="@id/btn30"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvCooldownInfo" />
+
+                <Button
+                    android:id="@+id/btn30"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:backgroundTint="#552080"
+                    android:text="30s"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp"
+                    app:cornerRadius="9dp"
+                    app:layout_constraintEnd_toStartOf="@id/btn60"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/btn15"
+                    app:layout_constraintTop_toTopOf="@id/btn15" />
+
+                <Button
+                    android:id="@+id/btn60"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:backgroundTint="#030817"
+                    android:text="60s"
+                    android:textAllCaps="false"
+                    android:textColor="#C7D0DD"
+                    android:textSize="10sp"
+                    app:cornerRadius="9dp"
+                    app:layout_constraintEnd_toStartOf="@id/btn120"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/btn30"
+                    app:layout_constraintTop_toTopOf="@id/btn15" />
+
+                <Button
+                    android:id="@+id/btn120"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="5dp"
+                    android:backgroundTint="#030817"
+                    android:text="120s"
+                    android:textAllCaps="false"
+                    android:textColor="#C7D0DD"
+                    android:textSize="10sp"
+                    app:cornerRadius="9dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/btn60"
+                    app:layout_constraintTop_toTopOf="@id/btn15" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- BOTTOM NAV -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardBottomNav"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="#080E1A"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardCooldown">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/navHome"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="⌂&#10;Home"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navGps"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/navGps"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="⌖&#10;GPS"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navSos"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navHome" />
+
+                <TextView
+                    android:id="@+id/navSos"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="!&#10;SOS"
+                    android:textColor="#FF4565"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/navCircle"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navGps" />
+
+                <TextView
+                    android:id="@+id/navCircle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="♙&#10;Circle"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navLogs"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navSos" />
+
+                <TextView
+                    android:id="@+id/navLogs"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="⌁&#10;Logs"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navScreens"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navCircle" />
+
+                <TextView
+                    android:id="@+id/navScreens"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="▦&#10;Screens"
+                    android:textColor="#D478FF"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navLogs" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#050A14"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="18dp"
+        android:paddingTop="28dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="20dp">
+
+        <!-- HEADER -->
+
+        <TextView
+            android:id="@+id/btnDashboard"
+            android:layout_width="100dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_health_dashboard"
+            android:gravity="center"
+            android:text="‹  Dashboard"
+            android:textColor="#D1DBE9"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:gravity="center_vertical"
+            android:text="ϟ  BEACON HEALTH &amp; TELEMETRY"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btnDashboard" />
+
+
+        <!-- OVERALL HEALTH -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardOverallHealth"
+            android:layout_width="0dp"
+            android:layout_height="330dp"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="#071B1F"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnDashboard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="22dp">
+
+                <TextView
+                    android:id="@+id/tvHealthCircle"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:background="@drawable/bg_health_circle"
+                    android:gravity="center"
+                    android:text="--%&#10;HEALTH"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="23sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvOverallTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:gravity="center"
+                    android:text="Checking Hardware Subsystems"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvHealthCircle" />
+
+                <TextView
+                    android:id="@+id/tvOverallInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:lineSpacingExtra="3dp"
+                    android:text="BEACON is checking GPS, SMS, battery and network readiness."
+                    android:textColor="#A5B1C3"
+                    android:textSize="11sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvOverallTitle" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- GPS -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardGps"
+            android:layout_width="0dp"
+            android:layout_height="105dp"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="#0D1729"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardOverallHealth">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvGpsIcon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_health_green_icon"
+                    android:gravity="center"
+                    android:text="⌖"
+                    android:textColor="#00E5B0"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvGpsTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="GPS Subsystem"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tvGpsStatus"
+                    app:layout_constraintStart_toEndOf="@id/tvGpsIcon"
+                    app:layout_constraintTop_toTopOf="@id/tvGpsIcon" />
+
+                <TextView
+                    android:id="@+id/tvGpsInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="5dp"
+                    android:text="GNSS hardware • Waiting for saved GPS fix"
+                    android:textColor="#95A2B6"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tvGpsStatus"
+                    app:layout_constraintStart_toEndOf="@id/tvGpsIcon"
+                    app:layout_constraintTop_toBottomOf="@id/tvGpsTitle" />
+
+                <TextView
+                    android:id="@+id/tvGpsStatus"
+                    android:layout_width="72dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_health_green_badge"
+                    android:gravity="center"
+                    android:text="CHECK"
+                    android:textColor="#00E5B0"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- SMS -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardSms"
+            android:layout_width="0dp"
+            android:layout_height="105dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#0D1729"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardGps">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvSmsIcon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_health_blue_icon"
+                    android:gravity="center"
+                    android:text="▣"
+                    android:textColor="#00C6FF"
+                    android:textSize="23sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvSmsTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="Cellular SMS Transmitter"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tvSmsStatus"
+                    app:layout_constraintStart_toEndOf="@id/tvSmsIcon"
+                    app:layout_constraintTop_toTopOf="@id/tvSmsIcon" />
+
+                <TextView
+                    android:id="@+id/tvSmsInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="5dp"
+                    android:text="SMS capability check"
+                    android:textColor="#95A2B6"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tvSmsStatus"
+                    app:layout_constraintStart_toEndOf="@id/tvSmsIcon"
+                    app:layout_constraintTop_toBottomOf="@id/tvSmsTitle" />
+
+                <TextView
+                    android:id="@+id/tvSmsStatus"
+                    android:layout_width="72dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_health_green_badge"
+                    android:gravity="center"
+                    android:text="CHECK"
+                    android:textColor="#00E5B0"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- BATTERY -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardBattery"
+            android:layout_width="0dp"
+            android:layout_height="105dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#0D1729"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardSms">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvBatteryIcon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_health_orange_icon"
+                    android:gravity="center"
+                    android:text="▭"
+                    android:textColor="#FFB000"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvBatteryTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="Battery &amp; Power Reserve"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tvBatteryStatus"
+                    app:layout_constraintStart_toEndOf="@id/tvBatteryIcon"
+                    app:layout_constraintTop_toTopOf="@id/tvBatteryIcon" />
+
+                <TextView
+                    android:id="@+id/tvBatteryInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Battery: --%"
+                    android:textColor="#95A2B6"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tvBatteryStatus"
+                    app:layout_constraintStart_toEndOf="@id/tvBatteryIcon"
+                    app:layout_constraintTop_toBottomOf="@id/tvBatteryTitle" />
+
+                <TextView
+                    android:id="@+id/tvBatteryStatus"
+                    android:layout_width="80dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/bg_health_green_badge"
+                    android:gravity="center"
+                    android:text="CHECK"
+                    android:textColor="#00E5B0"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- CELLULAR RADIO -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardSignal"
+            android:layout_width="0dp"
+            android:layout_height="105dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#0D1729"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardBattery">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvSignalIcon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_health_green_icon"
+                    android:gravity="center"
+                    android:text="▥"
+                    android:textColor="#00E5B0"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvSignalTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="RF / Cellular Radio"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tvSignalStatus"
+                    app:layout_constraintStart_toEndOf="@id/tvSignalIcon"
+                    app:layout_constraintTop_toTopOf="@id/tvSignalIcon" />
+
+                <TextView
+                    android:id="@+id/tvSignalInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Checking cellular hardware"
+                    android:textColor="#95A2B6"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tvSignalStatus"
+                    app:layout_constraintStart_toEndOf="@id/tvSignalIcon"
+                    app:layout_constraintTop_toBottomOf="@id/tvSignalTitle" />
+
+                <TextView
+                    android:id="@+id/tvSignalStatus"
+                    android:layout_width="80dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/bg_health_green_badge"
+                    android:gravity="center"
+                    android:text="CHECK"
+                    android:textColor="#00E5B0"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- MOBILE DATA -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardData"
+            android:layout_width="0dp"
+            android:layout_height="105dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#0D1729"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardSignal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvDataIcon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_health_dark_icon"
+                    android:gravity="center"
+                    android:text="⌁"
+                    android:textColor="#92A3BA"
+                    android:textSize="23sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvDataTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="Mobile Packet Data"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tvDataStatus"
+                    app:layout_constraintStart_toEndOf="@id/tvDataIcon"
+                    app:layout_constraintTop_toTopOf="@id/tvDataIcon" />
+
+                <TextView
+                    android:id="@+id/tvDataInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Internet is not required for GPS + SMS"
+                    android:textColor="#95A2B6"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tvDataStatus"
+                    app:layout_constraintStart_toEndOf="@id/tvDataIcon"
+                    app:layout_constraintTop_toBottomOf="@id/tvDataTitle" />
+
+                <TextView
+                    android:id="@+id/tvDataStatus"
+                    android:layout_width="80dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/bg_health_dark_badge"
+                    android:gravity="center"
+                    android:text="CHECK"
+                    android:textColor="#D6DFEB"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- SELF TEST -->
+
+        <Button
+            android:id="@+id/btnRunDiagnostic"
+            android:layout_width="0dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#00C69A"
+            android:text="↻  RUN FULL HARDWARE SELF-TEST"
+            android:textAllCaps="false"
+            android:textColor="#04140F"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            app:cornerRadius="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardData" />
+
+
+        <!-- BOTTOM NAV -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardBottomNav"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="#080E1A"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnRunDiagnostic">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/navHome"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="⌂&#10;Home"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navGps"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/navGps"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="⌖&#10;GPS"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navSos"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navHome" />
+
+                <TextView
+                    android:id="@+id/navSos"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="!&#10;SOS"
+                    android:textColor="#FF4565"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/navCircle"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navGps" />
+
+                <TextView
+                    android:id="@+id/navCircle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="♙&#10;Circle"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navLogs"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navSos" />
+
+                <TextView
+                    android:id="@+id/navLogs"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="⌁&#10;Logs"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navScreens"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navCircle" />
+
+                <TextView
+                    android:id="@+id/navScreens"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="▦&#10;Screens"
+                    android:textColor="#D478FF"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navLogs" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

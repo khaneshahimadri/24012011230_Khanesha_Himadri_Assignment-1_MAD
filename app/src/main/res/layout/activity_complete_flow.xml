@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#050A14"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="18dp"
+        android:paddingTop="28dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="20dp">
+
+        <!-- HEADER -->
+
+        <TextView
+            android:id="@+id/btnDashboard"
+            android:layout_width="100dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_flow_dashboard"
+            android:gravity="center"
+            android:text="‹  Dashboard"
+            android:textColor="#D1DBE9"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:gravity="center_vertical"
+            android:text="ϟ  END-TO-END FLOW"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btnDashboard" />
+
+
+        <!-- FLOW ENGINE -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardEngine"
+            android:layout_width="0dp"
+            android:layout_height="155dp"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="#1A1030"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnDashboard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="18dp">
+
+                <TextView
+                    android:id="@+id/tvEngineTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="AUTONOMOUS\nFLOW ENGINE"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/btnRunSimulation"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvEngineInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:text="Step-by-step visual execution of offline SMS location dispatch."
+                    android:textColor="#A9B3C4"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/btnRunSimulation"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvEngineTitle" />
+
+                <Button
+                    android:id="@+id/btnRunSimulation"
+                    android:layout_width="150dp"
+                    android:layout_height="52dp"
+                    android:backgroundTint="#00C99A"
+                    android:text="▶  Run Simulation"
+                    android:textAllCaps="false"
+                    android:textColor="#03130F"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="13dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- STEP 1 -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardStep1"
+            android:layout_width="0dp"
+            android:layout_height="145dp"
+            android:layout_marginTop="22dp"
+            app:cardBackgroundColor="#07101F"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardEngine">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/iconStep1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_flow_step_icon"
+                    android:gravity="center"
+                    android:text="♙"
+                    android:textColor="#D8E1EC"
+                    android:textSize="23sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleStep1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="01  Trusted Person"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconStep1"
+                    app:layout_constraintTop_toTopOf="@id/iconStep1" />
+
+                <TextView
+                    android:id="@+id/subStep1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Primary contact initiating emergency ping"
+                    android:textColor="#A7B1C1"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconStep1"
+                    app:layout_constraintTop_toBottomOf="@id/titleStep1" />
+
+                <TextView
+                    android:id="@+id/detailStep1"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_flow_detail"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="Trusted contact sends emergency SMS."
+                    android:textColor="#93A2B7"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subStep1" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- STEP 2 -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardStep2"
+            android:layout_width="0dp"
+            android:layout_height="145dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#07101F"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardStep1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/iconStep2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_flow_step_icon"
+                    android:gravity="center"
+                    android:text="▣"
+                    android:textColor="#D8E1EC"
+                    android:textSize="22sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleStep2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="02  SMS: &quot;LOCATE&quot;"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconStep2"
+                    app:layout_constraintTop_toTopOf="@id/iconStep2" />
+
+                <TextView
+                    android:id="@+id/subStep2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Inbound cellular SMS packet transmitted"
+                    android:textColor="#A7B1C1"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconStep2"
+                    app:layout_constraintTop_toBottomOf="@id/titleStep2" />
+
+                <TextView
+                    android:id="@+id/detailStep2"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_flow_detail"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="Payload text: LOCATE"
+                    android:textColor="#93A2B7"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subStep2" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- STEP 3 -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardStep3"
+            android:layout_width="0dp"
+            android:layout_height="145dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#07101F"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardStep2">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/iconStep3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_flow_step_icon"
+                    android:gravity="center"
+                    android:text="ϟ"
+                    android:textColor="#D8E1EC"
+                    android:textSize="23sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleStep3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="03  BEACON Receives SMS"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconStep3"
+                    app:layout_constraintTop_toTopOf="@id/iconStep3" />
+
+                <TextView
+                    android:id="@+id/subStep3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Android BroadcastReceiver intercepts message"
+                    android:textColor="#A7B1C1"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconStep3"
+                    app:layout_constraintTop_toBottomOf="@id/titleStep3" />
+
+                <TextView
+                    android:id="@+id/detailStep3"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_flow_detail"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="SmsReceiver processes the incoming message locally."
+                    android:textColor="#93A2B7"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subStep3" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- STEP 4 -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardStep4"
+            android:layout_width="0dp"
+            android:layout_height="145dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#07101F"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardStep3">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/iconStep4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_flow_step_icon"
+                    android:gravity="center"
+                    android:text="◇"
+                    android:textColor="#D8E1EC"
+                    android:textSize="23sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleStep4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="04  Verify Trusted Sender"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconStep4"
+                    app:layout_constraintTop_toTopOf="@id/iconStep4" />
+
+                <TextView
+                    android:id="@+id/subStep4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Whitelist and keyword validation"
+                    android:textColor="#A7B1C1"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconStep4"
+                    app:layout_constraintTop_toBottomOf="@id/titleStep4" />
+
+                <TextView
+                    android:id="@+id/detailStep4"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_flow_detail"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="Sender checked against Trusted Circle."
+                    android:textColor="#93A2B7"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subStep4" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- STEP 5 -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardStep5"
+            android:layout_width="0dp"
+            android:layout_height="145dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#07101F"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardStep4">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/iconStep5"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_flow_step_icon"
+                    android:gravity="center"
+                    android:text="⌖"
+                    android:textColor="#D8E1EC"
+                    android:textSize="23sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleStep5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="05  Get GPS Location"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconStep5"
+                    app:layout_constraintTop_toTopOf="@id/iconStep5" />
+
+                <TextView
+                    android:id="@+id/subStep5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Hardware satellite coordinate fix"
+                    android:textColor="#A7B1C1"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconStep5"
+                    app:layout_constraintTop_toBottomOf="@id/titleStep5" />
+
+                <TextView
+                    android:id="@+id/detailStep5"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_flow_detail"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="Waiting for GPS data..."
+                    android:textColor="#93A2B7"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subStep5" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- STEP 6 -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardStep6"
+            android:layout_width="0dp"
+            android:layout_height="145dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#07101F"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardStep5">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/iconStep6"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_flow_step_icon"
+                    android:gravity="center"
+                    android:text="⌁"
+                    android:textColor="#D8E1EC"
+                    android:textSize="23sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleStep6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="06  Generate Google Maps Link"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconStep6"
+                    app:layout_constraintTop_toTopOf="@id/iconStep6" />
+
+                <TextView
+                    android:id="@+id/subStep6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Automatic URL construction"
+                    android:textColor="#A7B1C1"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconStep6"
+                    app:layout_constraintTop_toBottomOf="@id/titleStep6" />
+
+                <TextView
+                    android:id="@+id/detailStep6"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_flow_detail"
+                    android:gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="Map URL not available"
+                    android:textColor="#93A2B7"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subStep6" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- STEP 7 -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardStep7"
+            android:layout_width="0dp"
+            android:layout_height="145dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#07101F"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardStep6">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/iconStep7"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_flow_step_icon"
+                    android:gravity="center"
+                    android:text="➤"
+                    android:textColor="#D8E1EC"
+                    android:textSize="22sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleStep7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="07  Send SMS Reply"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconStep7"
+                    app:layout_constraintTop_toTopOf="@id/iconStep7" />
+
+                <TextView
+                    android:id="@+id/subStep7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Cellular SMS transmitter dispatch"
+                    android:textColor="#A7B1C1"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconStep7"
+                    app:layout_constraintTop_toBottomOf="@id/titleStep7" />
+
+                <TextView
+                    android:id="@+id/detailStep7"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_flow_detail"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="Location payload ready for SMS dispatch."
+                    android:textColor="#93A2B7"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subStep7" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- STEP 8 -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardStep8"
+            android:layout_width="0dp"
+            android:layout_height="145dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#07101F"
+            app:cardCornerRadius="17dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardStep7">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/iconStep8"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_flow_step_icon"
+                    android:gravity="center"
+                    android:text="✓"
+                    android:textColor="#D8E1EC"
+                    android:textSize="22sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/titleStep8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:text="08  Trusted Person Receives Location"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconStep8"
+                    app:layout_constraintTop_toTopOf="@id/iconStep8" />
+
+                <TextView
+                    android:id="@+id/subStep8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Clickable Google Maps link delivered"
+                    android:textColor="#A7B1C1"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconStep8"
+                    app:layout_constraintTop_toBottomOf="@id/titleStep8" />
+
+                <TextView
+                    android:id="@+id/detailStep8"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_flow_detail"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="Emergency location exchange completed."
+                    android:textColor="#93A2B7"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subStep8" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- BOTTOM NAV -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardBottomNav"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="#080E1A"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardStep8">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/navHome"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="⌂&#10;Home"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navGps"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/navGps"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="⌖&#10;GPS"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navSos"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navHome" />
+
+                <TextView
+                    android:id="@+id/navSos"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="!&#10;SOS"
+                    android:textColor="#FF4565"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/navCircle"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navGps" />
+
+                <TextView
+                    android:id="@+id/navCircle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="♙&#10;Circle"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navLogs"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navSos" />
+
+                <TextView
+                    android:id="@+id/navLogs"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="ϟ&#10;Flow"
+                    android:textColor="#00E5B0"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/navScreens"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navCircle" />
+
+                <TextView
+                    android:id="@+id/navScreens"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="▦&#10;Screens"
+                    android:textColor="#D478FF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navLogs" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

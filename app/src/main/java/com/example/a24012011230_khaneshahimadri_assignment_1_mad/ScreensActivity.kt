@@ -121,12 +121,14 @@ class ScreensActivity : AppCompatActivity() {
         }
 
         cardOfflineArchitecture.setOnClickListener {
-            Toast.makeText(
-                this,
-                "Offline Architecture",
-                Toast.LENGTH_SHORT
-            ).show()
+            startActivity(
+                Intent(
+                    this,
+                    OfflineArchitectureActivity::class.java
+                )
+            )
         }
+
 
         cardGpsTactical.setOnClickListener {
             startActivity(
@@ -167,29 +169,37 @@ class ScreensActivity : AppCompatActivity() {
         }
 
         cardSecurity.setOnClickListener {
-            Toast.makeText(
-                this,
-                "Security & Privacy",
-                Toast.LENGTH_SHORT
-            ).show()
+
+            startActivity(
+                Intent(
+                    this,
+                    SecurityPrivacyActivity::class.java
+                )
+            )
         }
 
         cardHealth.setOnClickListener {
-            Toast.makeText(
-                this,
-                "Beacon Health Diagnostics",
-                Toast.LENGTH_SHORT
-            ).show()
+
+            startActivity(
+                Intent(
+                    this,
+                    BeaconHealthActivity::class.java
+                )
+            )
         }
 
+
+
         cardCompleteFlow.setOnClickListener {
-            Toast.makeText(
-                this,
-                "Complete Beacon Flow",
-                Toast.LENGTH_SHORT
-            ).show()
+            startActivity(
+                Intent(
+                    this,
+                    CompleteFlowActivity::class.java
+                )
+            )
         }
     }
+
 
     private fun setupBottomNavigation() {
 
