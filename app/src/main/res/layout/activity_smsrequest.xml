@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#050A14"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="18dp"
+        android:paddingTop="28dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="20dp">
+
+
+        <!-- HEADER -->
+
+        <TextView
+            android:id="@+id/btnDashboard"
+            android:layout_width="100dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_sms_small_button"
+            android:gravity="center"
+            android:text="‹  Dashboard"
+            android:textColor="#C6D1E3"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:gravity="center_vertical"
+            android:text="▣  SMS REQUEST INSPECTOR"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btnDashboard" />
+
+
+        <!-- INCOMING SMS CARD -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardIncomingSms"
+            android:layout_width="0dp"
+            android:layout_height="305dp"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="#0D1729"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnDashboard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="18dp">
+
+                <TextView
+                    android:id="@+id/tvIncomingTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="▯  Incoming Cellular SMS"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvLayer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="GSM Layer 3 Packet"
+                    android:textColor="#7F8DA2"
+                    android:textSize="9sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvIncomingTitle" />
+
+
+                <!-- SENDER -->
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardSender"
+                    android:layout_width="0dp"
+                    android:layout_height="82dp"
+                    android:layout_marginTop="18dp"
+                    app:cardBackgroundColor="#030817"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvIncomingTitle">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:id="@+id/tvSenderAvatar"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@drawable/bg_sms_sender"
+                            android:gravity="center"
+                            android:text="TC"
+                            android:textColor="#FFFFFF"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvSenderName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:text="Trusted Contact"
+                            android:textColor="#FFFFFF"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toStartOf="@id/tvTrustedBadge"
+                            app:layout_constraintStart_toEndOf="@id/tvSenderAvatar"
+                            app:layout_constraintTop_toTopOf="@id/tvSenderAvatar" />
+
+                        <TextView
+                            android:id="@+id/tvSenderNumber"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="4dp"
+                            android:text="No number selected"
+                            android:textColor="#8F9CB0"
+                            android:textSize="10sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tvSenderAvatar"
+                            app:layout_constraintTop_toBottomOf="@id/tvSenderName" />
+
+                        <TextView
+                            android:id="@+id/tvTrustedBadge"
+                            android:layout_width="105dp"
+                            android:layout_height="26dp"
+                            android:background="@drawable/bg_sms_trusted_badge"
+                            android:gravity="center"
+                            android:text="✓ TRUSTED SENDER"
+                            android:textColor="#00E5B0"
+                            android:textSize="8sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tvSenderAvatar" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <!-- BODY PAYLOAD -->
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardPayload"
+                    android:layout_width="0dp"
+                    android:layout_height="130dp"
+                    android:layout_marginTop="14dp"
+                    app:cardBackgroundColor="#030817"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardSender">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:id="@+id/tvPayloadLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Body Payload"
+                            android:textColor="#8C9AAF"
+                            android:textSize="9sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvEncoding"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="UTF-8 Text"
+                            android:textColor="#8C9AAF"
+                            android:textSize="9sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvPayload"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="&quot;LOCATE&quot;"
+                            android:textColor="#FFFFFF"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvPayloadLabel" />
+
+                        <TextView
+                            android:id="@+id/tvKeywordMatched"
+                            android:layout_width="120dp"
+                            android:layout_height="28dp"
+                            android:layout_marginTop="15dp"
+                            android:background="@drawable/bg_sms_keyword"
+                            android:gravity="center"
+                            android:text="KEYWORD: MATCHED"
+                            android:textColor="#E2A3FF"
+                            android:textSize="8sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvPayload" />
+
+                        <TextView
+                            android:id="@+id/tvAccepted"
+                            android:layout_width="110dp"
+                            android:layout_height="28dp"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/bg_sms_accepted"
+                            android:gravity="center"
+                            android:text="STATUS: ACCEPTED"
+                            android:textColor="#00E5B0"
+                            android:textSize="8sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toEndOf="@id/tvKeywordMatched"
+                            app:layout_constraintTop_toTopOf="@id/tvKeywordMatched" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- PIPELINE -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardPipeline"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="18dp"
+            app:cardBackgroundColor="#0D1729"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardIncomingSms">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="18dp">
+
+                <TextView
+                    android:id="@+id/tvPipelineTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PROCESSING PIPELINE FLOW"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvEngine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Autonomous Engine"
+                    android:textColor="#00E5B0"
+                    android:textSize="9sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvPipelineTitle" />
+
+                <TextView
+                    android:id="@+id/tvStepSms"
+                    android:layout_width="55dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="22dp"
+                    android:gravity="center"
+                    android:text="▣&#10;1. SMS"
+                    android:textColor="#75DFFF"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvPipelineTitle" />
+
+                <TextView
+                    android:id="@+id/tvArrow1"
+                    android:layout_width="25dp"
+                    android:layout_height="70dp"
+                    android:gravity="center"
+                    android:text="→"
+                    android:textColor="#63738B"
+                    app:layout_constraintStart_toEndOf="@id/tvStepSms"
+                    app:layout_constraintTop_toTopOf="@id/tvStepSms" />
+
+                <TextView
+                    android:id="@+id/tvStepVerify"
+                    android:layout_width="55dp"
+                    android:layout_height="70dp"
+                    android:gravity="center"
+                    android:text="♢&#10;2. Verify"
+                    android:textColor="#D77AFF"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toEndOf="@id/tvArrow1"
+                    app:layout_constraintTop_toTopOf="@id/tvStepSms" />
+
+                <TextView
+                    android:id="@+id/tvArrow2"
+                    android:layout_width="25dp"
+                    android:layout_height="70dp"
+                    android:gravity="center"
+                    android:text="→"
+                    android:textColor="#63738B"
+                    app:layout_constraintStart_toEndOf="@id/tvStepVerify"
+                    app:layout_constraintTop_toTopOf="@id/tvStepSms" />
+
+                <TextView
+                    android:id="@+id/tvStepGps"
+                    android:layout_width="55dp"
+                    android:layout_height="70dp"
+                    android:gravity="center"
+                    android:text="⌖&#10;3. GPS"
+                    android:textColor="#00E5B0"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toEndOf="@id/tvArrow2"
+                    app:layout_constraintTop_toTopOf="@id/tvStepSms" />
+
+                <TextView
+                    android:id="@+id/tvArrow3"
+                    android:layout_width="25dp"
+                    android:layout_height="70dp"
+                    android:gravity="center"
+                    android:text="→"
+                    android:textColor="#63738B"
+                    app:layout_constraintStart_toEndOf="@id/tvStepGps"
+                    app:layout_constraintTop_toTopOf="@id/tvStepSms" />
+
+                <TextView
+                    android:id="@+id/tvStepMaps"
+                    android:layout_width="55dp"
+                    android:layout_height="70dp"
+                    android:gravity="center"
+                    android:text="⌁&#10;4. Maps"
+                    android:textColor="#FFB000"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toEndOf="@id/tvArrow3"
+                    app:layout_constraintTop_toTopOf="@id/tvStepSms" />
+
+                <TextView
+                    android:id="@+id/tvArrow4"
+                    android:layout_width="25dp"
+                    android:layout_height="70dp"
+                    android:gravity="center"
+                    android:text="→"
+                    android:textColor="#63738B"
+                    app:layout_constraintStart_toEndOf="@id/tvStepMaps"
+                    app:layout_constraintTop_toTopOf="@id/tvStepSms" />
+
+                <TextView
+                    android:id="@+id/tvStepReply"
+                    android:layout_width="55dp"
+                    android:layout_height="70dp"
+                    android:gravity="center"
+                    android:text="➤&#10;5. Reply"
+                    android:textColor="#00E5B0"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvArrow4"
+                    app:layout_constraintTop_toTopOf="@id/tvStepSms" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- SIMULATOR -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardSimulator"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="18dp"
+            app:cardBackgroundColor="#0D1729"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardPipeline">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="18dp">
+
+                <TextView
+                    android:id="@+id/tvSimulatorTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SIMULATE INCOMING SMS TEST"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvSenderLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:text="Select Simulated Sender:"
+                    android:textColor="#9AA8BC"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvSimulatorTitle" />
+
+                <Button
+                    android:id="@+id/btnTrusted1"
+                    android:layout_width="0dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="5dp"
+                    android:backgroundTint="#073E35"
+                    android:text="Contact 1&#10;(Trusted)"
+                    android:textAllCaps="false"
+                    android:textColor="#00E5B0"
+                    android:textSize="10sp"
+                    app:cornerRadius="14dp"
+                    app:layout_constraintEnd_toStartOf="@id/btnTrusted2"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvSenderLabel" />
+
+                <Button
+                    android:id="@+id/btnTrusted2"
+                    android:layout_width="0dp"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:backgroundTint="#07101E"
+                    android:text="Contact 2&#10;(Trusted)"
+                    android:textAllCaps="false"
+                    android:textColor="#C5CFDD"
+                    android:textSize="10sp"
+                    app:cornerRadius="14dp"
+                    app:layout_constraintEnd_toStartOf="@id/btnUnknown"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/btnTrusted1"
+                    app:layout_constraintTop_toTopOf="@id/btnTrusted1" />
+
+                <Button
+                    android:id="@+id/btnUnknown"
+                    android:layout_width="0dp"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="5dp"
+                    android:backgroundTint="#07101E"
+                    android:text="Unknown&#10;(Block)"
+                    android:textAllCaps="false"
+                    android:textColor="#C5CFDD"
+                    android:textSize="10sp"
+                    app:cornerRadius="14dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/btnTrusted2"
+                    app:layout_constraintTop_toTopOf="@id/btnTrusted1" />
+
+                <TextView
+                    android:id="@+id/tvMessageLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="SMS Message Text to Transmit:"
+                    android:textColor="#9AA8BC"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btnTrusted1" />
+
+                <EditText
+                    android:id="@+id/etMessage"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_sms_input"
+                    android:hint="LOCATE"
+                    android:inputType="text"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:text="LOCATE"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#738198"
+                    android:textSize="11sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvMessageLabel" />
+
+                <Button
+                    android:id="@+id/btnTransmit"
+                    android:layout_width="0dp"
+                    android:layout_height="58dp"
+                    android:layout_marginTop="14dp"
+                    android:backgroundTint="#147DE8"
+                    android:text="◉  TRANSMIT INBOUND SMS"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/etMessage" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- BOTTOM NAV -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardBottomNav"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="#080E1A"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardSimulator">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/navHome"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="◉&#10;Beacon"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navGps"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/navGps"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="⌖&#10;GPS"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navSos"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navHome" />
+
+                <TextView
+                    android:id="@+id/navSos"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="!&#10;SOS"
+                    android:textColor="#FF4565"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navCircle"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navGps" />
+
+                <TextView
+                    android:id="@+id/navCircle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="♙&#10;Circle"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navLogs"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navSos" />
+
+                <TextView
+                    android:id="@+id/navLogs"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="⌁&#10;Logs"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navScreens"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navCircle" />
+
+                <TextView
+                    android:id="@+id/navScreens"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="▦&#10;Screens"
+                    android:textColor="#D478FF"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navLogs" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

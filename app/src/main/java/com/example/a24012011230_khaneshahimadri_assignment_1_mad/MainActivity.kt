@@ -860,6 +860,16 @@ class MainActivity : AppCompatActivity() {
                             location.longitude.toString()
                         )
 
+                        .putFloat(
+                            "accuracy",
+                            location.accuracy
+                        )
+
+                        .putLong(
+                            "altitude",
+                            location.altitude.toBits()
+                        )
+
                         .putLong(
                             "timestamp",
                             System.currentTimeMillis()

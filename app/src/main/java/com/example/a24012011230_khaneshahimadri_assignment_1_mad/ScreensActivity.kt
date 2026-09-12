@@ -100,12 +100,16 @@ class ScreensActivity : AppCompatActivity() {
         }
 
         cardBeaconControl.setOnClickListener {
-            Toast.makeText(
-                this,
-                "Beacon Control",
-                Toast.LENGTH_SHORT
-            ).show()
+
+            startActivity(
+                Intent(
+                    this,
+                    BeaconControlActivity::class.java
+                )
+            )
         }
+
+
 
         cardTrustedCircle.setOnClickListener {
             startActivity(
@@ -134,19 +138,23 @@ class ScreensActivity : AppCompatActivity() {
         }
 
         cardSmsParser.setOnClickListener {
-            Toast.makeText(
-                this,
-                "SMS Request Parser",
-                Toast.LENGTH_SHORT
-            ).show()
+
+            startActivity(
+                Intent(
+                    this,
+                    SmsRequestActivity::class.java
+                )
+            )
         }
 
         cardLocationResponse.setOnClickListener {
-            Toast.makeText(
-                this,
-                "Location Response",
-                Toast.LENGTH_SHORT
-            ).show()
+
+            startActivity(
+                Intent(
+                    this,
+                    LocationResponseActivity::class.java
+                )
+            )
         }
 
         cardActivityLog.setOnClickListener {

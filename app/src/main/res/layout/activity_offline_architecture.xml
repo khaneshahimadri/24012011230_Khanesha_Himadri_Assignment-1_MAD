@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#050A14"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="18dp"
+        android:paddingTop="28dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="20dp">
+
+
+        <!-- HEADER -->
+
+        <TextView
+            android:id="@+id/btnDashboard"
+            android:layout_width="100dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_offline_small_button"
+            android:gravity="center"
+            android:text="‹  Dashboard"
+            android:textColor="#C6D1E3"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:gravity="center_vertical"
+            android:text="⌁  OFFLINE ARCHITECTURE"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btnDashboard" />
+
+
+        <!-- MAIN OFFLINE CARD -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardOfflineMain"
+            android:layout_width="0dp"
+            android:layout_height="310dp"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="#1B1713"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnDashboard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/tvOfflineIcon"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:background="@drawable/bg_offline_icon"
+                    android:gravity="center"
+                    android:text="◉"
+                    android:textColor="#FFB000"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvBeaconActive"
+                    android:layout_width="215dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/bg_offline_active"
+                    android:gravity="center"
+                    android:text="BEACON STILL ACTIVE"
+                    android:textColor="#00E4AC"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvOfflineIcon" />
+
+                <TextView
+                    android:id="@+id/tvZeroData"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="Zero Mobile Data Required"
+                    android:textColor="#FFFFFF"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvBeaconActive" />
+
+                <TextView
+                    android:id="@+id/tvZeroDataInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="BEACON operates independently of Wi-Fi, 4G, and 5G internet by combining hardware GPS satellite receivers with cellular SMS signaling channels."
+                    android:textColor="#C1C8D3"
+                    android:textSize="12sp"
+                    android:lineSpacingExtra="3dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvZeroData" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- STATUS MATRIX TITLE -->
+
+        <TextView
+            android:id="@+id/tvMatrixTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="SUBSYSTEM STATUS MATRIX"
+            android:textColor="#9EB0C8"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardOfflineMain" />
+
+
+        <!-- INTERNET STATUS -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardInternet"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#0D1729"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMatrixTitle">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/tvInternetIcon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_offline_status_dark"
+                    android:gravity="center"
+                    android:text="⌁"
+                    android:textColor="#8A9BB5"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvInternetTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="Internet Data (4G / 5G / Wi-Fi)"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tvInternetStatus"
+                    app:layout_constraintStart_toEndOf="@id/tvInternetIcon"
+                    app:layout_constraintTop_toTopOf="@id/tvInternetIcon" />
+
+                <TextView
+                    android:id="@+id/tvInternetSub"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Packet data connection"
+                    android:textColor="#8796AC"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tvInternetStatus"
+                    app:layout_constraintStart_toEndOf="@id/tvInternetIcon"
+                    app:layout_constraintTop_toBottomOf="@id/tvInternetTitle" />
+
+                <TextView
+                    android:id="@+id/tvInternetStatus"
+                    android:layout_width="82dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/bg_offline_badge"
+                    android:gravity="center"
+                    android:text="OFFLINE"
+                    android:textColor="#C3CBD8"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- SMS STATUS -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardSms"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#081E25"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardInternet">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/tvSmsIcon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_offline_status_green"
+                    android:gravity="center"
+                    android:text="▥"
+                    android:textColor="#00E3AD"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvSmsTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="SMS Cellular Network"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tvSmsStatus"
+                    app:layout_constraintStart_toEndOf="@id/tvSmsIcon"
+                    app:layout_constraintTop_toTopOf="@id/tvSmsIcon" />
+
+                <TextView
+                    android:id="@+id/tvSmsSub"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="4dp"
+                    android:text="2G / 3G / LTE Signaling Layer"
+                    android:textColor="#8796AC"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tvSmsStatus"
+                    app:layout_constraintStart_toEndOf="@id/tvSmsIcon"
+                    app:layout_constraintTop_toBottomOf="@id/tvSmsTitle" />
+
+                <TextView
+                    android:id="@+id/tvSmsStatus"
+                    android:layout_width="82dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/bg_available_badge"
+                    android:gravity="center"
+                    android:text="AVAILABLE"
+                    android:textColor="#00E5B0"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- GPS STATUS -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardGps"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#081E25"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardSms">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/tvGpsIcon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_offline_status_green"
+                    android:gravity="center"
+                    android:text="⌖"
+                    android:textColor="#00E3AD"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvGpsTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="Hardware GPS Satellites"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tvGpsStatus"
+                    app:layout_constraintStart_toEndOf="@id/tvGpsIcon"
+                    app:layout_constraintTop_toTopOf="@id/tvGpsIcon" />
+
+                <TextView
+                    android:id="@+id/tvGpsSub"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Direct GNSS constellation link"
+                    android:textColor="#8796AC"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/tvGpsStatus"
+                    app:layout_constraintStart_toEndOf="@id/tvGpsIcon"
+                    app:layout_constraintTop_toBottomOf="@id/tvGpsTitle" />
+
+                <TextView
+                    android:id="@+id/tvGpsStatus"
+                    android:layout_width="82dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/bg_available_badge"
+                    android:gravity="center"
+                    android:text="AVAILABLE"
+                    android:textColor="#00E5B0"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- COVERAGE REQUIREMENT -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardCoverage"
+            android:layout_width="0dp"
+            android:layout_height="145dp"
+            android:layout_marginTop="18dp"
+            app:cardBackgroundColor="#131A2B"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardGps">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="18dp">
+
+                <TextView
+                    android:id="@+id/tvCoverageTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⚠  IMPORTANT COVERAGE REQUIREMENT"
+                    android:textColor="#FFB000"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvCoverageInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="While mobile Internet (data plans) is NOT required, basic cellular voice/SMS signal is still necessary to send and receive text messages."
+                    android:textColor="#D1D7E1"
+                    android:textSize="11sp"
+                    android:lineSpacingExtra="3dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvCoverageTitle" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- HOW IT WORKS -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardHowWorks"
+            android:layout_width="0dp"
+            android:layout_height="520dp"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="#0D1729"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardCoverage">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="18dp">
+
+                <TextView
+                    android:id="@+id/tvHowTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ⓘ  HOW OFFLINE LOCATION EXCHANGE WORKS"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <!-- STEP 1 -->
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardStep1"
+                    android:layout_width="0dp"
+                    android:layout_height="135dp"
+                    android:layout_marginTop="18dp"
+                    app:cardBackgroundColor="#030817"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvHowTitle">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:id="@+id/tvStep1Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1. Satellite GPS Receiver"
+                            android:textColor="#00E5B0"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvStep1Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="9dp"
+                            android:text="Your phone's GPS chip communicates directly with GNSS satellites. It does not need mobile internet to calculate coordinates."
+                            android:textColor="#B6C0D0"
+                            android:textSize="10sp"
+                            android:lineSpacingExtra="3dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvStep1Title" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <!-- STEP 2 -->
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardStep2"
+                    android:layout_width="0dp"
+                    android:layout_height="135dp"
+                    android:layout_marginTop="12dp"
+                    app:cardBackgroundColor="#030817"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardStep1">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:id="@+id/tvStep2Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2. SMS Signaling Channel"
+                            android:textColor="#00BFFF"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvStep2Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="9dp"
+                            android:text="SMS travels through the cellular network rather than mobile internet. BEACON can therefore exchange coordinates even when packet data is unavailable."
+                            android:textColor="#B6C0D0"
+                            android:textSize="10sp"
+                            android:lineSpacingExtra="3dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvStep2Title" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <!-- STEP 3 -->
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardStep3"
+                    android:layout_width="0dp"
+                    android:layout_height="135dp"
+                    android:layout_marginTop="12dp"
+                    app:cardBackgroundColor="#030817"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardStep2">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:id="@+id/tvStep3Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3. Autonomous On-Device Parsing"
+                            android:textColor="#D06CFF"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvStep3Info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="9dp"
+                            android:text="The BEACON app reads the incoming trigger locally, prepares the saved GPS coordinates and returns them by SMS without requiring a cloud server."
+                            android:textColor="#B6C0D0"
+                            android:textSize="10sp"
+                            android:lineSpacingExtra="3dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvStep3Title" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- BOTTOM NAV -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardBottomNav"
+            android:layout_width="0dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="#080E1A"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardHowWorks">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/navHome"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="◉&#10;Beacon"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navGps"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/navGps"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="⌖&#10;GPS"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navSos"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navHome" />
+
+                <TextView
+                    android:id="@+id/navSos"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="!&#10;SOS"
+                    android:textColor="#FF4565"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navCircle"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navGps" />
+
+                <TextView
+                    android:id="@+id/navCircle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="♙&#10;Circle"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navLogs"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navSos" />
+
+                <TextView
+                    android:id="@+id/navLogs"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="⌁&#10;Logs"
+                    android:textColor="#8D9AAF"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@id/navScreens"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navCircle" />
+
+                <TextView
+                    android:id="@+id/navScreens"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="▦&#10;Screens"
+                    android:textColor="#D478FF"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/navLogs" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
