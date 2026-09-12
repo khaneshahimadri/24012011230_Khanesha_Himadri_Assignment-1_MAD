@@ -24,8 +24,6 @@ class ScreensActivity : AppCompatActivity() {
     private lateinit var cardHealth: CardView
     private lateinit var cardCompleteFlow: CardView
 
-    // Bottom Navigation
-
     private lateinit var navHome: TextView
     private lateinit var navGps: TextView
     private lateinit var navSos: TextView
@@ -34,109 +32,57 @@ class ScreensActivity : AppCompatActivity() {
     private lateinit var navScreens: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_screens)
 
-        // =========================
-        // CONNECT VIEWS
-        // =========================
+        connectViews()
+        setupCards()
+        setupBottomNavigation()
+    }
 
-        btnClose =
-            findViewById(R.id.btnClose)
+    private fun connectViews() {
 
-        cardHomeDashboard =
-            findViewById(R.id.cardHomeDashboard)
+        btnClose = findViewById(R.id.btnClose)
 
-        cardEmergencySOS =
-            findViewById(R.id.cardEmergencySOS)
+        cardHomeDashboard = findViewById(R.id.cardHomeDashboard)
+        cardEmergencySOS = findViewById(R.id.cardEmergencySOS)
+        cardBeaconControl = findViewById(R.id.cardBeaconControl)
+        cardTrustedCircle = findViewById(R.id.cardTrustedCircle)
+        cardOfflineArchitecture = findViewById(R.id.cardOfflineArchitecture)
+        cardGpsTactical = findViewById(R.id.cardGpsTactical)
+        cardSmsParser = findViewById(R.id.cardSmsParser)
+        cardLocationResponse = findViewById(R.id.cardLocationResponse)
+        cardActivityLog = findViewById(R.id.cardActivityLog)
+        cardSecurity = findViewById(R.id.cardSecurity)
+        cardHealth = findViewById(R.id.cardHealth)
+        cardCompleteFlow = findViewById(R.id.cardCompleteFlow)
 
-        cardBeaconControl =
-            findViewById(R.id.cardBeaconControl)
+        navHome = findViewById(R.id.navHome)
+        navGps = findViewById(R.id.navGps)
+        navSos = findViewById(R.id.navSos)
+        navCircle = findViewById(R.id.navCircle)
+        navLogs = findViewById(R.id.navLogs)
+        navScreens = findViewById(R.id.navScreens)
+    }
 
-        cardTrustedCircle =
-            findViewById(R.id.cardTrustedCircle)
-
-        cardOfflineArchitecture =
-            findViewById(R.id.cardOfflineArchitecture)
-
-        cardGpsTactical =
-            findViewById(R.id.cardGpsTactical)
-
-        cardSmsParser =
-            findViewById(R.id.cardSmsParser)
-
-        cardLocationResponse =
-            findViewById(R.id.cardLocationResponse)
-
-        cardActivityLog =
-            findViewById(R.id.cardActivityLog)
-
-        cardSecurity =
-            findViewById(R.id.cardSecurity)
-
-        cardHealth =
-            findViewById(R.id.cardHealth)
-
-        cardCompleteFlow =
-            findViewById(R.id.cardCompleteFlow)
-
-
-        // Bottom Navigation
-
-        navHome =
-            findViewById(R.id.navHome)
-
-        navGps =
-            findViewById(R.id.navGps)
-
-        navSos =
-            findViewById(R.id.navSos)
-
-        navCircle =
-            findViewById(R.id.navCircle)
-
-        navLogs =
-            findViewById(R.id.navLogs)
-
-        navScreens =
-            findViewById(R.id.navScreens)
-
-
-        // =========================
-        // CLOSE BUTTON
-        // =========================
+    private fun setupCards() {
 
         btnClose.setOnClickListener {
-
             finish()
         }
 
-
-        // =========================
-        // 1. HOME DASHBOARD
-        // =========================
-
         cardHomeDashboard.setOnClickListener {
-
             startActivity(
                 Intent(
                     this,
                     MainActivity::class.java
                 )
             )
-
             finish()
         }
 
-
-        // =========================
-        // 2. EMERGENCY SOS
-        // =========================
-
         cardEmergencySOS.setOnClickListener {
-
             startActivity(
                 Intent(
                     this,
@@ -153,13 +99,7 @@ class ScreensActivity : AppCompatActivity() {
             finish()
         }
 
-
-        // =========================
-        // 3. BEACON CONTROL
-        // =========================
-
         cardBeaconControl.setOnClickListener {
-
             Toast.makeText(
                 this,
                 "Beacon Control",
@@ -167,13 +107,7 @@ class ScreensActivity : AppCompatActivity() {
             ).show()
         }
 
-
-        // =========================
-        // 4. TRUSTED CIRCLE
-        // =========================
-
         cardTrustedCircle.setOnClickListener {
-
             startActivity(
                 Intent(
                     this,
@@ -182,13 +116,7 @@ class ScreensActivity : AppCompatActivity() {
             )
         }
 
-
-        // =========================
-        // 5. OFFLINE ARCHITECTURE
-        // =========================
-
         cardOfflineArchitecture.setOnClickListener {
-
             Toast.makeText(
                 this,
                 "Offline Architecture",
@@ -196,13 +124,7 @@ class ScreensActivity : AppCompatActivity() {
             ).show()
         }
 
-
-        // =========================
-        // 6. GPS
-        // =========================
-
         cardGpsTactical.setOnClickListener {
-
             startActivity(
                 Intent(
                     this,
@@ -211,13 +133,7 @@ class ScreensActivity : AppCompatActivity() {
             )
         }
 
-
-        // =========================
-        // 7. SMS PARSER
-        // =========================
-
         cardSmsParser.setOnClickListener {
-
             Toast.makeText(
                 this,
                 "SMS Request Parser",
@@ -225,13 +141,7 @@ class ScreensActivity : AppCompatActivity() {
             ).show()
         }
 
-
-        // =========================
-        // 8. LOCATION RESPONSE
-        // =========================
-
         cardLocationResponse.setOnClickListener {
-
             Toast.makeText(
                 this,
                 "Location Response",
@@ -239,13 +149,7 @@ class ScreensActivity : AppCompatActivity() {
             ).show()
         }
 
-
-        // =========================
-        // 9. ACTIVITY LOG
-        // =========================
-
         cardActivityLog.setOnClickListener {
-
             startActivity(
                 Intent(
                     this,
@@ -254,13 +158,7 @@ class ScreensActivity : AppCompatActivity() {
             )
         }
 
-
-        // =========================
-        // 10. SECURITY
-        // =========================
-
         cardSecurity.setOnClickListener {
-
             Toast.makeText(
                 this,
                 "Security & Privacy",
@@ -268,13 +166,7 @@ class ScreensActivity : AppCompatActivity() {
             ).show()
         }
 
-
-        // =========================
-        // 11. HEALTH
-        // =========================
-
         cardHealth.setOnClickListener {
-
             Toast.makeText(
                 this,
                 "Beacon Health Diagnostics",
@@ -282,40 +174,28 @@ class ScreensActivity : AppCompatActivity() {
             ).show()
         }
 
-
-        // =========================
-        // 12. COMPLETE FLOW
-        // =========================
-
         cardCompleteFlow.setOnClickListener {
-
             Toast.makeText(
                 this,
                 "Complete Beacon Flow",
                 Toast.LENGTH_SHORT
             ).show()
         }
+    }
 
-
-        // =========================
-        // BOTTOM NAVIGATION
-        // =========================
+    private fun setupBottomNavigation() {
 
         navHome.setOnClickListener {
-
             startActivity(
                 Intent(
                     this,
                     MainActivity::class.java
                 )
             )
-
             finish()
         }
 
-
         navGps.setOnClickListener {
-
             startActivity(
                 Intent(
                     this,
@@ -324,9 +204,7 @@ class ScreensActivity : AppCompatActivity() {
             )
         }
 
-
         navSos.setOnClickListener {
-
             startActivity(
                 Intent(
                     this,
@@ -343,9 +221,7 @@ class ScreensActivity : AppCompatActivity() {
             finish()
         }
 
-
         navCircle.setOnClickListener {
-
             startActivity(
                 Intent(
                     this,
@@ -354,9 +230,7 @@ class ScreensActivity : AppCompatActivity() {
             )
         }
 
-
         navLogs.setOnClickListener {
-
             startActivity(
                 Intent(
                     this,
@@ -365,9 +239,7 @@ class ScreensActivity : AppCompatActivity() {
             )
         }
 
-
         navScreens.setOnClickListener {
-
             Toast.makeText(
                 this,
                 "You are already on Screens",
