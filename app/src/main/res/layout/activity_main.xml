@@ -681,7 +681,7 @@
                     android:gravity="center"
                     android:text="⌁\nBeacon"
                     android:textColor="#C98CFF"
-                    android:textSize="9sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@id/navGps"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -693,7 +693,7 @@
                     android:gravity="center"
                     android:text="◎\nGPS"
                     android:textColor="#8B95AA"
-                    android:textSize="9sp"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toStartOf="@id/navSos"
                     app:layout_constraintStart_toEndOf="@id/navHome" />
 
@@ -704,7 +704,7 @@
                     android:gravity="center"
                     android:text="⚠\nSOS"
                     android:textColor="#FF526C"
-                    android:textSize="9sp"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toStartOf="@id/navCircle"
                     app:layout_constraintStart_toEndOf="@id/navGps" />
 
@@ -715,7 +715,7 @@
                     android:gravity="center"
                     android:text="♙\nCircle"
                     android:textColor="#8B95AA"
-                    android:textSize="9sp"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toStartOf="@id/navLogs"
                     app:layout_constraintStart_toEndOf="@id/navSos" />
 
@@ -726,7 +726,7 @@
                     android:gravity="center"
                     android:text="⌁\nLogs"
                     android:textColor="#8B95AA"
-                    android:textSize="9sp"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toStartOf="@id/navScreens"
                     app:layout_constraintStart_toEndOf="@id/navCircle" />
 
@@ -737,7 +737,7 @@
                     android:gravity="center"
                     android:text="▦\nScreens"
                     android:textColor="#8B95AA"
-                    android:textSize="9sp"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/navLogs" />
 
