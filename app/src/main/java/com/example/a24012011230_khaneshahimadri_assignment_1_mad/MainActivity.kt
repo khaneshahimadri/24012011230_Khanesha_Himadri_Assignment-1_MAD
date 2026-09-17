@@ -30,6 +30,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+
 class MainActivity : AppCompatActivity() {
 
     // =========================================================
@@ -75,11 +76,8 @@ class MainActivity : AppCompatActivity() {
     // GPS
     // =========================================================
 
-    private lateinit var fusedLocationClient:
-            FusedLocationProviderClient
-
-    private lateinit var locationCallback:
-            LocationCallback
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationCallback: LocationCallback
 
     private var currentLatitude: Double? = null
     private var currentLongitude: Double? = null
@@ -93,13 +91,11 @@ class MainActivity : AppCompatActivity() {
 
     private var vibrator: Vibrator? = null
 
-    private val handler =
-        Handler(Looper.getMainLooper())
+    private val handler = Handler(Looper.getMainLooper())
 
     private var buttonPressed = false
-
     private var sosActive = false
-
+    private var stopSosOnRelease = false
 
     companion object {
 
@@ -124,37 +120,34 @@ class MainActivity : AppCompatActivity() {
     // BATTERY RECEIVER
     // =========================================================
 
-    private val batteryReceiver =
-        object : BroadcastReceiver() {
+    private val batteryReceiver = object : BroadcastReceiver() {
 
-            override fun onReceive(
-                context: Context?,
-                intent: Intent?
-            ) {
+        override fun onReceive(
+            context: Context?,
+            intent: Intent?
+        ) {
 
-                val level =
-                    intent?.getIntExtra(
-                        BatteryManager.EXTRA_LEVEL,
-                        -1
-                    ) ?: -1
+            val level = intent?.getIntExtra(
+                BatteryManager.EXTRA_LEVEL,
+                -1
+            ) ?: -1
 
-                val scale =
-                    intent?.getIntExtra(
-                        BatteryManager.EXTRA_SCALE,
-                        -1
-                    ) ?: -1
+            val scale = intent?.getIntExtra(
+                BatteryManager.EXTRA_SCALE,
+                -1
+            ) ?: -1
 
 
-                if (level >= 0 && scale > 0) {
+            if (level >= 0 && scale > 0) {
 
-                    val batteryPercentage =
-                        level * 100 / scale
+                val batteryPercentage =
+                    level * 100 / scale
 
-                    tvBattery.text =
-                        "$batteryPercentage%"
-                }
+                tvBattery.text =
+                    "$batteryPercentage%"
             }
         }
+    }
 
 
     // =========================================================
@@ -252,8 +245,7 @@ class MainActivity : AppCompatActivity() {
         // =====================================================
 
         fusedLocationClient =
-            LocationServices
-                .getFusedLocationProviderClient(this)
+            LocationServices.getFusedLocationProviderClient(this)
 
         createLocationCallback()
 
@@ -287,18 +279,51 @@ class MainActivity : AppCompatActivity() {
 
             when (event.action) {
 
-
-                // -------------------------------------------------
-                // FINGER PRESSED
-                // -------------------------------------------------
-
                 MotionEvent.ACTION_DOWN -> {
 
-
-                    // If SOS is already active,
-                    // tap again to STOP it.
-
+                    // SOS is already active.
+                    // This touch will stop SOS when finger is released.
                     if (sosActive) {
+
+                        stopSosOnRelease = true
+                        buttonPressed = false
+
+                        handler.removeCallbacks(sosRunnable)
+
+                        return@setOnTouchListener true
+                    }
+
+
+                    // SOS is currently OFF.
+                    // Start the 3-second hold timer.
+                    stopSosOnRelease = false
+                    buttonPressed = true
+
+                    tvHold.text = "HOLD FOR 3 SECONDS..."
+
+                    handler.removeCallbacks(sosRunnable)
+
+                    handler.postDelayed(
+                        sosRunnable,
+                        3000
+                    )
+
+                    true
+                }
+
+
+                MotionEvent.ACTION_UP -> {
+
+                    // ==========================================
+                    // SOS WAS ALREADY ACTIVE WHEN TAP STARTED
+                    // ==========================================
+
+                    if (stopSosOnRelease) {
+
+                        stopSosOnRelease = false
+                        buttonPressed = false
+
+                        handler.removeCallbacks(sosRunnable)
 
                         stopSOS()
 
@@ -306,84 +331,41 @@ class MainActivity : AppCompatActivity() {
                     }
 
 
-                    // Start 3 second hold
+                    // ==========================================
+                    // NORMAL 3-SECOND HOLD
+                    // ==========================================
 
-                    buttonPressed = true
+                    buttonPressed = false
 
-                    tvHold.text =
-                        "HOLD FOR 3 SECONDS..."
-
-
-                    handler.removeCallbacks(
-                        sosRunnable
-                    )
+                    handler.removeCallbacks(sosRunnable)
 
 
-                    handler.postDelayed(
-                        sosRunnable,
-                        3000
-                    )
-
-
-                    true
-                }
-
-
-                // -------------------------------------------------
-                // FINGER RELEASED
-                // -------------------------------------------------
-
-                MotionEvent.ACTION_UP -> {
-
-
-                    // If SOS has NOT started,
-                    // cancel the 3 second timer.
-
+                    // If user released before 3 seconds
                     if (!sosActive) {
 
-                        buttonPressed = false
-
-                        handler.removeCallbacks(
-                            sosRunnable
-                        )
-
-                        tvHold.text =
-                            "3s REMAINING"
+                        tvHold.text = "3s REMAINING"
                     }
 
 
                     // IMPORTANT:
-                    //
-                    // If SOS already started,
-                    // DO NOT call stopSOS() here.
-                    //
-                    // Siren keeps running until
-                    // user taps SOS again.
-
+                    // If SOS became active during this same hold,
+                    // DO NOT stop it here.
 
                     true
                 }
 
 
-                // -------------------------------------------------
-                // TOUCH CANCELLED
-                // -------------------------------------------------
-
                 MotionEvent.ACTION_CANCEL -> {
 
+                    buttonPressed = false
+                    stopSosOnRelease = false
+
+                    handler.removeCallbacks(sosRunnable)
 
                     if (!sosActive) {
 
-                        buttonPressed = false
-
-                        handler.removeCallbacks(
-                            sosRunnable
-                        )
-
-                        tvHold.text =
-                            "3s REMAINING"
+                        tvHold.text = "3s REMAINING"
                     }
-
 
                     true
                 }
@@ -392,7 +374,6 @@ class MainActivity : AppCompatActivity() {
                 else -> true
             }
         }
-
 
         // =====================================================
         // GPS CARD
@@ -456,7 +437,6 @@ class MainActivity : AppCompatActivity() {
         // BOTTOM NAVIGATION
         // =====================================================
 
-
         // BEACON
 
         navHome.setOnClickListener {
@@ -488,7 +468,10 @@ class MainActivity : AppCompatActivity() {
 
             Toast.makeText(
                 this,
-                "Hold SOS for 3 seconds",
+                if (sosActive)
+                    "SOS is active - tap the SOS button to stop"
+                else
+                    "Hold SOS for 3 seconds",
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -520,9 +503,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        // =====================================================
-        // SCREENS - FIXED
-        // =====================================================
+        // SCREENS
 
         navScreens.setOnClickListener {
 
@@ -550,8 +531,6 @@ class MainActivity : AppCompatActivity() {
     private fun startSOS() {
 
 
-        // Prevent duplicate SOS
-
         if (sosActive) {
 
             return
@@ -563,13 +542,15 @@ class MainActivity : AppCompatActivity() {
         buttonPressed = false
 
 
+
+
         handler.removeCallbacks(
             sosRunnable
         )
 
 
         // =====================================================
-        // CHANGE UI
+        // CHANGE UI STATUS
         // =====================================================
 
         tvStatus.text =
@@ -591,16 +572,14 @@ class MainActivity : AppCompatActivity() {
 
         try {
 
-            if (
-                mediaPlayer != null &&
-                mediaPlayer!!.isPlaying
-            ) {
+            if (mediaPlayer?.isPlaying == true) {
 
-                mediaPlayer!!.stop()
+                mediaPlayer?.stop()
             }
 
-        } catch (_: Exception) {
+        } catch (e: Exception) {
 
+            e.printStackTrace()
         }
 
 
@@ -608,8 +587,9 @@ class MainActivity : AppCompatActivity() {
 
             mediaPlayer?.release()
 
-        } catch (_: Exception) {
+        } catch (e: Exception) {
 
+            e.printStackTrace()
         }
 
 
@@ -630,6 +610,8 @@ class MainActivity : AppCompatActivity() {
         if (mediaPlayer == null) {
 
             sosActive = false
+
+            buttonPressed = false
 
             tvStatus.text =
                 "● ONLINE"
@@ -652,9 +634,10 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        mediaPlayer?.isLooping =
-            true
+        // IMPORTANT:
+        // Siren will continue looping until stopSOS() is called.
 
+        mediaPlayer?.isLooping = true
 
         mediaPlayer?.start()
 
@@ -694,7 +677,7 @@ class MainActivity : AppCompatActivity() {
 
 
         // =====================================================
-        // SAVE LOG
+        // SAVE SOS LOG
         // =====================================================
 
         saveSOSLog()
@@ -714,6 +697,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun stopSOS() {
 
+        // Remove any pending timer
 
         handler.removeCallbacks(
             sosRunnable
@@ -731,16 +715,14 @@ class MainActivity : AppCompatActivity() {
 
         try {
 
-            if (
-                mediaPlayer != null &&
-                mediaPlayer!!.isPlaying
-            ) {
+            if (mediaPlayer?.isPlaying == true) {
 
-                mediaPlayer!!.stop()
+                mediaPlayer?.stop()
             }
 
-        } catch (_: Exception) {
+        } catch (e: Exception) {
 
+            e.printStackTrace()
         }
 
 
@@ -748,8 +730,9 @@ class MainActivity : AppCompatActivity() {
 
             mediaPlayer?.release()
 
-        } catch (_: Exception) {
+        } catch (e: Exception) {
 
+            e.printStackTrace()
         }
 
 
@@ -764,8 +747,9 @@ class MainActivity : AppCompatActivity() {
 
             vibrator?.cancel()
 
-        } catch (_: Exception) {
+        } catch (e: Exception) {
 
+            e.printStackTrace()
         }
 
 
@@ -803,15 +787,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun createLocationCallback() {
 
-
         locationCallback =
             object : LocationCallback() {
-
 
                 override fun onLocationResult(
                     result: LocationResult
                 ) {
-
 
                     val location =
                         result.lastLocation
@@ -826,7 +807,7 @@ class MainActivity : AppCompatActivity() {
                         location.longitude
 
 
-                    // Update Home screen
+
 
                     tvGps.text =
                         "GPS Live"
@@ -842,7 +823,7 @@ class MainActivity : AppCompatActivity() {
                         } m"
 
 
-                    // Save latest location
+
 
                     getSharedPreferences(
                         "BeaconLocation",
@@ -887,13 +868,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun startLocationUpdates() {
 
-
         if (
             ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            != PackageManager.PERMISSION_GRANTED
+            ) != PackageManager.PERMISSION_GRANTED
         ) {
 
             return
@@ -928,7 +907,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkSmsStatus() {
 
-
         val hasTelephony =
             packageManager
                 .hasSystemFeature(
@@ -954,7 +932,6 @@ class MainActivity : AppCompatActivity() {
     // =========================================================
 
     private fun checkCellularStatus() {
-
 
         val hasTelephony =
             packageManager
@@ -982,7 +959,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadTrustedContact() {
 
-
         val preferences =
             getSharedPreferences(
                 "BeaconContacts",
@@ -1006,7 +982,6 @@ class MainActivity : AppCompatActivity() {
 
         if (number.isNotEmpty()) {
 
-
             if (name.isNotEmpty()) {
 
                 tvContactName.text =
@@ -1026,9 +1001,7 @@ class MainActivity : AppCompatActivity() {
             tvContactAvatar.text =
                 getInitials(name)
 
-
         } else {
-
 
             tvContactName.text =
                 "No Trusted Contact"
@@ -1051,7 +1024,6 @@ class MainActivity : AppCompatActivity() {
     private fun getInitials(
         name: String
     ): String {
-
 
         if (name.isBlank()) {
 
@@ -1089,15 +1061,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun sendEmergencySms() {
 
-
         if (
             ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.SEND_SMS
-            )
-            != PackageManager.PERMISSION_GRANTED
+            ) != PackageManager.PERMISSION_GRANTED
         ) {
-
 
             Toast.makeText(
                 this,
@@ -1136,7 +1105,6 @@ class MainActivity : AppCompatActivity() {
             number2.isEmpty()
         ) {
 
-
             Toast.makeText(
                 this,
                 "No trusted contact added",
@@ -1162,15 +1130,12 @@ class MainActivity : AppCompatActivity() {
             currentLongitude != null
         ) {
 
-
             message +=
                 "\nLocation:\n" +
                         "https://maps.google.com/?q=" +
                         "$currentLatitude,$currentLongitude"
 
-
         } else {
-
 
             message +=
                 "\nLocation unavailable."
@@ -1178,11 +1143,10 @@ class MainActivity : AppCompatActivity() {
 
 
         // =====================================================
-        // SEND
+        // SEND SMS
         // =====================================================
 
         try {
-
 
             @Suppress("DEPRECATION")
             val smsManager =
@@ -1190,7 +1154,6 @@ class MainActivity : AppCompatActivity() {
 
 
             if (number1.isNotEmpty()) {
-
 
                 smsManager.sendTextMessage(
                     number1,
@@ -1203,7 +1166,6 @@ class MainActivity : AppCompatActivity() {
 
 
             if (number2.isNotEmpty()) {
-
 
                 smsManager.sendTextMessage(
                     number2,
@@ -1221,9 +1183,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
 
-
         } catch (e: Exception) {
-
 
             Toast.makeText(
                 this,
@@ -1239,7 +1199,6 @@ class MainActivity : AppCompatActivity() {
     // =========================================================
 
     private fun saveSOSLog() {
-
 
         val preferences =
             getSharedPreferences(
@@ -1312,7 +1271,6 @@ class MainActivity : AppCompatActivity() {
 
         if (oldDate.isNotEmpty()) {
 
-
             editor.putString(
                 "log2_date",
                 oldDate
@@ -1368,7 +1326,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun requestRequiredPermissions() {
 
-
         val permissions =
             mutableListOf<String>()
 
@@ -1379,10 +1336,8 @@ class MainActivity : AppCompatActivity() {
             ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            != PackageManager.PERMISSION_GRANTED
+            ) != PackageManager.PERMISSION_GRANTED
         ) {
-
 
             permissions.add(
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -1401,10 +1356,8 @@ class MainActivity : AppCompatActivity() {
             ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.SEND_SMS
-            )
-            != PackageManager.PERMISSION_GRANTED
+            ) != PackageManager.PERMISSION_GRANTED
         ) {
-
 
             permissions.add(
                 Manifest.permission.SEND_SMS
@@ -1418,10 +1371,8 @@ class MainActivity : AppCompatActivity() {
             ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.RECEIVE_SMS
-            )
-            != PackageManager.PERMISSION_GRANTED
+            ) != PackageManager.PERMISSION_GRANTED
         ) {
-
 
             permissions.add(
                 Manifest.permission.RECEIVE_SMS
@@ -1430,7 +1381,6 @@ class MainActivity : AppCompatActivity() {
 
 
         if (permissions.isNotEmpty()) {
-
 
             ActivityCompat.requestPermissions(
                 this,
@@ -1451,7 +1401,6 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
 
-
         super.onRequestPermissionsResult(
             requestCode,
             permissions,
@@ -1461,15 +1410,12 @@ class MainActivity : AppCompatActivity() {
 
         if (requestCode == PERMISSION_REQUEST) {
 
-
             if (
                 ContextCompat.checkSelfPermission(
                     this,
                     Manifest.permission.ACCESS_FINE_LOCATION
-                )
-                == PackageManager.PERMISSION_GRANTED
+                ) == PackageManager.PERMISSION_GRANTED
             ) {
-
 
                 startLocationUpdates()
             }
@@ -1498,10 +1444,8 @@ class MainActivity : AppCompatActivity() {
             ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            == PackageManager.PERMISSION_GRANTED
+            ) == PackageManager.PERMISSION_GRANTED
         ) {
-
 
             startLocationUpdates()
         }
@@ -1517,8 +1461,7 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
 
 
-        // Stop GPS updates while another
-        // Activity is open.
+        // Stop GPS updates while another Activity is open.
 
         fusedLocationClient
             .removeLocationUpdates(
@@ -1526,12 +1469,11 @@ class MainActivity : AppCompatActivity() {
             )
 
 
-        // VERY IMPORTANT:
+        // IMPORTANT:
+        // DO NOT stop SOS here.
         //
-        // DO NOT CALL stopSOS() HERE.
-        //
-        // Otherwise opening GPS/Circle/Logs/Screens
-        // would automatically stop the siren.
+        // This allows the siren to continue if another
+        // BEACON Activity is opened.
     }
 
 
@@ -1541,27 +1483,23 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
 
-
         handler.removeCallbacks(
             sosRunnable
         )
 
 
-        // Stop siren only when this Activity
-        // is actually destroyed.
+        // Clean MediaPlayer when Activity is destroyed
 
         try {
 
-            if (
-                mediaPlayer != null &&
-                mediaPlayer!!.isPlaying
-            ) {
+            if (mediaPlayer?.isPlaying == true) {
 
-                mediaPlayer!!.stop()
+                mediaPlayer?.stop()
             }
 
-        } catch (_: Exception) {
+        } catch (e: Exception) {
 
+            e.printStackTrace()
         }
 
 
@@ -1569,8 +1507,9 @@ class MainActivity : AppCompatActivity() {
 
             mediaPlayer?.release()
 
-        } catch (_: Exception) {
+        } catch (e: Exception) {
 
+            e.printStackTrace()
         }
 
 
@@ -1583,8 +1522,9 @@ class MainActivity : AppCompatActivity() {
 
             vibrator?.cancel()
 
-        } catch (_: Exception) {
+        } catch (e: Exception) {
 
+            e.printStackTrace()
         }
 
 
@@ -1599,8 +1539,9 @@ class MainActivity : AppCompatActivity() {
                 batteryReceiver
             )
 
-        } catch (_: Exception) {
+        } catch (e: Exception) {
 
+            e.printStackTrace()
         }
 
 
