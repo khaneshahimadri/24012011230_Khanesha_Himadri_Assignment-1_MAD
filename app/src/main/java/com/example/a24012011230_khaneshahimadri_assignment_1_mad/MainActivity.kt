@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.os.BatteryManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -29,6 +30,7 @@ import com.google.android.gms.location.Priority
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -529,169 +531,55 @@ class MainActivity : AppCompatActivity() {
     // =========================================================
 
     private fun startSOS() {
-
-
-        if (sosActive) {
-
-            return
-        }
-
-
         sosActive = true
 
-        buttonPressed = false
+        tvStatus.text = "● SOS ACTIVE"
+        tvEmergency.text = "⚠ EMERGENCY SOS ACTIVE ⚠"
+        tvHold.text = "RELEASE/TAP TO STOP"
+        btnSOS.text = "STOP\nSOS"
 
-
-
-
-        handler.removeCallbacks(
-            sosRunnable
-        )
-
-
-        // =====================================================
-        // CHANGE UI STATUS
-        // =====================================================
-
-        tvStatus.text =
-            "● SOS ACTIVE"
-
-        tvEmergency.text =
-            "⚠ EMERGENCY SOS DISPATCH"
-
-        tvHold.text =
-            "TAP SOS TO STOP"
-
-        btnSOS.text =
-            "SOS ACTIVE\nTAP TO STOP"
-
-
-        // =====================================================
-        // REMOVE OLD MEDIA PLAYER
-        // =====================================================
-
+        // Initialize and start media player for siren
         try {
-
-            if (mediaPlayer?.isPlaying == true) {
-
-                mediaPlayer?.stop()
+            mediaPlayer = MediaPlayer.create(this, R.raw.siren).apply {
+                isLooping = true
+                start()
             }
-
         } catch (e: Exception) {
-
             e.printStackTrace()
         }
 
-
+        // Initialize and start vibrator
         try {
-
-            mediaPlayer?.release()
-
+            @Suppress("DEPRECATION")
+            vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            @Suppress("DEPRECATION")
+            val pattern = longArrayOf(0, 500, 500)
+            vibrator?.vibrate(pattern, 0)
         } catch (e: Exception) {
-
             e.printStackTrace()
         }
 
-
-        mediaPlayer = null
-
-
-        // =====================================================
-        // START SIREN
-        // =====================================================
-
-        mediaPlayer =
-            MediaPlayer.create(
-                this,
-                R.raw.siren
-            )
-
-
-        if (mediaPlayer == null) {
-
-            sosActive = false
-
-            buttonPressed = false
-
-            tvStatus.text =
-                "● ONLINE"
-
-            tvHold.text =
-                "3s REMAINING"
-
-            btnSOS.text =
-                "SOS\nHOLD 3 SEC"
-
-
-            Toast.makeText(
-                this,
-                "Siren file not found",
-                Toast.LENGTH_SHORT
-            ).show()
-
-
-            return
-        }
-
-
-        // IMPORTANT:
-        // Siren will continue looping until stopSOS() is called.
-
-        mediaPlayer?.isLooping = true
-
-        mediaPlayer?.start()
-
-
-        // =====================================================
-        // START VIBRATION
-        // =====================================================
-
-        vibrator =
-            getSystemService(
-                VIBRATOR_SERVICE
-            ) as Vibrator
-
-
-        val vibrationPattern =
-            longArrayOf(
-                0,
-                500,
-                300,
-                500,
-                300
-            )
-
-
-        @Suppress("DEPRECATION")
-        vibrator?.vibrate(
-            vibrationPattern,
-            0
-        )
-
-
-        // =====================================================
+        // ==========================================
         // SEND EMERGENCY SMS
-        // =====================================================
-
+        // ==========================================
         sendEmergencySms()
 
-
-        // =====================================================
-        // SAVE SOS LOG
-        // =====================================================
-
+        // ==========================================
+        // SAVE LOG
+        // ==========================================
         saveSOSLog()
-
 
         Toast.makeText(
             this,
-            "SOS activated",
+            "Emergency alert sent to trusted contacts",
             Toast.LENGTH_SHORT
         ).show()
     }
 
 
-    // =========================================================
+
+
+// =========================================================
     // STOP SOS
     // =========================================================
 
@@ -1324,71 +1212,98 @@ class MainActivity : AppCompatActivity() {
     // REQUEST PERMISSIONS
     // =========================================================
 
-    private fun requestRequiredPermissions() {
+private fun requestRequiredPermissions() {
 
-        val permissions =
-            mutableListOf<String>()
-
-
-        // LOCATION
-
-        if (
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-
-            permissions.add(
-                Manifest.permission.ACCESS_FINE_LOCATION
-            )
+    val permissions = mutableListOf<String>()
 
 
-            permissions.add(
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            )
-        }
+    // ==========================================
+    // LOCATION PERMISSION
+    // ==========================================
 
+    if (
+        ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) != PackageManager.PERMISSION_GRANTED
+    ) {
 
-        // SEND SMS
+        permissions.add(
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
 
-        if (
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.SEND_SMS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-
-            permissions.add(
-                Manifest.permission.SEND_SMS
-            )
-        }
-
-
-        // RECEIVE SMS
-
-        if (
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.RECEIVE_SMS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-
-            permissions.add(
-                Manifest.permission.RECEIVE_SMS
-            )
-        }
-
-
-        if (permissions.isNotEmpty()) {
-
-            ActivityCompat.requestPermissions(
-                this,
-                permissions.toTypedArray(),
-                PERMISSION_REQUEST
-            )
-        }
+        permissions.add(
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
     }
+
+
+    // ==========================================
+    // SEND SMS PERMISSION
+    // ==========================================
+
+    if (
+        ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.SEND_SMS
+        ) != PackageManager.PERMISSION_GRANTED
+    ) {
+
+        permissions.add(
+            Manifest.permission.SEND_SMS
+        )
+    }
+
+
+    // ==========================================
+    // RECEIVE SMS PERMISSION
+    // ==========================================
+
+    if (
+        ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.RECEIVE_SMS
+        ) != PackageManager.PERMISSION_GRANTED
+    ) {
+
+        permissions.add(
+            Manifest.permission.RECEIVE_SMS
+        )
+    }
+
+
+    // ==========================================
+    // NOTIFICATION PERMISSION
+    // Android 13+
+    // ==========================================
+
+    if (
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+        ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.POST_NOTIFICATIONS
+        ) != PackageManager.PERMISSION_GRANTED
+    ) {
+
+        permissions.add(
+            Manifest.permission.POST_NOTIFICATIONS
+        )
+    }
+
+
+    // ==========================================
+    // REQUEST PERMISSIONS
+    // ==========================================
+
+    if (permissions.isNotEmpty()) {
+
+        ActivityCompat.requestPermissions(
+            this,
+            permissions.toTypedArray(),
+            PERMISSION_REQUEST
+        )
+    }
+}
 
 
     // =========================================================
