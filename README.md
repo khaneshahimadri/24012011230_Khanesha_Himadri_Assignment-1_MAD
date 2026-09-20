@@ -1,274 +1,396 @@
-# 🚨 BEACON – Emergency Location System
+# 🚨 BEACON – Emergency Safety & Offline Location System
 
-BEACON is an Android-based emergency safety application developed as part of my **Mobile Application Development (MAD) Assignment-1**.
+<p align="center">
+  <b>Emergency Location • SOS • Offline GPS • SMS • Trusted Circle</b>
+</p>
 
-The application is designed to provide quick access to emergency features such as **SOS alerts, GPS location, trusted contacts, SMS-based location requests, activity logs, and device health monitoring**.
+<p align="center">
+  An Android-based emergency safety application built using Kotlin and XML.
+</p>
+
+---
+
+## 📌 Project Overview
+
+**BEACON** is an Android-based Emergency Safety and Location System developed as part of the **Mobile Application Development (MAD)** course.
+
+The application is designed to provide quick assistance during emergency situations using **SOS alerts, GPS/GNSS location, cellular SMS, trusted contacts, emergency siren, vibration, security controls, activity logs, and device health monitoring**.
+
+A major focus of BEACON is its **offline-oriented architecture**. GPS coordinates can be obtained without mobile-data internet, while cellular SMS can be used for emergency communication when SMS network coverage is available.
+
+---
+
+## 📱 Application Preview
+
+<p align="center">
+  <img src="screenshots/home.jpg" width="30%" />
+  <img src="screenshots/sos_active.jpg" width="30%" />
+  <img src="screenshots/gps.jpg" width="30%" />
+</p>
 
 ---
 
 ## 🎯 Objectives
 
-- Develop a functional Android emergency safety application.
-- Implement an emergency SOS system.
-- Access and display GPS location.
-- Manage trusted emergency contacts.
-- Implement SMS-based location request functionality.
-- Generate Google Maps location links.
-- Understand Android runtime permissions.
-- Store application data locally using SharedPreferences.
-- Apply Android concepts learned during MAD.
+- 🚨 Provide quick emergency assistance through SOS
+- 📍 Obtain accurate GPS/GNSS coordinates
+- 📩 Share emergency location through cellular SMS
+- 👥 Maintain a secure Trusted Circle
+- 📶 Reduce dependency on mobile internet
+- 🔐 Protect location information from unauthorized users
+- 📋 Maintain emergency and security activity logs
+- ❤️ Monitor important BEACON system components
 
 ---
 
-## ✨ Features
+# ✨ Key Features
 
-### 🚨 Emergency SOS
-- Hold SOS button for 3 seconds to activate.
-- Emergency siren using MediaPlayer.
-- Device vibration during emergency mode.
-- SOS can be stopped from the application.
+### 🚨 3-Second SOS Activation
+Press and hold the SOS button for **3 seconds** to activate emergency mode and reduce accidental triggers.
 
-### 📍 GPS Location
-- Fetches available GPS location.
-- Displays latitude and longitude.
-- Shows location accuracy and provider information.
-- Generates a Google Maps link.
-- Supports copying/opening coordinates.
+### 🔊 Siren & Vibration
+Emergency mode activates an audible siren and vibration alert.
+
+### 📍 Live GPS/GNSS
+Displays latitude, longitude, accuracy, altitude and latest GPS update.
+
+### 📩 SMS LOCATE System
+Trusted contacts can use the keyword **`LOCATE`** for location-based emergency communication.
 
 ### 👥 Trusted Circle
-- Add trusted emergency contacts.
-- Select contacts from the device.
-- Store contact details locally.
-- Remove trusted contacts.
-- Trusted contacts are used for location-request functionality.
+Only authorized/whitelisted contacts are permitted to request sensitive location information.
 
-### 📩 SMS Location Request
-BEACON recognizes the emergency keyword:
+### 🛡️ Security & Privacy
+Unknown sender blocking, trusted sender verification, stealth controls and anti-spam protection.
 
-`LOCATE`
+### 📋 Activity Audit
+Maintains records of successful requests, blocked requests and SOS events.
 
-The basic workflow is:
+### 🔋 Health & Telemetry
+Displays GPS, SMS, cellular and battery subsystem status.
 
-`LOCATE → Verify Trusted Contact → Get GPS → Generate Maps Link → Location Response`
-
-### 🗺️ Location Response
-- Uses available GPS coordinates.
-- Generates a Google Maps location link.
-- Prepares location information for trusted contacts.
-
-### 📋 Activity Logs
-- Stores important BEACON activities.
-- Displays application events.
-- Supports clearing stored logs.
-
-### 🔒 Security & Privacy
-- Trusted-contact whitelist concept.
-- Unknown contacts can be excluded from the trusted workflow.
-- Important settings are stored locally.
-
-### 📡 Offline Support
-BEACON is designed around GPS and cellular SMS functionality.
-
-- GPS coordinates can be obtained without mobile internet when a GPS fix is available.
-- SMS does not require internet access.
-- SMS functionality requires cellular network/SMS service.
-- Online Maps display may require an internet connection.
-
-### ❤️ Beacon Health
-Provides information about important services such as:
-
-- GPS availability
-- SMS/Telephony availability
-- Battery information
-- Network status
-- BEACON configuration
-
-### 🔄 Complete Beacon Flow
-The application contains a one-device demonstration of the complete emergency workflow:
-
-1. Trusted Person
-2. SMS `"LOCATE"`
-3. BEACON Receives Request
-4. Verify Trusted Sender
-5. Get GPS Location
-6. Generate Google Maps Link
-7. Prepare SMS Reply
-8. Location Response Ready
-
-The Complete Flow screen demonstrates the SMS exchange locally on one device while using saved contact and location information where available.
+### 📶 Offline-Oriented Operation
+Core GPS and SMS features are designed without dependency on Wi-Fi or mobile-data internet.
 
 ---
 
-## 📱 Main Screens
+# 📲 12 BEACON Modules
 
-The application contains the following screens:
+BEACON contains **12 major functional modules**:
 
-1. Home Dashboard
-2. Emergency SOS
-3. Beacon Control
-4. Trusted Circle
-5. Offline Architecture
-6. GPS Tactical Location
-7. SMS Request Parser
-8. Location Response
-9. Beacon Activity Logs
-10. Security & Privacy
-11. Beacon Health Diagnostics
-12. Complete Beacon Flow
+| No. | Module | Purpose |
+|---|---|---|
+| 1 | 🏠 Home Dashboard | System status and SOS access |
+| 2 | 🚨 Emergency SOS | Siren, vibration and emergency dispatch |
+| 3 | ⚙️ Beacon Control | LOCATE keyword and SMS monitoring |
+| 4 | 👥 Trusted Circle | Verified emergency contacts |
+| 5 | 📶 Offline Architecture | GPS + cellular SMS operation |
+| 6 | 📍 GPS Tactical Location | Live GNSS coordinates and accuracy |
+| 7 | 📨 SMS Request Parser | Validates incoming LOCATE requests |
+| 8 | 📤 Location Response | Generates location SMS response |
+| 9 | 📋 Beacon Activity Log | Emergency and security audit |
+| 10 | 🔐 Security & Privacy | Whitelist and privacy controls |
+| 11 | ❤️ Health Diagnostics | GPS, SMS and battery diagnostics |
+| 12 | 🔄 Complete Beacon Flow | End-to-end BEACON architecture |
 
----
-
-## 🛠️ Technologies Used
-
-- **Kotlin** – Application logic
-- **XML** – User interface
-- **Android Studio** – Development environment
-- **ConstraintLayout** – UI layouts
-- **CardView** – UI components
-- **SharedPreferences** – Local data storage
-- **Android Location Services** – GPS functionality
-- **SMS APIs** – SMS functionality
-- **BroadcastReceiver** – SMS/system event handling
-- **MediaPlayer** – SOS siren
-- **Vibrator** – Emergency vibration
-- **Intent** – Activity navigation
+<p align="center">
+  <img src="screenshots/screens1.jpg" width="42%" />
+  <img src="screenshots/screens2.jpg" width="42%" />
+</p>
 
 ---
 
-## 🔐 Permissions Used
+# 🚨 Emergency SOS System
 
-The application uses Android permissions such as:
-
-- `ACCESS_FINE_LOCATION`
-- `ACCESS_COARSE_LOCATION`
-- `READ_CONTACTS`
-- `SEND_SMS`
-- `RECEIVE_SMS`
-- `VIBRATE`
-- `ACCESS_NETWORK_STATE`
-
-Runtime permissions are requested where required.
-
----
-
-## 🔄 Working Flow
+The user must hold the SOS button for **3 seconds**.
 
 ```text
-Open BEACON
-     ↓
-Configure Trusted Contact
-     ↓
-Emergency / LOCATE Request
-     ↓
-Verify Trusted Contact
-     ↓
-Get Available GPS Location
-     ↓
-Generate Google Maps Link
-     ↓
-Prepare Location Response
+Hold SOS for 3 Seconds
+          ↓
+     SOS Activated
+          ↓
+   Siren + Vibration
+          ↓
+  Get GPS Coordinates
+          ↓
+ Alert Trusted Contacts
+          ↓
+  Store Activity Log
 ```
 
----
-
-## ⚠️ Challenges Faced
-
-During the development of BEACON, I faced several challenges:
-
-### 1. GPS Permission Handling
-Managing Android runtime location permissions and retrieving GPS coordinates correctly.
-
-### 2. SOS Siren
-Handling MediaPlayer so that the emergency siren starts and stops properly.
-
-### 3. SMS Handling
-Understanding SMS permissions and BroadcastReceiver functionality.
-
-### 4. Trusted Contact Management
-Selecting, storing, retrieving, and removing trusted contacts.
-
-### 5. Multiple Screen Navigation
-Managing navigation between multiple Android Activities using Intents.
-
-### 6. UI Consistency
-Maintaining the same design, colors, cards, and navigation across different screens.
-
-### 7. Complete Flow
-Creating a simple one-device demonstration of the complete emergency workflow.
+<p align="center">
+  <img src="screenshots/sos.jpg" width="38%" />
+  <img src="screenshots/sos_active.jpg" width="38%" />
+</p>
 
 ---
 
-## 📚 Concepts Learned
+# 📍 GPS Tactical Telemetry
 
-Through this project, I learned and implemented:
+BEACON provides detailed GPS information including:
 
-- Activities
-- Intents
-- XML Layouts
-- ConstraintLayout
-- CardView
-- Event Listeners
-- Runtime Permissions
-- SharedPreferences
-- GPS / Location Services
-- SMS Handling
-- BroadcastReceiver
-- MediaPlayer
-- Vibrator
-- Multi-screen Navigation
+- Latitude
+- Longitude
+- Estimated accuracy
+- Altitude
+- Location provider
+- Last GPS update
+- Copy coordinates
+- Open location on web map
+
+<p align="center">
+  <img src="screenshots/gps.jpg" width="38%" />
+</p>
 
 ---
 
-## ▶️ How to Run
+# 👥 Trusted Circle
 
-1. Clone or download this repository.
-2. Open the project in **Android Studio**.
-3. Wait for Gradle Sync to complete.
-4. Connect an Android device.
-5. Build and run the application.
-6. Grant the required permissions.
-7. Add a trusted contact.
-8. Enable GPS/Location.
-9. Test the BEACON features.
+The **Trusted Circle Whitelist** protects the user's location from unauthorized requests.
 
-> A physical Android device is recommended for testing GPS, SMS, vibration, contacts, and other device-dependent functionality.
+Users can:
 
----
+- Add trusted contacts
+- Set a primary contact
+- Maintain verified contacts
+- Send LOCATE requests
+- Block unknown senders
 
-## 🚧 Future Improvements
-
-- Improved background location support
-- More trusted contacts
-- Emergency notifications
-- Improved activity history
-- Cloud backup support
-- Additional emergency customization
-- Improved location tracking
+<p align="center">
+  <img src="screenshots/circle.jpg" width="38%" />
+</p>
 
 ---
 
-## 👩‍💻 Developed By
+# 📩 SMS LOCATE Workflow
 
-**Himadri Khanesha**  
-**Enrollment No.: 24012011230**  
+One of the main BEACON workflows is location communication through cellular SMS.
+
+```text
+Incoming "LOCATE" SMS
+          ↓
+     Verify Sender
+          ↓
+   Check Trusted Circle
+       ↙       ↘
+   Trusted   Unknown
+      ↓          ↓
+ Get GPS       Block
+      ↓
+Generate Location
+      ↓
+Create Maps Link
+      ↓
+ Send SMS Response
+      ↓
+ Save Activity Log
+```
+
+<p align="center">
+  <img src="screenshots/sms_request.jpg" width="38%" />
+  <img src="screenshots/sms_response.jpg" width="38%" />
+</p>
+
+---
+
+# 📶 Offline Architecture
+
+BEACON separates **GPS, cellular SMS and internet connectivity**.
+
+```text
+🛰️ GPS/GNSS
+     ↓
+Location Coordinates
+
+📡 Cellular Network
+     ↓
+SMS Communication
+
+🌐 Internet
+     ↓
+Online Map Services
+```
+
+This means mobile-data internet is not required to obtain GPS coordinates. SMS communication still requires cellular SMS coverage.
+
+<p align="center">
+  <img src="screenshots/offline.jpg" width="38%" />
+</p>
+
+---
+
+# 🔐 Security & Privacy
+
+BEACON includes several mechanisms designed to protect location information:
+
+- 🛡️ Trusted sender whitelist
+- 🚫 Unknown sender blocking
+- 🔑 Exact LOCATE keyword verification
+- ⏱️ Anti-spam cooldown
+- 🕵️ Stealth mode
+- 📋 Activity auditing
+
+<p align="center">
+  <img src="screenshots/security.jpg" width="38%" />
+</p>
+
+---
+
+# 📋 Beacon Activity Audit
+
+BEACON records important events such as:
+
+- Emergency SOS activation
+- Successful trusted requests
+- Blocked unknown requests
+- GPS/location responses
+- Diagnostic activities
+
+<p align="center">
+  <img src="screenshots/logs.jpg" width="38%" />
+</p>
+
+---
+
+# ❤️ Health & Telemetry
+
+The diagnostic module monitors important BEACON subsystems.
+
+It includes:
+
+- 🛰️ GPS subsystem
+- 📩 Cellular SMS availability
+- 🔋 Battery and power status
+- 📡 Cellular system status
+
+<p align="center">
+  <img src="screenshots/health.jpg" width="38%" />
+</p>
+
+---
+
+# 🛠️ Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| **Kotlin** | Application logic |
+| **XML** | UI design |
+| **Android Studio** | Development environment |
+| **Android SDK** | Android functionality |
+| **Google Play Services** | Location services |
+| **Fused Location Provider** | GPS/GNSS location |
+| **BroadcastReceiver** | SMS/event handling |
+| **Android SMS APIs** | SMS communication |
+| **MediaPlayer** | Emergency siren |
+| **Vibrator API** | Emergency vibration |
+| **BatteryManager** | Battery monitoring |
+| **SharedPreferences** | Local application data |
+| **Intent** | Navigation and external actions |
+
+---
+
+# ⚠️ Challenges Faced
+
+During development, some of the major challenges were:
+
+- Implementing the **3-second SOS hold**
+- Getting accurate and updated GPS coordinates
+- Handling Android runtime permissions
+- Working with GPS without mobile-data internet
+- Receiving and processing SMS requests
+- Verifying trusted contacts before sharing location
+- Handling unknown/unauthorized senders
+- Managing siren and vibration during SOS
+- Handling different Android versions
+- Maintaining activity logs
+- Managing security and privacy controls
+- Keeping the code student-friendly while implementing real Android functionality
+
+---
+
+# 🔐 Permissions Used
+
+The application uses Android permissions for:
+
+- 📍 Fine Location
+- 📍 Coarse Location
+- 📩 SMS
+- 📳 Vibration
+- 👥 Contacts where required
+
+---
+
+# 🧪 Testing
+
+BEACON can be tested for:
+
+- SOS activation after a 3-second hold
+- SOS cancellation
+- Siren and vibration
+- GPS coordinate retrieval
+- GPS accuracy
+- Battery percentage
+- Trusted contact selection
+- LOCATE keyword handling
+- Trusted sender verification
+- Unknown sender blocking
+- SMS location response
+- Activity log generation
+- Offline GPS operation
+
+---
+
+# 🚀 Future Scope
+
+- Improved background location handling
+- Multiple emergency profiles
+- Enhanced contact management
+- Location history
+- Additional emergency triggers
+- Improved battery optimization
+- Emergency notification improvements
+- Further integration with emergency services
+
+---
+
+# 📸 Screenshots
+
+<p align="center">
+  <img src="screenshots/home.jpg" width="24%" />
+  <img src="screenshots/gps.jpg" width="24%" />
+  <img src="screenshots/circle.jpg" width="24%" />
+  <img src="screenshots/logs.jpg" width="24%" />
+</p>
+
+<p align="center">
+  <img src="screenshots/offline.jpg" width="24%" />
+  <img src="screenshots/security.jpg" width="24%" />
+  <img src="screenshots/sms_request.jpg" width="24%" />
+  <img src="screenshots/health.jpg" width="24%" />
+</p>
+
+---
+
+# 👩‍💻 Developed By
+
+### Himadri Khanesha
+
+**Enrollment No:** `24012011230`  
 **Class:** CE-I  
 **Batch:** I-2  
-**Course:** B.Tech Computer Engineering  
-**University:** Ganpat University  
-**College:** U.V. Patel College of Engineering (UVPCE)
+**Subject:** Mobile Application Development (MAD)
 
 ---
 
-## 📚 Academic Information
+## ⚠️ Disclaimer
 
-**Subject:** Mobile Application Development (MAD)  
-**Assignment:** Assignment-1  
-**Platform:** Android  
-**Programming Language:** Kotlin  
+BEACON is an **academic project developed for educational purposes**.
+
+It demonstrates Android emergency communication, location and safety concepts and should **not be considered a replacement for official emergency services**.
 
 ---
 
-
-
-### 🚨 BEACON
-**Emergency Location System – Stay Connected. Stay Safe.**
+<p align="center">
+  <b>🚨 BEACON</b><br>
+  <i>Emergency Assistance • Location • Communication • Safety</i>
+</p>
