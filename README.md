@@ -1,4 +1,3 @@
-
 # 🚨 BEACON – Emergency Safety & Offline Location System
 
 <p align="center">
@@ -13,7 +12,7 @@ The application provides quick assistance during emergency situations using SOS 
 
 ## 📱 Project Overview
 
-During an emergency, users may not always have access to mobile-data internet or enough time to manually contact multiple people.
+During an emergency, users may not always have access to mobile data or enough time to manually contact multiple people.
 
 **BEACON** combines multiple emergency and safety features into a single Android application.
 
@@ -25,35 +24,22 @@ A major focus of BEACON is its **offline-oriented architecture**. GPS coordinate
 
 ### 🚨 Emergency SOS
 
-The user must **press and hold the SOS button for 3 seconds** to activate emergency mode.
-
-When activated:
-
-* 🚨 Emergency mode starts
-* 🔊 Siren starts playing
-* 📳 Device vibration is activated
-* 📍 GPS coordinates are obtained
-* 👥 Trusted contacts can be alerted
-* 📋 Emergency activity is recorded
-
----
+* 3-second hold to activate SOS
+* Emergency siren
+* Device vibration
+* GPS location
+* Trusted contact alerts
+* Emergency activity logging
 
 ### 📍 GPS / GNSS Location
 
-BEACON provides:
-
-* Latitude
-* Longitude
+* Latitude and longitude
 * Estimated accuracy
 * Altitude
 * Location provider
 * Last GPS update
 * Copy coordinates
-* Open location in map services
-
-GPS coordinates can be obtained without mobile-data internet.
-
----
+* Open location using map services
 
 ### 📩 SMS LOCATE System
 
@@ -61,92 +47,46 @@ A trusted contact can send:
 
 `LOCATE`
 
-BEACON verifies the sender before sharing the user's location.
-
-```text
-Incoming "LOCATE" SMS
-          │
-          ▼
-     Verify Sender
-          │
-          ▼
-   Trusted Circle
-       /     \
-      /       \
- Trusted     Unknown
-    │            │
-    ▼            ▼
- Get GPS        Block
-    │
-    ▼
-Generate Location
-    │
-    ▼
-Create Maps Link
-    │
-    ▼
-Send SMS Response
-    │
-    ▼
-Save Activity Log
-```
-
----
+BEACON verifies the sender and can return the device's location through cellular SMS.
 
 ### 👥 Trusted Circle
 
-Users can:
-
 * Add trusted contacts
-* Maintain verified contacts
-* Select a primary contact
-* Verify incoming LOCATE requests
+* Select primary contact
+* Verify incoming requests
 * Block unknown senders
-* Share emergency location securely
-
----
+* Securely share location
 
 ### 🔐 Security & Privacy
 
-BEACON includes:
-
-* 🛡️ Trusted sender whitelist
-* 🚫 Unknown sender blocking
-* 🔑 Exact `LOCATE` keyword verification
-* ⏱️ Anti-spam protection
-* 🕵️ Stealth controls
-* 📋 Security activity auditing
-
----
+* Trusted sender whitelist
+* Unknown sender blocking
+* Exact `LOCATE` keyword verification
+* Anti-spam protection
+* Security activity auditing
 
 ### 📋 Activity Log
 
-BEACON records important events such as:
-
-* 🚨 SOS activation
-* 📍 GPS activities
-* ✅ Successful trusted requests
-* 🚫 Blocked unknown requests
-* 📨 SMS location responses
-* ❤️ Diagnostic activities
-
----
+* SOS activities
+* GPS activities
+* Trusted requests
+* Blocked requests
+* SMS responses
+* Diagnostic activities
 
 ### ❤️ Health & Telemetry
 
-BEACON monitors:
-
-* 🛰️ GPS subsystem
-* 📩 SMS availability
-* 🔋 Battery status
-* 📡 Cellular system
-* ❤️ Overall system health
+* GPS subsystem
+* SMS availability
+* Battery status
+* Cellular system
+* Overall BEACON health
 
 ---
 
 # 📶 Offline Architecture
 
-```text
+```text id="d9ukge"
 🛰️ GPS / GNSS
       │
       ▼
@@ -163,9 +103,7 @@ SMS Communication
 Online Map Services
 ```
 
-> **Mobile-data internet is not required to obtain GPS coordinates.**
-
-SMS communication requires cellular SMS network coverage.
+> GPS coordinates can be obtained without mobile-data internet. SMS functionality requires cellular SMS coverage.
 
 ---
 
@@ -180,7 +118,7 @@ SMS communication requires cellular SMS network coverage.
 | 5   | 📶 Offline Architecture  | GPS + cellular SMS operation            |
 | 6   | 📍 GPS Tactical Location | Live GNSS coordinates                   |
 | 7   | 📨 SMS Request Parser    | Validates LOCATE requests               |
-| 8   | 📤 Location Response     | Generates location response             |
+| 8   | 📤 Location Response     | Generates location SMS response         |
 | 9   | 📋 Activity Log          | Emergency and security audit            |
 | 10  | 🔐 Security & Privacy    | Whitelist and privacy controls          |
 | 11  | ❤️ Health Diagnostics    | GPS, SMS and battery diagnostics        |
@@ -190,7 +128,7 @@ SMS communication requires cellular SMS network coverage.
 
 # 🚨 SOS Workflow
 
-```text
+```text id="ig16ds"
 User Holds SOS Button
         │
         ▼
@@ -234,140 +172,53 @@ Save Activity Log
 
 ---
 
-# 🔑 Android Permissions
-
-```xml
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-<uses-permission android:name="android.permission.SEND_SMS" />
-<uses-permission android:name="android.permission.RECEIVE_SMS" />
-<uses-permission android:name="android.permission.VIBRATE" />
-```
-
----
-
 # 📸 Application Screenshots
 
-## 🏠 Home Dashboard
-
 <p align="center">
-  <img src="./screenshots/home.jpg" width="280" alt="BEACON Home Dashboard"/>
-</p>
-
----
-
-## 🚨 Emergency SOS
-
-<p align="center">
-  <img src="./screenshots/sos.jpg" width="280" alt="Emergency SOS"/>
-</p>
-
----
-
-## ⚙️ Beacon Control
-
-<p align="center">
-  <img src="./screenshots/beacon-control.jpg" width="280" alt="Beacon Control"/>
-</p>
-
----
-
-## 👥 Trusted Circle
-
-<p align="center">
-  <img src="./screenshots/trusted-circle.jpg" width="280" alt="Trusted Circle"/>
-</p>
-
----
-
-## 📶 Offline Architecture
-
-<p align="center">
-  <img src="./screenshots/offline-architecture.jpg" width="280" alt="Offline Architecture"/>
-</p>
-
----
-
-## 📍 GPS Tactical Location
-
-<p align="center">
-  <img src="./screenshots/gps-location.jpg" width="280" alt="GPS Tactical Location"/>
-</p>
-
----
-
-## 📨 SMS Request Parser
-
-<p align="center">
-  <img src="./screenshots/sms-parser.jpg" width="280" alt="SMS Request Parser"/>
-</p>
-
----
-
-## 📤 Location Response
-
-<p align="center">
-  <img src="./screenshots/location-response.jpg" width="280" alt="Location Response"/>
-</p>
-
----
-
-## 📋 Beacon Activity Log
-
-<p align="center">
-  <img src="./screenshots/activity-log.jpg" width="280" alt="Beacon Activity Log"/>
-</p>
-
----
-
-## 🔐 Security & Privacy
-
-<p align="center">
-  <img src="./screenshots/security.jpg" width="280" alt="Security and Privacy"/>
-</p>
-
----
-
-## ❤️ Health Diagnostics
-
-<p align="center">
-  <img src="./screenshots/diagnostics.jpg" width="280" alt="Health Diagnostics"/>
-</p>
-
----
-
-## 🔄 Complete BEACON Flow
-
-<p align="center">
-  <img src="./screenshots/beacon-flow.jpg" width="280" alt="Complete BEACON Flow"/>
-</p>
-
----
-
-# 🖼️ Screenshot Gallery
-
-<p align="center">
-  <img src="./screenshots/home.jpg" width="230" alt="Home"/>
-  <img src="./screenshots/sos.jpg" width="230" alt="SOS"/>
-  <img src="./screenshots/beacon-control.jpg" width="230" alt="Beacon Control"/>
+  <img src="./screenshots/Screenshot_2026-09-20-17-26-35-77_83ba7a687252d9558c8e881608915382.jpg" width="250">
+  <img src="./screenshots/Screenshot_2026-09-20-17-26-40-09_83ba7a687252d9558c8e881608915382.jpg" width="250">
+  <img src="./screenshots/Screenshot_2026-09-20-17-27-13-90_83ba7a687252d9558c8e881608915382.jpg" width="250">
 </p>
 
 <p align="center">
-  <img src="./screenshots/trusted-circle.jpg" width="230" alt="Trusted Circle"/>
-  <img src="./screenshots/offline-architecture.jpg" width="230" alt="Offline Architecture"/>
-  <img src="./screenshots/gps-location.jpg" width="230" alt="GPS Location"/>
+  <img src="./screenshots/Screenshot_2026-09-20-17-27-20-51_83ba7a687252d9558c8e881608915382.jpg" width="250">
+  <img src="./screenshots/Screenshot_2026-09-20-17-27-21-71_83ba7a687252d9558c8e881608915382.jpg" width="250">
+  <img src="./screenshots/Screenshot_2026-09-20-17-27-38-32_83ba7a687252d9558c8e881608915382.jpg" width="250">
 </p>
 
 <p align="center">
-  <img src="./screenshots/sms-parser.jpg" width="230" alt="SMS Parser"/>
-  <img src="./screenshots/location-response.jpg" width="230" alt="Location Response"/>
-  <img src="./screenshots/activity-log.jpg" width="230" alt="Activity Log"/>
+  <img src="./screenshots/Screenshot_2026-09-20-17-27-41-05_83ba7a687252d9558c8e881608915382.jpg" width="250">
+  <img src="./screenshots/Screenshot_2026-09-20-17-27-45-56_83ba7a687252d9558c8e881608915382.jpg" width="250">
+  <img src="./screenshots/Screenshot_2026-09-20-17-27-49-75_83ba7a687252d9558c8e881608915382.jpg" width="250">
 </p>
 
 <p align="center">
-  <img src="./screenshots/security.jpg" width="230" alt="Security"/>
-  <img src="./screenshots/diagnostics.jpg" width="230" alt="Diagnostics"/>
-  <img src="./screenshots/beacon-flow.jpg" width="230" alt="Beacon Flow"/>
+  <img src="./screenshots/Screenshot_2026-09-20-17-27-52-25_83ba7a687252d9558c8e881608915382.jpg" width="250">
+  <img src="./screenshots/Screenshot_2026-09-20-17-27-54-62_83ba7a687252d9558c8e881608915382.jpg" width="250">
+  <img src="./screenshots/Screenshot_2026-09-20-17-27-56-87_83ba7a687252d9558c8e881608915382.jpg" width="250">
+</p>
+
+<p align="center">
+  <img src="./screenshots/Screenshot_2026-09-20-17-28-03-21_83ba7a687252d9558c8e881608915382.jpg" width="250">
+  <img src="./screenshots/Screenshot_2026-09-20-17-28-05-61_83ba7a687252d9558c8e881608915382.jpg" width="250">
+  <img src="./screenshots/Screenshot_2026-09-20-17-28-10-04_83ba7a687252d9558c8e881608915382.jpg" width="250">
+</p>
+
+<p align="center">
+  <img src="./screenshots/Screenshot_2026-09-20-17-28-14-48_83ba7a687252d9558c8e881608915382.jpg" width="250">
+  <img src="./screenshots/Screenshot_2026-09-20-17-28-19-98_83ba7a687252d9558c8e881608915382.jpg" width="250">
+  <img src="./screenshots/Screenshot_2026-09-20-17-28-25-50_83ba7a687252d9558c8e881608915382.jpg" width="250">
+</p>
+
+<p align="center">
+  <img src="./screenshots/Screenshot_2026-09-20-17-28-29-35_83ba7a687252d9558c8e881608915382.jpg" width="250">
+  <img src="./screenshots/Screenshot_2026-09-20-17-28-33-30_83ba7a687252d9558c8e881608915382.jpg" width="250">
+  <img src="./screenshots/Screenshot_2026-09-20-17-28-35-92_83ba7a687252d9558c8e881608915382.jpg" width="250">
+</p>
+
+<p align="center">
+  <img src="./screenshots/Screenshot_2026-09-20-17-28-40-61_83ba7a687252d9558c8e881608915382.jpg" width="250">
+  <img src="./screenshots/Screenshot_2026-09-20-17-28-42-74_83ba7a687252d9558c8e881608915382.jpg" width="250">
 </p>
 
 ---
@@ -390,11 +241,11 @@ Save Activity Log
 
 # ⚠️ Limitations
 
-* SMS requires cellular network availability.
-* GPS accuracy depends on the device and environment.
+* SMS depends on cellular network availability.
+* GPS accuracy depends on device and surroundings.
 * Required Android permissions must be granted.
-* Online map visualization may require internet connectivity.
-* Background functionality can be affected by Android battery optimization.
+* Online maps may require internet connectivity.
+* Background functionality may be affected by Android battery optimization.
 
 ---
 
@@ -418,32 +269,32 @@ Save Activity Log
 
 ### 1. Clone the Repository
 
-```bash
+```bash id="ntnw3u"
 git clone https://github.com/khaneshahimadri/24012011230_Khanesha_Himadri_Assignment-1_MAD.git
 ```
 
 ### 2. Open in Android Studio
 
-Open the project using **Android Studio**.
+Open the cloned project using **Android Studio**.
 
 ### 3. Sync Gradle
 
-Allow Android Studio to download and synchronize all required dependencies.
+Allow Android Studio to synchronize the required Gradle dependencies.
 
 ### 4. Grant Permissions
 
-Grant required permissions for:
+Grant the required permissions for:
 
-* 📍 Location
-* 📩 SMS
-* 📳 Vibration
-* 👥 Contacts where applicable
+* Location
+* SMS
+* Vibration
+* Contacts where applicable
 
 ### 5. Run the Application
 
 Connect an Android device and run the application.
 
-> A physical Android device is recommended for testing GPS, SMS, siren, vibration and cellular functionality.
+> A physical Android device is recommended for GPS, SMS, siren, vibration and cellular functionality.
 
 ---
 
@@ -460,4 +311,46 @@ Connect an Android device and run the application.
 * [ ] Primary contact selection
 * [ ] LOCATE keyword detection
 * [ ] Trusted sender verification
-* [ ] Unknown sender blo
+* [ ] Unknown sender blocking
+* [ ] SMS location response
+* [ ] Activity log generation
+* [ ] Battery status
+* [ ] Health diagnostics
+* [ ] Offline GPS operation
+
+---
+
+# 👩‍💻 Developed By
+
+### Himadri Khanesha
+
+**Enrollment No:** `24012011230`
+**Class:** CE-I
+**Batch:** I-2
+**Subject:** Mobile Application Development (MAD)
+
+**GitHub:**
+https://github.com/khaneshahimadri
+
+**Project Repository:**
+https://github.com/khaneshahimadri/24012011230_Khanesha_Himadri_Assignment-1_MAD
+
+---
+
+# ⚠️ Disclaimer
+
+BEACON is an **academic project developed for educational purposes**.
+
+The application demonstrates Android emergency communication, GPS/location, SMS, security and safety concepts. It should **not be considered a replacement for official emergency services**.
+
+---
+
+<p align="center">
+
+# 🚨 BEACON
+
+### Emergency Assistance • Location • Communication • Safety
+
+**Built with Kotlin ❤️ for Mobile Application Development**
+
+</p>
