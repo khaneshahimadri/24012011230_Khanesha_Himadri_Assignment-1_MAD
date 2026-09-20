@@ -263,40 +263,7 @@ Save Activity Log
 * 📞 Emergency service integration
 * ☁️ Optional cloud synchronization
 
----
-
-# ⚙️ Installation
-
-### 1. Clone the Repository
-
-```bash id="ntnw3u"
-git clone https://github.com/khaneshahimadri/24012011230_Khanesha_Himadri_Assignment-1_MAD.git
-```
-
-### 2. Open in Android Studio
-
-Open the cloned project using **Android Studio**.
-
-### 3. Sync Gradle
-
-Allow Android Studio to synchronize the required Gradle dependencies.
-
-### 4. Grant Permissions
-
-Grant the required permissions for:
-
-* Location
-* SMS
-* Vibration
-* Contacts where applicable
-
-### 5. Run the Application
-
-Connect an Android device and run the application.
-
-> A physical Android device is recommended for GPS, SMS, siren, vibration and cellular functionality.
-
----
+  --------
 
 # 🧪 Testing Checklist
 
