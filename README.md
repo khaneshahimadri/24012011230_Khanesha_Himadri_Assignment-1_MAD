@@ -472,6 +472,8 @@ All generated suggestions should be reviewed, tested, and modified according to 
 
 ---
 
+![image alt](https://github.com/khaneshahimadri/24012011230_Khanesha_Himadri_Assignment-1_MAD/tree/589b3796f7643b9ca5f7509cfcd8c71a5e14e0cf/screenshots)
+
 # 👩‍💻 Developer
 
 ### Himadri Khanesha
