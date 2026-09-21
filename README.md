@@ -249,6 +249,24 @@ Save Activity Log
 
 ---
 
+# ⚠️ Challenges Faced
+
+During the development of BEACON, several challenges were encountered:
+
+- 📍 **GPS Location Accuracy** – Getting accurate and updated GPS coordinates.
+- 📩 **SMS Handling** – Sending, receiving, and processing `LOCATE` messages correctly.
+- 🔐 **Permission Management** – Handling location, SMS, and other runtime permissions.
+- 👥 **Trusted Contact Verification** – Ensuring location is shared only with authorized contacts.
+- 🚫 **Unknown Sender Blocking** – Preventing unauthorized location requests.
+- 🚨 **SOS Implementation** – Implementing the 3-second hold mechanism to avoid accidental activation.
+- 🔊 **Siren & Vibration** – Managing emergency siren and vibration during SOS mode.
+- 📶 **Offline Functionality** – Making important features work without mobile-data internet.
+- 🔋 **Background Restrictions** – Handling Android battery optimization and background execution limitations.
+- 📋 **Activity Logging** – Recording emergency, location, and security activities properly.
+
+-------
+
+
 # 🚀 Future Enhancements
 
 * 🎙️ Voice-activated SOS
@@ -304,15 +322,6 @@ https://github.com/khaneshahimadri/24012011230_Khanesha_Himadri_Assignment-1_MAD
 
 ---
 
-# ⚠️ Disclaimer
-
-BEACON is an **academic project developed for educational purposes**.
-
-The application demonstrates Android emergency communication, GPS/location, SMS, security and safety concepts. It should **not be considered a replacement for official emergency services**.
-
----
-
-<p align="center">
 
 # 🚨 BEACON
 
